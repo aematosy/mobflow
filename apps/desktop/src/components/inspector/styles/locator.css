@@ -1,0 +1,1087 @@
+.mi-locator-lab {
+  border: 1px solid #dcd7ff;
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fbfaff 0%,
+      #f5f3ff 100%
+    );
+
+  box-shadow:
+    0 8px 24px rgba(82, 70, 190, 0.07);
+}
+
+.mi-locator-lab select,
+.mi-locator-lab input {
+  min-height: 42px;
+
+  border-color: #d4daea;
+
+  font-size: 13px;
+
+  background: #fff;
+}
+
+.mi-locator-card {
+  border: 1px solid var(--tf-border);
+  border-radius: 15px;
+
+  background: #fff;
+
+  box-shadow: var(--tf-shadow-sm);
+}
+
+.mi-locator-card-recommended,
+.mi-locator-recommended {
+  border-color: #8fdfbd;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #f0fcf7 100%
+    );
+
+  box-shadow:
+    0 8px 22px rgba(17, 155, 105, 0.08);
+}
+
+.mi-locator-card strong {
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.mi-locator-card code {
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.mi-count {
+  min-width: 28px;
+  height: 28px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  color: var(--tf-violet-strong);
+
+  background: var(--tf-violet-soft);
+}
+
+.mi-no-locator {
+  border-color: #ead8a8;
+
+  background: var(--tf-surface-amber);
+}
+
+.mi-no-locator strong {
+  color: #885a08;
+}
+
+/* ==========================================================
+   LOCATOR CARD V3 — FINAL COMPONENT CONTRACT
+   Scoped to inspector to defeat legacy locator declarations.
+   ========================================================== */
+
+.mi-inspector-panel .mi-locator-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.mi-inspector-panel .mi-locator-card {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+
+  padding: 0;
+  margin: 0;
+
+  border: 1px solid var(--tf-border);
+  border-radius: 18px;
+
+  background: #fff;
+
+  box-shadow:
+    0 8px 26px rgba(26, 36, 58, 0.07);
+
+  box-sizing: border-box;
+}
+
+.mi-inspector-panel .mi-locator-card-recommended {
+  border-color: #69d4a7;
+  border-left: 5px solid #19ad78;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #f1fcf7 100%
+    );
+}
+
+.mi-inspector-panel .mi-locator-card-parameterized {
+  border-color: #aaa2ff;
+}
+
+.mi-inspector-panel .mi-locator-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  width: 100%;
+  min-height: 78px;
+
+  padding: 16px 18px;
+
+  border-bottom: 1px solid #e6eaf1;
+
+  box-sizing: border-box;
+}
+
+.mi-inspector-panel .mi-locator-identity {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 7px;
+}
+
+.mi-inspector-panel .mi-locator-eyebrow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  min-height: 20px;
+}
+
+.mi-inspector-panel .mi-locator-recommended-badge,
+.mi-inspector-panel .mi-locator-parameterized-badge {
+  display: inline-flex;
+  align-items: center;
+
+  width: auto;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 850;
+
+  letter-spacing: 0.055em;
+
+  white-space: nowrap;
+}
+
+.mi-inspector-panel .mi-locator-identity > strong {
+  display: block;
+
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 850;
+
+  color: #182238;
+}
+
+.mi-inspector-panel .mi-locator-category {
+  display: inline-flex;
+
+  width: fit-content;
+
+  padding: 4px 8px;
+
+  border-radius: 7px;
+
+  font-size: 11.5px;
+  line-height: 1.2;
+  font-weight: 700;
+
+  color: #625a9e;
+
+  background: #f0eeff;
+}
+
+.mi-inspector-panel .mi-locator-score {
+  flex: 0 0 64px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  min-width: 64px;
+  min-height: 60px;
+
+  padding: 7px;
+
+  border-radius: 14px;
+
+  color: #5146d3;
+
+  background: #efedff;
+
+  box-sizing: border-box;
+}
+
+.mi-inspector-panel .mi-locator-score strong {
+  display: block;
+
+  font-size: 21px;
+  line-height: 1;
+  font-weight: 900;
+}
+
+.mi-inspector-panel .mi-locator-score span {
+  display: block;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 850;
+
+  letter-spacing: 0.08em;
+}
+
+.mi-inspector-panel .mi-locator-code-section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+
+  width: 100%;
+
+  padding: 16px 18px;
+
+  box-sizing: border-box;
+}
+
+.mi-inspector-panel .mi-locator-code-heading {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.mi-inspector-panel .mi-locator-code-heading strong {
+  display: block;
+
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 850;
+
+  color: #202b41;
+}
+
+.mi-inspector-panel .mi-locator-code-heading span {
+  display: block;
+
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 550;
+
+  color: #7c899f;
+}
+
+.mi-inspector-panel .mi-locator-code,
+.mi-inspector-panel .mi-locator-template-code {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding: 13px 14px;
+
+  overflow-x: auto;
+
+  border: 1px solid #dfe5ef;
+  border-radius: 12px;
+
+  font-size: 13px;
+  line-height: 1.55;
+  font-weight: 600;
+
+  color: #293850;
+
+  background: #f6f8fb;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  box-sizing: border-box;
+}
+
+.mi-inspector-panel .mi-locator-validation-badges {
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 7px;
+
+  width: 100%;
+}
+
+.mi-inspector-panel .mi-locator-validation-badges > span {
+  display: inline-flex;
+  align-items: center;
+
+  width: auto;
+
+  padding: 5px 8px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.mi-inspector-panel .mi-locator-template-section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 13px;
+
+  width: 100%;
+
+  padding: 17px 18px;
+
+  border-top: 1px solid #dfdcff;
+  border-bottom: 1px solid #dfdcff;
+
+  background:
+    linear-gradient(
+      145deg,
+      #faf9ff 0%,
+      #f2f0ff 100%
+    );
+
+  box-sizing: border-box;
+}
+
+.mi-inspector-panel .mi-locator-template-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.mi-inspector-panel .mi-locator-template-title > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.mi-inspector-panel .mi-locator-template-title strong {
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 850;
+
+  color: #332d7d;
+}
+
+.mi-inspector-panel .mi-locator-parameter-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(120px, 0.7fr)
+    minmax(0, 1.3fr);
+
+  gap: 10px;
+
+  width: 100%;
+}
+
+.mi-inspector-panel .mi-locator-parameter-grid > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  padding: 11px 12px;
+
+  border: 1px solid #dcd8ff;
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.86);
+
+  box-sizing: border-box;
+}
+
+.mi-inspector-panel .mi-locator-reason {
+  display: block;
+
+  margin: 0;
+
+  padding: 13px 18px;
+
+  font-size: 12.5px;
+  line-height: 1.5;
+  font-weight: 550;
+
+  color: #69778e;
+}
+
+.mi-inspector-panel .mi-locator-actions-v3 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  width: 100%;
+
+  padding: 0 18px 18px;
+
+  box-sizing: border-box;
+}
+
+.mi-inspector-panel .mi-locator-actions-v3 button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  min-width: 110px;
+  min-height: 40px;
+
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  font-size: 12.5px;
+  line-height: 1;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.mi-inspector-panel .mi-locator-action-primary {
+  border: 1px solid #6258ed;
+
+  color: #fff;
+
+  background: #6258ed;
+
+  box-shadow:
+    0 5px 15px rgba(98, 88, 237, 0.20);
+}
+
+.mi-inspector-panel .mi-locator-action-template {
+  border: 1px solid #b8b1ff;
+
+  color: #4d43c5;
+
+  background: #efedff;
+}
+
+.mi-inspector-panel .mi-locator-action-test {
+  border: 1px solid #cbd4e2;
+
+  color: #42516a;
+
+  background: #fff;
+}
+
+/* ==========================================================
+   READY-TO-USE LOCATOR ACTION
+   ========================================================== */
+
+.mi-inspector-panel .mi-locator-action-appium {
+  border: 1px solid #5046d8;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6258ed 0%,
+      #4e44d4 100%
+    );
+
+  box-shadow:
+    0 5px 15px rgba(78, 68, 212, 0.20);
+}
+
+.mi-inspector-panel .mi-locator-action-appium:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #574ddf 0%,
+      #4339c4 100%
+    );
+}
+
+/* ==========================================================
+   PARAMETERIZED LOCATOR — COMPACT V2
+   ========================================================== */
+
+.mi-locator-template-section {
+  padding: 14px 16px !important;
+}
+
+.mi-locator-template-title {
+  margin-bottom: 8px !important;
+}
+
+.mi-locator-template-title > div > span {
+  display: none !important;
+}
+
+.mi-template-ready {
+  font-size: 10px !important;
+  padding: 3px 7px !important;
+}
+
+.mi-locator-parameter-summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 8px;
+
+  font-size: 11px;
+  color: #7b8496;
+}
+
+.mi-locator-parameter-summary code {
+  max-width: 46%;
+
+  padding: 4px 7px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  border-radius: 6px;
+
+  color: #514a78;
+  background: #f2f0ff;
+}
+
+.mi-locator-template-code {
+  max-height: 92px !important;
+
+  padding: 10px 12px !important;
+
+  overflow: auto !important;
+
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+
+.mi-locator-card-parameterized {
+  border-width: 1px !important;
+}
+
+/* ==========================================================
+   COPY FEEDBACK
+   ========================================================== */
+
+@keyframes mi-copy-confirm {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.035);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.mi-locator-actions-v3 button:has(> *) {
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease;
+}
+
+.mi-locator-actions-v3 button:active {
+  transform: scale(.97);
+}
+
+/* ==========================================================
+   LOCATOR ACTIONS V8
+   Compact single-row action bar
+   ========================================================== */
+
+.mi-locator-actions-v3 {
+  display: grid !important;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr)) !important;
+
+  gap: 10px !important;
+
+  width: 100% !important;
+  margin-top: 16px !important;
+}
+
+.mi-locator-actions-v3 button {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 44px !important;
+
+  padding: 0 12px !important;
+
+  border-radius: 12px !important;
+
+  font-size: 14px !important;
+  font-weight: 800 !important;
+
+  white-space: nowrap !important;
+}
+
+.mi-locator-action-primary,
+.mi-locator-action-appium {
+  color: #fff !important;
+
+  border: 1px solid transparent !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6557ef,
+      #4f46d8
+    ) !important;
+
+  box-shadow:
+    0 7px 16px rgba(79, 70, 216, .18) !important;
+}
+
+.mi-locator-action-template {
+  color: #5145c7 !important;
+
+  border: 1px solid #b8afff !important;
+
+  background: #f1efff !important;
+}
+
+.mi-locator-action-test {
+  color: #34415d !important;
+
+  border: 1px solid #cbd5e4 !important;
+
+  background: #fff !important;
+}
+
+.mi-locator-actions-v3 button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px rgba(50, 48, 110, .15) !important;
+}
+
+.mi-locator-actions-v3 button:active {
+  transform: scale(.97);
+}
+
+/* ==========================================================
+   LOCATOR ACTION BAR V9
+   Final compact 4-action layout
+   ========================================================== */
+
+.mi-locator-actions-v3 {
+  display: grid !important;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr)) !important;
+
+  align-items: center !important;
+  gap: 8px !important;
+
+  width: 100% !important;
+  margin-top: 14px !important;
+}
+
+.mi-locator-actions-v3 button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 38px !important;
+  min-height: 38px !important;
+
+  margin: 0 !important;
+  padding: 0 10px !important;
+
+  border-radius: 10px !important;
+
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em !important;
+
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    border-color 120ms ease,
+    background 120ms ease !important;
+}
+
+/* Primary copy actions */
+
+.mi-locator-action-primary,
+.mi-locator-action-appium {
+  color: #fff !important;
+
+  border: 1px solid #584be0 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #695cf3 0%,
+      #5145d8 100%
+    ) !important;
+
+  box-shadow:
+    0 5px 12px rgba(81, 69, 216, .18) !important;
+}
+
+/* Reusable template */
+
+.mi-locator-action-template {
+  color: #5145c7 !important;
+
+  border: 1px solid #aaa0ff !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f6f4ff 0%,
+      #ece9ff 100%
+    ) !important;
+
+  box-shadow:
+    0 4px 10px rgba(92, 79, 202, .08) !important;
+}
+
+/* Live verification */
+
+.mi-locator-action-test {
+  color: #34415b !important;
+
+  border: 1px solid #cbd4e3 !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f7f9fc 100%
+    ) !important;
+
+  box-shadow:
+    0 4px 10px rgba(35, 48, 78, .06) !important;
+}
+
+.mi-locator-actions-v3 button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 15px rgba(60, 55, 130, .16) !important;
+}
+
+.mi-locator-actions-v3 button:active:not(:disabled) {
+  transform: translateY(0) scale(.97);
+}
+
+/*
+ * Keep all four actions usable on narrower inspector widths.
+ * Reduce typography instead of wrapping to another row.
+ */
+@media (max-width: 1280px) {
+  .mi-locator-actions-v3 {
+    gap: 6px !important;
+  }
+
+  .mi-locator-actions-v3 button {
+    height: 36px !important;
+    min-height: 36px !important;
+
+    padding-inline: 7px !important;
+
+    font-size: 11px !important;
+  }
+}
+
+/* ==========================================================
+   LOCATOR CARD V10 — COMPACT
+   Preserve information, reduce visual weight.
+   ========================================================== */
+
+.mi-locator {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+/* ---------- Header ---------- */
+
+.mi-locator-header {
+  padding: 14px 16px 12px !important;
+}
+
+.mi-locator-header strong {
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+}
+
+/* Score badge */
+
+.mi-locator-header b {
+  min-width: 58px !important;
+  min-height: 58px !important;
+
+  padding: 8px !important;
+
+  border-radius: 14px !important;
+
+  font-size: 24px !important;
+  line-height: .95 !important;
+}
+
+/* ---------- Main body ---------- */
+
+.mi-locator > code {
+  margin: 10px 16px !important;
+  padding: 12px 14px !important;
+
+  border-radius: 11px !important;
+
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+
+  max-height: 132px !important;
+  overflow: auto !important;
+}
+
+/* ---------- Status badges ---------- */
+
+.mi-locator-badges {
+  gap: 12px !important;
+
+  margin: 10px 16px !important;
+}
+
+.mi-locator-badges span {
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+/* ---------- Reason ---------- */
+
+.mi-locator-reason,
+.mi-locator > p {
+  margin: 10px 16px !important;
+
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+/* ---------- Reusable template ---------- */
+
+.mi-locator-template {
+  margin-top: 12px !important;
+  padding: 12px 16px !important;
+}
+
+.mi-locator-template h4,
+.mi-locator-template strong {
+  font-size: 13px !important;
+}
+
+.mi-locator-parameter-summary {
+  margin: 8px 0 !important;
+  padding: 7px 10px !important;
+
+  border-radius: 9px !important;
+
+  font-size: 11px !important;
+}
+
+.mi-locator-template-code {
+  display: block !important;
+
+  max-height: 100px !important;
+  overflow: auto !important;
+
+  margin-top: 8px !important;
+  padding: 10px 12px !important;
+
+  border-radius: 10px !important;
+
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+
+/* ---------- Actions ---------- */
+
+.mi-locator-actions-v3 {
+  gap: 7px !important;
+
+  margin: 12px 16px 14px !important;
+  width: auto !important;
+}
+
+.mi-locator-actions-v3 button {
+  height: 36px !important;
+  min-height: 36px !important;
+
+  padding: 0 8px !important;
+
+  border-radius: 9px !important;
+
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+/* Recommended card keeps emphasis without becoming huge. */
+
+.mi-locator-best {
+  box-shadow:
+    0 8px 22px rgba(41, 174, 119, .08) !important;
+}
+
+/* =========================================================
+   MOBFLOW LOCATOR LAB THEME V2
+   ========================================================= */
+
+.mi-locator-lab,
+.mi-locator-card {
+  border-color: var(--mi-border);
+  background: var(--mi-panel-bg-soft);
+}
+
+.mi-locator-test-row input,
+.mi-locator-test-row select {
+  border-color: var(--mi-input-border);
+  background: var(--mi-input-bg);
+  color: var(--mi-text-primary);
+}
+
+.mi-locator-test-row input::placeholder {
+  color: var(--mi-text-muted);
+}
+
+.mi-locator-card strong,
+.mi-locator-code-heading strong {
+  color: var(--mi-text-strong);
+}
+
+.mi-locator-category,
+.mi-locator-code-heading span,
+.mi-locator-reason {
+  color: var(--mi-text-muted);
+}
+
+:root[data-theme="dark"] .mi-locator-code,
+:root[data-theme="dark"] .mi-locator-template-code {
+  border-color: #29384d;
+  background: #07101b;
+  color: #dce6f4;
+}
+
+:root[data-theme="light"] .mi-locator-code,
+:root[data-theme="light"] .mi-locator-template-code {
+  border-color: #e0e5ee;
+  background: #f2f4f8;
+  color: #344057;
+}
+
+
+/* =========================================================
+   MOBFLOW LOCATOR SURFACES V2.1
+   ========================================================= */
+
+:root[data-theme="dark"] .mi-locator-card {
+  border-color: #26364a;
+  background:
+    linear-gradient(
+      145deg,
+      #111d2b,
+      #0d1724
+    );
+  color: #dce4ef;
+}
+
+:root[data-theme="dark"] .mi-locator-card-header {
+  border-bottom-color: #223044;
+  background: transparent;
+}
+
+:root[data-theme="dark"] .mi-locator-card strong,
+:root[data-theme="dark"] .mi-locator-identity strong {
+  color: #f1f5f9;
+}
+
+:root[data-theme="dark"] .mi-locator-code-section {
+  border-color: #223044;
+  background: transparent;
+}
+
+:root[data-theme="dark"] .mi-locator-code {
+  border-color: #2b3a4f;
+  background: #07111d;
+  color: #dce6f4;
+}
+
+:root[data-theme="dark"] .mi-locator-reason {
+  color: #93a3b9;
+}
+
+:root[data-theme="dark"] .mi-locator-score {
+  border-color: rgba(129, 140, 248, 0.20);
+  background: rgba(99, 102, 241, 0.13);
+  color: #c7d2fe;
+}
+
+:root[data-theme="dark"] .mi-locator-action-primary,
+:root[data-theme="dark"] .mi-locator-action-appium {
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .mi-locator-action-test {
+  border-color: #314157;
+  background: #111d2b;
+  color: #d4deeb;
+}
+
+:root[data-theme="dark"] .mi-locator-action-test:hover {
+  background: #182638;
+  color: #ffffff;
+}
+

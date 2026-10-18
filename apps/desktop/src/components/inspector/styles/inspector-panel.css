@@ -1,0 +1,178 @@
+.mi-inspector-panel {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fbfcff 100%
+    );
+}
+
+.mi-selected-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--tf-violet);
+}
+
+.mi-selected-title,
+.mi-selected-element h2,
+.mi-inspector-content h2 {
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 850;
+  letter-spacing: -0.025em;
+  color: var(--tf-text-strong);
+}
+
+.mi-section-title strong {
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.045em;
+  color: #344057;
+}
+
+.mi-section-title span {
+  font-size: 12px;
+  color: var(--tf-text-muted);
+}
+
+.mi-properties {
+  overflow: hidden;
+
+  border: 1px solid var(--tf-border);
+  border-radius: 15px;
+
+  background: #fff;
+
+  box-shadow: var(--tf-shadow-sm);
+}
+
+.mi-properties > div {
+  min-height: 44px;
+
+  padding: 0 14px;
+
+  border-bottom: 1px solid #e7ebf2;
+}
+
+.mi-properties > div:last-child {
+  border-bottom: 0;
+}
+
+.mi-properties span {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--tf-text-muted);
+}
+
+.mi-properties code {
+  font-size: 13px;
+  font-weight: 650;
+  color: #334158;
+}
+
+.mi-empty,
+.mi-no-locator {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--tf-text-secondary);
+}
+
+/* =========================================================
+   MOBFLOW INSPECTOR PANEL V2
+   ========================================================= */
+
+.mi-inspector-panel {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-left: 1px solid var(--mi-border);
+
+  background: var(--mi-panel-bg);
+}
+
+.mi-inspector-scroll {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+
+  background: var(--mi-panel-bg);
+}
+
+.mi-selected-label {
+  color: var(--mi-accent);
+}
+
+.mi-selected-title,
+.mi-selected-element h2,
+.mi-inspector-content h2 {
+  color: var(--mi-text-strong);
+}
+
+.mi-section-title strong {
+  color: var(--mi-text-primary);
+}
+
+.mi-section-title span {
+  color: var(--mi-text-muted);
+}
+
+.mi-properties {
+  border-color: var(--mi-border);
+  background: var(--mi-panel-bg-soft);
+}
+
+.mi-properties > div {
+  border-bottom-color: var(--mi-border-soft);
+}
+
+.mi-properties span {
+  color: var(--mi-text-muted);
+}
+
+.mi-properties code {
+  color: var(--mi-text-primary);
+}
+
+.mi-empty,
+.mi-no-locator {
+  color: var(--mi-text-secondary);
+}
+
+
+/* =========================================================
+   MOBFLOW INSPECTOR DARK SURFACE V2.1
+   ========================================================= */
+
+:root[data-theme="dark"] .mi-inspector-panel,
+:root[data-theme="dark"] .mi-inspector-scroll {
+  background: #0d1725;
+}
+
+:root[data-theme="dark"] .mi-panel-header {
+  border-color: #223044;
+  background: #0d1725;
+}
+
+:root[data-theme="dark"] .mi-properties {
+  border-color: #26364a;
+  background: #101c2b;
+}
+
+:root[data-theme="dark"] .mi-properties > div {
+  border-color: #223044;
+}
+
+:root[data-theme="dark"] .mi-properties span {
+  color: #8798af;
+}
+
+:root[data-theme="dark"] .mi-properties code {
+  color: #dce4ef;
+}
+

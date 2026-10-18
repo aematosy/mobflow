@@ -1,0 +1,1108 @@
+.mi-hierarchy-panel {
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcff 0%,
+      #f7f8fd 100%
+    );
+}
+
+.mi-hierarchy-search input,
+.mi-search input {
+  min-height: 42px;
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--tf-text);
+}
+
+.mi-tree-node {
+  border-radius: 10px;
+}
+
+.mi-node-content strong {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 750;
+  color: var(--tf-text);
+}
+
+.mi-node-content span,
+.mi-node-content small {
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 550;
+  color: var(--tf-text-muted);
+}
+
+.mi-tree-node:hover {
+  background: #f0f2ff;
+}
+
+.mi-tree-node-selected {
+  background:
+    linear-gradient(
+      90deg,
+      #eeebff 0%,
+      #f6f4ff 100%
+    );
+
+  box-shadow:
+    inset 3px 0 0 var(--tf-violet);
+}
+
+.mi-tree-node-selected .mi-node-content strong {
+  color: #352da0;
+}
+
+.mi-node-clickable {
+  background: var(--tf-green);
+  box-shadow:
+    0 0 0 3px rgba(17, 155, 105, 0.10);
+}
+
+/* ==========================================================
+   HIERARCHY V8
+   Higher contrast / semantic depth
+   ========================================================== */
+
+.mi-hierarchy {
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcff 0%,
+      #f5f7fd 100%
+    ) !important;
+}
+
+.mi-tree-node {
+  margin: 2px 7px !important;
+  border-radius: 11px !important;
+
+  transition:
+    background 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease !important;
+}
+
+.mi-tree-node:hover {
+  background: #eef2ff !important;
+
+  box-shadow:
+    inset 3px 0 0 #9b91ff !important;
+}
+
+.mi-tree-node strong,
+.mi-tree-node-name {
+  color: #1e2942 !important;
+  font-weight: 800 !important;
+}
+
+.mi-tree-node small,
+.mi-tree-node-type {
+  color: #7887a4 !important;
+  font-weight: 650 !important;
+}
+
+.mi-tree-node[aria-selected="true"],
+.mi-tree-node-selected,
+.mi-tree-node.is-selected {
+  background:
+    linear-gradient(
+      90deg,
+      #e8e5ff 0%,
+      #f2f0ff 70%,
+      #f8f7ff 100%
+    ) !important;
+
+  box-shadow:
+    inset 4px 0 0 #6254e8,
+    0 5px 14px rgba(83, 70, 196, .08) !important;
+}
+
+.mi-tree-node[aria-selected="true"] strong,
+.mi-tree-node-selected strong,
+.mi-tree-node.is-selected strong {
+  color: #3f35aa !important;
+}
+
+.mi-tree-count,
+.mi-tree-node-count {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  min-width: 28px !important;
+  height: 28px !important;
+
+  padding: 0 8px !important;
+
+  border-radius: 999px !important;
+
+  color: #5547d7 !important;
+  background: #ebe8ff !important;
+
+  font-size: 13px !important;
+  font-weight: 850 !important;
+}
+
+/* Slight visual differentiation for expandable containers. */
+
+.mi-tree-node:has([aria-expanded="true"]) {
+  background-color: rgba(238, 242, 255, .42);
+}
+
+/* ==========================================================
+   HIERARCHY V9 — FINAL VISUAL POLISH
+   Uses the real HierarchyPanel class contract.
+   ========================================================== */
+
+.mi-hierarchy-panel {
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcff 0%,
+      #f6f8ff 48%,
+      #f3f5fc 100%
+    ) !important;
+
+  border-right:
+    1px solid #dfe4f2 !important;
+}
+
+/* ---------- Search ---------- */
+
+.mi-hierarchy-panel .mi-hierarchy-search {
+  margin: 14px 12px 10px !important;
+  padding: 4px !important;
+
+  border:
+    1px solid #d9dfef !important;
+  border-radius: 13px !important;
+
+  background: #ffffff !important;
+
+  box-shadow:
+    0 4px 14px rgba(37, 48, 83, .06) !important;
+}
+
+.mi-hierarchy-panel .mi-hierarchy-search:focus-within {
+  border-color: #9589f4 !important;
+
+  box-shadow:
+    0 0 0 3px rgba(101, 87, 239, .10),
+    0 5px 16px rgba(37, 48, 83, .07) !important;
+}
+
+.mi-hierarchy-panel .mi-hierarchy-search input {
+  color: #26334d !important;
+  background: transparent !important;
+
+  font-weight: 650 !important;
+}
+
+.mi-hierarchy-panel .mi-hierarchy-search input::placeholder {
+  color: #9aa6bd !important;
+}
+
+/* ---------- Tree surface ---------- */
+
+.mi-hierarchy-panel .mi-tree-scroll {
+  padding:
+    8px 8px 18px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .42),
+      rgba(244, 247, 255, .74)
+    ) !important;
+}
+
+/* ---------- Node ---------- */
+
+.mi-hierarchy-panel .mi-tree-node {
+  position: relative !important;
+
+  min-height: 44px !important;
+
+  margin:
+    2px 3px !important;
+
+  border:
+    1px solid transparent !important;
+  border-radius: 10px !important;
+
+  background:
+    transparent !important;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease !important;
+}
+
+/* Subtle hierarchy guide. */
+
+.mi-hierarchy-panel .mi-tree-node::before {
+  content: "" !important;
+
+  position: absolute !important;
+  top: 8px !important;
+  bottom: 8px !important;
+  left: 3px !important;
+
+  width: 2px !important;
+
+  border-radius: 99px !important;
+
+  background:
+    transparent !important;
+}
+
+/* ---------- Hover ---------- */
+
+.mi-hierarchy-panel .mi-tree-node:hover,
+.mi-hierarchy-panel .mi-tree-hovered {
+  border-color:
+    #e0e4f8 !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f0f2ff 0%,
+      #f7f8ff 100%
+    ) !important;
+
+  box-shadow:
+    0 3px 10px rgba(74, 68, 154, .05) !important;
+}
+
+/* ---------- REAL selected class ---------- */
+
+.mi-hierarchy-panel .mi-tree-selected {
+  border-color:
+    #c8c1ff !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      #e5e1ff 0%,
+      #efedff 52%,
+      #f5f4ff 100%
+    ) !important;
+
+  box-shadow:
+    inset 4px 0 0 #6254e8,
+    0 5px 15px rgba(80, 67, 190, .10) !important;
+}
+
+.mi-hierarchy-panel .mi-tree-selected::before {
+  background:
+    #6254e8 !important;
+}
+
+/* ---------- Expand control ---------- */
+
+.mi-hierarchy-panel .mi-tree-expand {
+  display:
+    inline-flex !important;
+  align-items:
+    center !important;
+  justify-content:
+    center !important;
+
+  width: 26px !important;
+  height: 26px !important;
+
+  margin-right: 2px !important;
+
+  border-radius:
+    8px !important;
+
+  color:
+    #7685a3 !important;
+
+  transition:
+    color 120ms ease,
+    background 120ms ease,
+    transform 120ms ease !important;
+}
+
+.mi-hierarchy-panel .mi-tree-expand:not(:disabled):hover {
+  color:
+    #5648d8 !important;
+
+  background:
+    #e8e5ff !important;
+}
+
+.mi-hierarchy-panel .mi-tree-expand:disabled {
+  opacity:
+    .35 !important;
+}
+
+/* ---------- Selectable content ---------- */
+
+.mi-hierarchy-panel .mi-tree-select {
+  min-width: 0 !important;
+
+  padding:
+    5px 8px 5px 4px !important;
+
+  border-radius:
+    9px !important;
+}
+
+.mi-hierarchy-panel .mi-node-content {
+  display:
+    flex !important;
+  flex-direction:
+    column !important;
+
+  min-width:
+    0 !important;
+
+  gap:
+    1px !important;
+}
+
+/* Element name */
+
+.mi-hierarchy-panel .mi-node-content strong {
+  max-width:
+    100% !important;
+
+  overflow:
+    hidden !important;
+  text-overflow:
+    ellipsis !important;
+  white-space:
+    nowrap !important;
+
+  color:
+    #202b44 !important;
+
+  font-size:
+    14px !important;
+  line-height:
+    1.25 !important;
+  font-weight:
+    800 !important;
+}
+
+/* Android/iOS element type */
+
+.mi-hierarchy-panel .mi-node-content small {
+  max-width:
+    100% !important;
+
+  overflow:
+    hidden !important;
+  text-overflow:
+    ellipsis !important;
+  white-space:
+    nowrap !important;
+
+  color:
+    #8794ac !important;
+
+  font-size:
+    12px !important;
+  line-height:
+    1.2 !important;
+  font-weight:
+    650 !important;
+}
+
+/* Selected typography */
+
+.mi-hierarchy-panel
+.mi-tree-selected
+.mi-node-content strong {
+  color:
+    #4034ad !important;
+}
+
+.mi-hierarchy-panel
+.mi-tree-selected
+.mi-node-content small {
+  color:
+    #7168b6 !important;
+}
+
+/* ---------- Locator/count badge ---------- */
+
+.mi-hierarchy-panel .mi-node-locator {
+  display:
+    inline-flex !important;
+  align-items:
+    center !important;
+  justify-content:
+    center !important;
+
+  flex:
+    0 0 auto !important;
+
+  min-width:
+    25px !important;
+  height:
+    25px !important;
+
+  margin-left:
+    7px !important;
+  padding:
+    0 7px !important;
+
+  border:
+    1px solid #dcd7ff !important;
+  border-radius:
+    999px !important;
+
+  color:
+    #5749d4 !important;
+
+  background:
+    #ece9ff !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .75) !important;
+
+  font-size:
+    11px !important;
+  line-height:
+    1 !important;
+  font-weight:
+    850 !important;
+}
+
+/* Selected badge */
+
+.mi-hierarchy-panel
+.mi-tree-selected
+.mi-node-locator {
+  color:
+    #ffffff !important;
+
+  border-color:
+    #6254e8 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7165ef,
+      #5749d5
+    ) !important;
+
+  box-shadow:
+    0 3px 8px rgba(87, 73, 213, .20) !important;
+}
+
+/* ---------- Diamond/icon accent ---------- */
+
+.mi-hierarchy-panel
+.mi-tree-select > span:first-child {
+  color:
+    #a1acc0 !important;
+}
+
+.mi-hierarchy-panel
+.mi-tree-selected
+.mi-tree-select > span:first-child {
+  color:
+    #6557e8 !important;
+}
+
+/* ---------- Scrollbar ---------- */
+
+.mi-hierarchy-panel
+.mi-tree-scroll::-webkit-scrollbar {
+  width:
+    7px !important;
+}
+
+.mi-hierarchy-panel
+.mi-tree-scroll::-webkit-scrollbar-track {
+  background:
+    transparent !important;
+}
+
+.mi-hierarchy-panel
+.mi-tree-scroll::-webkit-scrollbar-thumb {
+  border:
+    2px solid transparent !important;
+  border-radius:
+    999px !important;
+
+  background:
+    #bcc5d9 !important;
+  background-clip:
+    padding-box !important;
+}
+
+.mi-hierarchy-panel
+.mi-tree-scroll::-webkit-scrollbar-thumb:hover {
+  background:
+    #929db7 !important;
+  background-clip:
+    padding-box !important;
+}
+
+/* =========================================================
+   MOBFLOW HIERARCHY V2
+   ========================================================= */
+
+.mi-hierarchy-panel {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-right: 1px solid var(--mi-border);
+
+  background: var(--mi-panel-bg);
+}
+
+.mi-hierarchy-search,
+.mi-search {
+  background: var(--mi-panel-bg);
+}
+
+.mi-hierarchy-panel input,
+.mi-hierarchy-search input,
+.mi-search input {
+  border-color: var(--mi-input-border);
+  background: var(--mi-input-bg);
+  color: var(--mi-text-primary);
+}
+
+.mi-hierarchy-panel input::placeholder,
+.mi-hierarchy-search input::placeholder,
+.mi-search input::placeholder {
+  color: var(--mi-text-muted);
+}
+
+.mi-tree,
+.mi-hierarchy-tree {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+}
+
+.mi-tree button,
+.mi-hierarchy-tree button {
+  color: var(--mi-text-primary);
+}
+
+.mi-tree button:hover,
+.mi-hierarchy-tree button:hover {
+  background: var(--mi-hover-bg);
+}
+
+
+/* =========================================================
+   MOBFLOW HIERARCHY THEME V2.1
+   ========================================================= */
+
+:root[data-theme="dark"] .mi-hierarchy-panel,
+:root[data-theme="dark"] .mi-hierarchy,
+:root[data-theme="dark"] .mi-tree,
+:root[data-theme="dark"] .mi-hierarchy-tree {
+  background: #0d1725;
+  color: #dce4ef;
+}
+
+:root[data-theme="dark"] .mi-hierarchy-search,
+:root[data-theme="dark"] .mi-search {
+  background: #0d1725;
+}
+
+:root[data-theme="dark"] .mi-hierarchy-search input,
+:root[data-theme="dark"] .mi-search input {
+  border-color: #26364a;
+  background: #09131f;
+  color: #e5ebf3;
+}
+
+:root[data-theme="dark"] .mi-hierarchy-search input::placeholder,
+:root[data-theme="dark"] .mi-search input::placeholder {
+  color: #71839b;
+}
+
+:root[data-theme="dark"] .mi-tree-row,
+:root[data-theme="dark"] .mi-tree-node,
+:root[data-theme="dark"] .mi-hierarchy-row {
+  color: #d2dbe8;
+  background: transparent;
+}
+
+:root[data-theme="dark"] .mi-tree-row:hover,
+:root[data-theme="dark"] .mi-tree-node:hover,
+:root[data-theme="dark"] .mi-hierarchy-row:hover {
+  background: #132132;
+}
+
+:root[data-theme="dark"] .mi-tree-selected,
+:root[data-theme="dark"] .mi-selected {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(99, 102, 241, 0.18),
+      rgba(99, 102, 241, 0.08)
+    );
+}
+
+
+/* =========================================================
+   MOBFLOW HIERARCHY V10 — THEME CONTRACT
+   Overrides historical light-only generations.
+   ========================================================= */
+
+/* ---------- DARK ---------- */
+
+:root[data-theme="dark"] .mi-hierarchy-panel {
+  border-right:
+    1px solid var(--spy-border) !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0d1725 0%,
+      #0b1522 100%
+    ) !important;
+
+  color:
+    var(--spy-text) !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-hierarchy-search {
+  border:
+    1px solid #2a394d !important;
+
+  background:
+    #09131f !important;
+
+  box-shadow:
+    none !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-hierarchy-search:focus-within {
+  border-color:
+    rgba(129, 116, 247, .58) !important;
+
+  background:
+    #0a1522 !important;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(99, 82, 238, .10) !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-hierarchy-search input {
+  background:
+    transparent !important;
+
+  color:
+    #dce5f1 !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-hierarchy-search input::placeholder {
+  color:
+    #718198 !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-search-icon {
+  color:
+    #73839a !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-scroll {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(13, 23, 37, .98),
+      rgba(10, 19, 31, .98)
+    ) !important;
+
+  scrollbar-color:
+    transparent
+    transparent;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-node {
+  border-color:
+    transparent !important;
+
+  background:
+    transparent !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-node:hover,
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-hovered {
+  border-color:
+    #26364b !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(42, 53, 82, .58),
+      rgba(22, 33, 51, .58)
+    ) !important;
+
+  box-shadow:
+    none !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-selected {
+  border-color:
+    rgba(129, 116, 247, .42) !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(99, 82, 238, .20),
+      rgba(99, 82, 238, .08)
+    ) !important;
+
+  box-shadow:
+    inset 3px 0 0 #8174f7 !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-selected::before {
+  background:
+    #8174f7 !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-node strong,
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-node-name,
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-node-content strong {
+  color:
+    #dce5f1 !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-node small,
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-node-type,
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-node-content small {
+  color:
+    #8191a8 !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-selected
+.mi-node-content strong {
+  color:
+    #c8c2ff !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-expand {
+  color:
+    #8292a9 !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-tree-expand:not(:disabled):hover {
+  color:
+    #b6afff !important;
+
+  background:
+    rgba(99, 82, 238, .12) !important;
+}
+
+
+/* ---------- LIGHT ---------- */
+
+:root[data-theme="light"] .mi-hierarchy-panel {
+  border-right:
+    1px solid #dfe5ee !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcff,
+      #f5f7fc
+    ) !important;
+
+  color:
+    #172033 !important;
+}
+
+
+/* =========================================================
+   MOBFLOW HIERARCHY V10.1
+   Single-surface compact search.
+   ========================================================= */
+
+.mi-hierarchy-search {
+  width:
+    auto !important;
+
+  height:
+    36px !important;
+
+  min-height:
+    36px !important;
+
+  margin:
+    10px 12px 8px !important;
+
+  padding:
+    0 11px !important;
+
+  box-sizing:
+    border-box !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  gap:
+    8px !important;
+
+  border-radius:
+    10px !important;
+
+  box-shadow:
+    none !important;
+}
+
+.mi-hierarchy-search input {
+  width:
+    100% !important;
+
+  height:
+    100% !important;
+
+  min-height:
+    0 !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  border:
+    0 !important;
+
+  outline:
+    0 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  font-size:
+    11px !important;
+
+  line-height:
+    1 !important;
+
+  font-weight:
+    650 !important;
+}
+
+.mi-hierarchy-search input:focus {
+  border:
+    0 !important;
+
+  outline:
+    0 !important;
+
+  box-shadow:
+    none !important;
+}
+
+.mi-search-icon {
+  width:
+    14px !important;
+
+  min-width:
+    14px !important;
+
+  display:
+    grid !important;
+
+  place-items:
+    center !important;
+
+  font-size:
+    12px !important;
+}
+
+.mi-hierarchy-search button {
+  width:
+    22px !important;
+
+  height:
+    22px !important;
+
+  min-width:
+    22px !important;
+
+  min-height:
+    22px !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  border:
+    0 !important;
+
+  border-radius:
+    6px !important;
+
+  background:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+/* ---------- DARK SEARCH ---------- */
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-hierarchy-search {
+  border:
+    1px solid #29394e !important;
+
+  background:
+    #0a1522 !important;
+
+  box-shadow:
+    none !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-hierarchy-search:focus-within {
+  border-color:
+    rgba(129, 116, 247, .55) !important;
+
+  background:
+    #0a1522 !important;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(99, 82, 238, .09) !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-hierarchy-search input {
+  border:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #dbe4f0 !important;
+
+  box-shadow:
+    none !important;
+}
+
+:root[data-theme="dark"]
+.mi-hierarchy-panel
+.mi-hierarchy-search input::placeholder {
+  color:
+    #73839a !important;
+}
+
+
+/* ---------- LIGHT SEARCH ---------- */
+
+:root[data-theme="light"]
+.mi-hierarchy-panel
+.mi-hierarchy-search {
+  border:
+    1px solid #dce3ed !important;
+
+  background:
+    #ffffff !important;
+
+  box-shadow:
+    0 3px 10px
+    rgba(30, 41, 59, .035) !important;
+}
+
+:root[data-theme="light"]
+.mi-hierarchy-panel
+.mi-hierarchy-search:focus-within {
+  border-color:
+    rgba(95, 84, 232, .45) !important;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(95, 84, 232, .07) !important;
+}
+
+:root[data-theme="light"]
+.mi-hierarchy-panel
+.mi-hierarchy-search input {
+  border:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #334155 !important;
+
+  box-shadow:
+    none !important;
+}
+

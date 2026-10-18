@@ -1,0 +1,145 @@
+:root {
+  --tf-bg: #f4f6fb;
+  --tf-surface: #ffffff;
+  --tf-surface-soft: #f8f9fd;
+  --tf-surface-violet: #f5f3ff;
+  --tf-surface-blue: #f2f7ff;
+  --tf-surface-green: #effbf6;
+  --tf-surface-amber: #fff8e8;
+  --tf-surface-red: #fff1f3;
+
+  --tf-text: #172033;
+  --tf-text-strong: #10182a;
+  --tf-text-secondary: #56647a;
+  --tf-text-muted: #8490a5;
+
+  --tf-violet: #6258ed;
+  --tf-violet-strong: #5147dc;
+  --tf-violet-soft: #e9e6ff;
+
+  --tf-blue: #3478f6;
+  --tf-green: #119b69;
+  --tf-amber: #c47b08;
+  --tf-red: #d4475c;
+
+  --tf-border: #dce3ee;
+  --tf-border-strong: #ccd5e4;
+
+  --tf-radius-sm: 9px;
+  --tf-radius-md: 13px;
+  --tf-radius-lg: 18px;
+  --tf-radius-xl: 24px;
+
+  --tf-shadow-sm:
+    0 2px 7px rgba(25, 35, 55, 0.06);
+
+  --tf-shadow-md:
+    0 10px 30px rgba(25, 35, 55, 0.10);
+
+  --tf-shadow-device:
+    0 26px 60px rgba(20, 28, 45, 0.20),
+    0 8px 20px rgba(20, 28, 45, 0.12);
+
+  --tf-font-xs: 12px;
+  --tf-font-sm: 13px;
+  --tf-font-md: 14px;
+  --tf-font-lg: 16px;
+  --tf-font-xl: 20px;
+  --tf-font-2xl: 23px;
+}
+
+/* =========================================================
+   MOBFLOW INSPECTOR THEME CONTRACT V2
+   Semantic tokens shared by the Inspector workspace.
+   ========================================================= */
+
+:root {
+  --mi-shell-bg: #f4f6fb;
+  --mi-panel-bg: #ffffff;
+  --mi-panel-bg-soft: #f8f9fc;
+  --mi-stage-bg: #f3f5fa;
+  --mi-stage-glow: #ffffff;
+
+  --mi-border: #dfe4ed;
+  --mi-border-soft: #e9edf3;
+
+  --mi-text-strong: #172033;
+  --mi-text-primary: #2d394e;
+  --mi-text-secondary: #596980;
+  --mi-text-muted: #8290a5;
+
+  --mi-input-bg: #ffffff;
+  --mi-input-border: #d8e0eb;
+
+  --mi-hover-bg: #f5f7fc;
+  --mi-selected-bg: rgba(99, 102, 241, 0.08);
+
+  --mi-accent: #6257ea;
+  --mi-accent-soft: rgba(99, 102, 241, 0.10);
+
+  --mi-success: #059669;
+  --mi-success-soft: rgba(16, 185, 129, 0.09);
+
+  --mi-shadow:
+    0 18px 50px rgba(30, 41, 59, 0.10);
+}
+
+:root[data-theme="dark"] {
+  --mi-shell-bg: #08111d;
+  --mi-panel-bg: #0d1725;
+  --mi-panel-bg-soft: #101c2b;
+  --mi-stage-bg: #080f19;
+  --mi-stage-glow: #111d2d;
+
+  --mi-border: #223044;
+  --mi-border-soft: #1a2839;
+
+  --mi-text-strong: #f3f6fb;
+  --mi-text-primary: #dce4ef;
+  --mi-text-secondary: #a8b5c7;
+  --mi-text-muted: #7f90a7;
+
+  --mi-input-bg: #09131f;
+  --mi-input-border: #26364a;
+
+  --mi-hover-bg: #132132;
+  --mi-selected-bg: rgba(99, 102, 241, 0.14);
+
+  --mi-accent: #818cf8;
+  --mi-accent-soft: rgba(99, 102, 241, 0.14);
+
+  --mi-success: #34d399;
+  --mi-success-soft: rgba(16, 185, 129, 0.10);
+
+  --mi-shadow:
+    0 22px 65px rgba(0, 0, 0, 0.30);
+}
+
+:root[data-theme="light"] {
+  --mi-shell-bg: #f4f6fb;
+  --mi-panel-bg: #ffffff;
+  --mi-panel-bg-soft: #f8f9fc;
+  --mi-stage-bg: #f2f4f9;
+  --mi-stage-glow: #ffffff;
+
+  --mi-border: #dfe4ed;
+  --mi-border-soft: #e9edf3;
+
+  --mi-text-strong: #172033;
+  --mi-text-primary: #2d394e;
+  --mi-text-secondary: #596980;
+  --mi-text-muted: #8290a5;
+
+  --mi-input-bg: #ffffff;
+  --mi-input-border: #d8e0eb;
+
+  --mi-hover-bg: #f5f7fc;
+  --mi-selected-bg: rgba(99, 102, 241, 0.08);
+
+  --mi-accent: #5757e8;
+  --mi-accent-soft: rgba(99, 102, 241, 0.09);
+
+  --mi-success: #059669;
+  --mi-success-soft: rgba(16, 185, 129, 0.08);
+}
+

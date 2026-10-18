@@ -1,0 +1,17 @@
+/*
+ * TestFlow Mobile Inspector
+ *
+ * V6 stylesheet entrypoint.
+ *
+ * legacy.css remains temporarily loaded while each visual
+ * subsystem is migrated. New styles must live in their
+ * dedicated file. Do not append new generations to legacy.css.
+ */
+
+@import "./styles/legacy.css";
+@import "./styles/tokens.css";
+@import "./styles/shell.css";
+@import "./styles/hierarchy.css";
+@import "./styles/device.css";
+@import "./styles/inspector-panel.css";
+@import "./styles/locator.css";

@@ -1,0 +1,2810 @@
+.mi-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(12, 18, 32, 0.38);
+  backdrop-filter: blur(12px);
+}
+
+.mi-shell {
+  display: grid;
+  grid-template-rows: 58px auto minmax(0, 1fr) 34px;
+  width: min(1500px, 96vw);
+  height: min(940px, 94vh);
+  overflow: hidden;
+  border: 1px solid rgba(215, 220, 231, 0.95);
+  border-radius: 16px;
+  background: #f7f8fb;
+  box-shadow:
+    0 30px 90px rgba(10, 18, 38, 0.25),
+    0 4px 18px rgba(10, 18, 38, 0.08);
+}
+
+.mi-fullscreen {
+  padding: 0;
+}
+
+.mi-fullscreen .mi-shell {
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+  border-radius: 0;
+}
+
+.mi-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 20px;
+  padding: 0 16px;
+  border-bottom: 1px solid #e1e5ed;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.mi-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mi-logo {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 9px;
+  background: #6259ed;
+  color: white;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.mi-brand span {
+  color: #9aa3b3;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+}
+
+.mi-brand h2 {
+  margin: 1px 0 0;
+  color: #172036;
+  font-size: 14px;
+  letter-spacing: -0.025em;
+}
+
+.mi-session {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #818b9d;
+  font-size: 8px;
+}
+
+.mi-session strong {
+  color: #48536a;
+  font-size: 8px;
+}
+
+.mi-connected {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #087f55;
+  font-weight: 800;
+}
+
+.mi-connected i,
+.mi-footer i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #17b779;
+}
+
+.mi-header-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.mi-header-actions button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #e0e4ec;
+  border-radius: 8px;
+  background: #fff;
+  color: #647086;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.mi-header-actions button:hover {
+  border-color: #cbc7fa;
+  background: #f5f3ff;
+  color: #554ce0;
+}
+
+.mi-header-actions .mi-close:hover {
+  border-color: #ffd3d8;
+  background: #fff2f3;
+  color: #cc3f50;
+}
+
+.mi-error {
+  padding: 7px 15px;
+  border-bottom: 1px solid #ffd5da;
+  background: #fff2f4;
+  color: #bd3b4a;
+  font-size: 9px;
+}
+
+.mi-workbench {
+  display: grid;
+  grid-template-columns:
+    minmax(230px, 0.8fr)
+    minmax(360px, 1.25fr)
+    minmax(340px, 1fr);
+  min-height: 0;
+}
+
+.mi-hierarchy-panel,
+.mi-device-panel,
+.mi-inspector-panel {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.mi-hierarchy-panel,
+.mi-device-panel {
+  border-right: 1px solid #e1e5ed;
+}
+
+.mi-hierarchy-panel,
+.mi-inspector-panel {
+  background: #fff;
+}
+
+.mi-device-panel {
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #eef0f8,
+      #e7e9f1 65%,
+      #e3e6ee
+    );
+}
+
+.mi-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  padding: 0 12px;
+  border-bottom: 1px solid #e7eaf0;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.mi-panel-header strong {
+  color: #384359;
+  font-size: 9px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+}
+
+.mi-panel-header span {
+  color: #929bad;
+  font-size: 8px;
+}
+
+.mi-search {
+  display: flex;
+  align-items: center;
+  margin: 8px;
+  min-height: 31px;
+  padding: 0 9px;
+  border: 1px solid #e0e4ec;
+  border-radius: 8px;
+  background: #fafbfc;
+}
+
+.mi-search span {
+  margin-right: 6px;
+  color: #9ba4b4;
+}
+
+.mi-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #39445a;
+  font: inherit;
+  font-size: 9px;
+}
+
+.mi-tree-scroll,
+.mi-inspector-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.mi-tree-scroll {
+  padding: 2px 6px 14px;
+}
+
+.mi-tree-node {
+  display: flex;
+  min-height: 32px;
+  border-radius: 7px;
+}
+
+.mi-tree-node:hover {
+  background: #f6f7fa;
+}
+
+.mi-tree-selected {
+  background: #f0eeff;
+}
+
+.mi-tree-expand {
+  width: 23px;
+  border: 0;
+  background: transparent;
+  color: #8d97a9;
+  cursor: pointer;
+}
+
+.mi-tree-select {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  gap: 7px;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mi-tree-select > span:last-child {
+  min-width: 0;
+}
+
+.mi-tree-select strong,
+.mi-tree-select small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mi-tree-select strong {
+  color: #3c475c;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.mi-tree-select small {
+  margin-top: 2px;
+  color: #a0a8b7;
+  font-size: 7.5px;
+}
+
+.mi-node-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #bdc4d0;
+}
+
+.mi-node-clickable {
+  background: #19b77a;
+}
+
+.mi-device-stage {
+  display: grid;
+  place-items: start center;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 18px;
+}
+
+.mi-device-scale {
+  max-width: 100%;
+}
+
+.mi-device-screen {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 5px solid #242a38;
+  border-radius: 24px;
+  background: #111723;
+  box-shadow:
+    0 18px 50px rgba(18, 24, 40, 0.24);
+  cursor: crosshair;
+}
+
+.mi-device-screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+.mi-bounds {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  border: 1.5px solid #8b82f6;
+  background: rgba(98, 89, 237, 0.08);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.mi-bounds-selected {
+  border: 2px solid #655bec;
+  background: rgba(98, 89, 237, 0.14);
+}
+
+.mi-device-controls {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  min-height: 40px;
+  padding: 6px;
+  border-top: 1px solid #dfe3eb;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.mi-device-controls button {
+  min-width: 31px;
+  height: 27px;
+  padding: 0 8px;
+  border: 1px solid #dfe3eb;
+  border-radius: 7px;
+  background: #fff;
+  color: #647086;
+  font-size: 9px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.mi-device-controls .mi-zoom-value {
+  min-width: 48px;
+}
+
+.mi-inspector-scroll {
+  padding: 13px;
+}
+
+.mi-element-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mi-element-title > div {
+  min-width: 0;
+}
+
+.mi-element-title span {
+  color: #9ca5b5;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.mi-element-title h3 {
+  margin: 3px 0;
+  overflow: hidden;
+  color: #202a3f;
+  font-size: 15px;
+  letter-spacing: -0.025em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mi-element-title code {
+  color: #919aab;
+  font-size: 8px;
+}
+
+.mi-element-title button {
+  flex: 0 0 auto;
+  min-height: 28px;
+  padding: 0 9px;
+  border: 1px solid #dedfeb;
+  border-radius: 7px;
+  background: #fff;
+  color: #5e687d;
+  font-size: 8px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.mi-section {
+  margin-top: 15px;
+}
+
+.mi-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.mi-section-title strong {
+  color: #4a556a;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+}
+
+.mi-section-title span {
+  color: #9ba4b4;
+  font-size: 7.5px;
+}
+
+.mi-count {
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #f0f2f6;
+  color: #768196 !important;
+  font-size: 8px !important;
+  font-weight: 800;
+}
+
+.mi-properties {
+  overflow: hidden;
+  border: 1px solid #e4e7ed;
+  border-radius: 9px;
+}
+
+.mi-properties > div {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 8px;
+  padding: 7px 9px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.mi-properties > div:last-child {
+  border-bottom: 0;
+}
+
+.mi-properties span {
+  color: #939cac;
+  font-size: 8px;
+}
+
+.mi-properties code {
+  overflow-wrap: anywhere;
+  color: #465166;
+  font-size: 8px;
+}
+
+.mi-locator-list {
+  display: grid;
+  gap: 7px;
+}
+
+.mi-locator {
+  padding: 10px;
+  border: 1px solid #e2e5ec;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.mi-locator-best {
+  border-color: #bde7d5;
+  box-shadow:
+    inset 3px 0 #17b779;
+}
+
+.mi-locator-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.mi-locator-header > div {
+  display: grid;
+  gap: 2px;
+}
+
+.mi-locator-header span {
+  color: #0b8b5d;
+  font-size: 6.5px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.mi-locator-header strong {
+  color: #354056;
+  font-size: 9px;
+}
+
+.mi-locator-header b {
+  color: #087f55;
+  font-size: 12px;
+}
+
+.mi-locator > code {
+  display: block;
+  margin-top: 7px;
+  overflow-wrap: anywhere;
+  padding: 7px;
+  border-radius: 7px;
+  background: #f5f6f9;
+  color: #3d485d;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.mi-locator-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 7px;
+}
+
+.mi-locator-badges span {
+  padding: 3px 5px;
+  border-radius: 999px;
+  background: #edf9f4;
+  color: #087f55;
+  font-size: 6.5px;
+  font-weight: 850;
+}
+
+.mi-locator p {
+  margin: 6px 0 0;
+  color: #929bac;
+  font-size: 7.5px;
+}
+
+.mi-locator-actions {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.mi-locator-actions button {
+  min-height: 25px;
+  padding: 0 8px;
+  border: 1px solid #dde1e9;
+  border-radius: 6px;
+  background: #fff;
+  color: #657086;
+  font-size: 7.5px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.mi-locator-actions button:disabled {
+  opacity: 0.45;
+}
+
+.mi-no-locator {
+  display: grid;
+  gap: 4px;
+  padding: 13px;
+  border: 1px dashed #dce1e9;
+  border-radius: 9px;
+  background: #fafbfc;
+}
+
+.mi-no-locator strong {
+  color: #657086;
+  font-size: 9px;
+}
+
+.mi-no-locator span {
+  color: #98a1b1;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.mi-empty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  padding: 20px;
+  color: #969faf;
+  font-size: 9px;
+  text-align: center;
+}
+
+.mi-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-top: 1px solid #dfe3eb;
+  background: #fff;
+}
+
+.mi-footer > div {
+  display: flex;
+  height: 100%;
+}
+
+.mi-footer button {
+  padding: 0 10px;
+  border: 0;
+  border-right: 1px solid #edf0f4;
+  background: transparent;
+  color: #7d8799;
+  font-size: 8px;
+  cursor: pointer;
+}
+
+.mi-footer button:hover {
+  color: #554ce0;
+  background: #f7f6ff;
+}
+
+.mi-footer > span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #7d8799;
+  font-size: 7.5px;
+}
+
+@media (max-width: 1050px) {
+  .mi-workbench {
+    grid-template-columns:
+      minmax(200px, 0.7fr)
+      minmax(320px, 1fr);
+  }
+
+  .mi-inspector-panel {
+    position: absolute;
+    right: 0;
+    top: 58px;
+    bottom: 34px;
+    width: min(360px, 42vw);
+    border-left: 1px solid #e1e5ed;
+    box-shadow: -14px 0 35px rgba(20, 28, 46, 0.1);
+  }
+}
+
+.mi-pause {
+  min-width: 108px !important;
+}
+
+.mi-paused {
+  border-color: #c8c4ff !important;
+  background: #f2f0ff !important;
+  color: #574ee1 !important;
+}
+
+.mi-control-divider {
+  width: 1px;
+  height: 20px;
+  margin: 3px 4px;
+  background: #e1e5ed;
+}
+
+.mi-locator-lab {
+  padding: 11px;
+  border: 1px solid #e1e4ec;
+  border-radius: 11px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(248, 249, 253, 0.96),
+      rgba(255, 255, 255, 0.98)
+    );
+}
+
+.mi-locator-test-row {
+  display: grid;
+  grid-template-columns:
+    minmax(110px, 0.32fr)
+    minmax(0, 1fr)
+    auto;
+  gap: 6px;
+}
+
+.mi-locator-test-row select,
+.mi-locator-test-row input,
+.mi-locator-test-row button {
+  min-height: 32px;
+  border: 1px solid #dfe3eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #465166;
+  font-size: 8px;
+}
+
+.mi-locator-test-row select {
+  padding: 0 8px;
+}
+
+.mi-locator-test-row input {
+  min-width: 0;
+  padding: 0 10px;
+  outline: none;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+}
+
+.mi-locator-test-row input:focus {
+  border-color: #8f87f6;
+  box-shadow:
+    0 0 0 3px rgba(98, 89, 237, 0.09);
+}
+
+.mi-locator-test-row button {
+  padding: 0 11px;
+  color: #554ce0;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.mi-locator-test-row button:hover {
+  border-color: #bbb6fb;
+  background: #f5f3ff;
+}
+
+.mi-test-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 7px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 8px;
+}
+
+.mi-test-result strong {
+  flex: 0 0 auto;
+  font-size: 8px;
+}
+
+.mi-test-result span {
+  text-align: right;
+}
+
+.mi-test-success {
+  border: 1px solid #c9eadc;
+  background: #effaf5;
+  color: #087f55;
+}
+
+.mi-test-warning {
+  border: 1px solid #f2dfae;
+  background: #fff9eb;
+  color: #926514;
+}
+
+.mi-test-error {
+  border: 1px solid #f1c8ce;
+  background: #fff2f4;
+  color: #b93d4c;
+}
+
+.mi-device-stage {
+  place-items: center;
+}
+
+/* ==========================================================
+   TESTFLOW INSPECTOR - DEVICE VIEWPORT STABILIZATION
+   ========================================================== */
+
+.mi-device-stage {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 16px;
+}
+
+.mi-device-scale {
+  position: relative;
+  flex: 0 0 auto;
+  max-width: none;
+}
+
+.mi-device-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.mi-device-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.mi-device-controls {
+  flex: 0 0 42px;
+  align-items: center;
+}
+
+.mi-device-controls button {
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    transform 120ms ease;
+}
+
+.mi-device-controls button:active {
+  transform: translateY(1px);
+}
+
+.mi-device-paused {
+  cursor: default;
+}
+
+.mi-device-paused::after {
+  position: absolute;
+  z-index: 20;
+  top: 10px;
+  right: 10px;
+  content: "INSPECTION PAUSED";
+  padding: 5px 8px;
+  border: 1px solid rgba(98, 89, 237, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #554ce0;
+  font-size: 7px;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+}
+
+.mi-statusbar {
+  display: flex;
+  flex: 0 0 27px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  border-top: 1px solid #e1e5ed;
+  background: #fff;
+  color: #8a93a4;
+  font-size: 7.5px;
+}
+
+.mi-statusbar > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mi-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #17b779;
+}
+
+/* ==========================================================
+   TESTFLOW MOBILE INSPECTOR
+   DEVICE VIEWPORT V2
+   ========================================================== */
+
+.mi-device-panel {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(99, 91, 255, 0.08),
+      transparent 38%
+    ),
+    #f5f7fb;
+}
+
+.mi-panel-header {
+  min-height: 52px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  border-bottom: 1px solid #e2e7f0;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.mi-panel-header > div {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.mi-panel-header strong {
+  color: #202a40;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mi-panel-header > span,
+.mi-panel-subtitle {
+  color: #8a96aa;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.mi-device-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  box-sizing: border-box;
+}
+
+.mi-device-scale {
+  position: relative;
+  flex: 0 0 auto;
+  transition:
+    width 160ms ease,
+    height 160ms ease;
+}
+
+.mi-device-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 7px solid #202737;
+  border-radius: 34px;
+  background: #111827;
+  box-shadow:
+    0 24px 55px rgba(26, 35, 55, 0.18),
+    0 8px 18px rgba(26, 35, 55, 0.12);
+  user-select: none;
+}
+
+.mi-device-screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.mi-device-inspect {
+  cursor: crosshair;
+}
+
+.mi-device-interact {
+  cursor: pointer;
+  box-shadow:
+    0 0 0 3px rgba(92, 81, 238, 0.15),
+    0 24px 55px rgba(26, 35, 55, 0.18);
+}
+
+.mi-device-interact:active {
+  cursor: grabbing;
+}
+
+.mi-device-busy {
+  cursor: progress;
+}
+
+.mi-interact-badge {
+  position: absolute;
+  z-index: 30;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 11px;
+  border: 1px solid rgba(91, 81, 238, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #5148dc;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+
+.mi-interact-badge span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6258ef;
+  box-shadow:
+    0 0 0 4px rgba(98, 88, 239, 0.12);
+}
+
+.mi-device-progress {
+  position: absolute;
+  z-index: 40;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  padding: 8px 13px;
+  border-radius: 10px;
+  background: rgba(24, 31, 47, 0.9);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.mi-device-toolbar {
+  flex: 0 0 58px;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  border-top: 1px solid #e0e6ef;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.mi-mode-switch {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 11px;
+  background: #f0f2f7;
+}
+
+.mi-mode-switch button {
+  min-width: 96px;
+  height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #6f7a8e;
+  font-size: 11px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.mi-mode-switch button:hover {
+  color: #4239ce;
+}
+
+.mi-mode-switch .mi-mode-active {
+  background: #fff;
+  color: #4f46df;
+  box-shadow:
+    0 1px 3px rgba(29, 38, 57, 0.08),
+    0 4px 12px rgba(29, 38, 57, 0.06);
+}
+
+.mi-zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mi-zoom-controls button {
+  min-width: 38px;
+  height: 36px;
+  padding: 0 11px;
+  border: 1px solid #d8dfeb;
+  border-radius: 9px;
+  background: #fff;
+  color: #4f5b70;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.mi-zoom-controls button:hover {
+  border-color: #a9a2ff;
+  background: #f7f6ff;
+  color: #5148dc;
+}
+
+.mi-zoom-controls .mi-zoom-value {
+  min-width: 62px;
+}
+
+.mi-zoom-controls .mi-fit-active {
+  border-color: #b8b2ff;
+  background: #eeecff;
+  color: #5148dc;
+}
+
+.mi-bounds {
+  position: absolute;
+  z-index: 10;
+  box-sizing: border-box;
+  border: 2px solid rgba(98, 88, 239, 0.55);
+  background: rgba(98, 88, 239, 0.08);
+  pointer-events: none;
+}
+
+.mi-bounds-selected {
+  border-color: #5b51ee;
+  background: rgba(91, 81, 238, 0.14);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.72) inset;
+}
+
+/* ==========================================================
+   HIERARCHY V2
+   ========================================================== */
+
+.mi-hierarchy-panel {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.mi-hierarchy-search {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  margin: 12px;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid #dfe5ef;
+  border-radius: 10px;
+  background: #f8f9fc;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease;
+}
+
+.mi-hierarchy-search:focus-within {
+  border-color: #aaa3ff;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 3px rgba(91, 81, 238, 0.08);
+}
+
+.mi-search-icon {
+  color: #7d879a;
+  font-size: 16px;
+}
+
+.mi-hierarchy-search input {
+  min-width: 0;
+  height: 34px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #303b50;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.mi-hierarchy-search input::placeholder {
+  color: #9ca6b7;
+}
+
+.mi-hierarchy-search button {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #8a94a7;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.mi-hierarchy-search button:hover {
+  background: #eceefa;
+  color: #5148dc;
+}
+
+.mi-tree-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 2px 8px 18px;
+}
+
+.mi-tree-node {
+  --tree-depth: 0;
+
+  display: flex;
+  align-items: stretch;
+  min-height: 42px;
+  margin: 1px 0;
+  padding-left:
+    calc(var(--tree-depth) * 16px);
+  border-radius: 9px;
+  transition:
+    background 110ms ease,
+    box-shadow 110ms ease;
+}
+
+.mi-tree-node:hover,
+.mi-tree-hovered {
+  background: #f5f6fb;
+}
+
+.mi-tree-selected {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(91, 81, 238, 0.12),
+      rgba(91, 81, 238, 0.045)
+    );
+  box-shadow:
+    inset 3px 0 #5b51ee;
+}
+
+.mi-tree-expand {
+  flex: 0 0 28px;
+  width: 28px;
+  border: 0;
+  background: transparent;
+  color: #8792a5;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.mi-tree-expand:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.mi-tree-select {
+  display: grid;
+  grid-template-columns:
+    18px
+    minmax(0, 1fr)
+    auto;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  padding: 5px 8px 5px 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mi-node-icon {
+  color: #9ba5b6;
+  font-size: 10px;
+}
+
+.mi-node-interactive {
+  color: #5b51ee;
+}
+
+.mi-node-content {
+  min-width: 0;
+}
+
+.mi-node-content strong {
+  display: block;
+  overflow: hidden;
+  color: #334057;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mi-node-content small {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #909bad;
+  font-size: 10px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mi-node-locator {
+  display: grid;
+  place-items: center;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #eae8ff;
+  color: #5148dc;
+  font-size: 9px;
+  font-weight: 850;
+}
+
+/* ==========================================================
+   HIERARCHY CONTEXT MENU
+   ========================================================== */
+
+.mi-context-menu {
+  position: fixed;
+  z-index: 5000;
+  width: 238px;
+  overflow: hidden;
+  padding: 6px;
+  border: 1px solid rgba(210, 217, 229, 0.95);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow:
+    0 22px 55px rgba(22, 31, 49, 0.18),
+    0 5px 14px rgba(22, 31, 49, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.mi-context-header {
+  padding: 8px 9px 10px;
+}
+
+.mi-context-header span {
+  display: block;
+  color: #9aa4b5;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.mi-context-header strong {
+  display: block;
+  margin-top: 4px;
+  overflow: hidden;
+  color: #253047;
+  font-size: 12px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mi-context-header small {
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #909bad;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mi-context-menu > button {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  min-height: 35px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #47536a;
+  font-size: 11px;
+  font-weight: 650;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mi-context-menu > button:hover:not(:disabled) {
+  background: #f0efff;
+  color: #4d43d8;
+}
+
+.mi-context-menu > button:disabled {
+  color: #b2bac7;
+  cursor: not-allowed;
+}
+
+.mi-context-menu > button > span {
+  color: #7e88a0;
+  font-size: 13px;
+}
+
+.mi-context-separator {
+  height: 1px;
+  margin: 5px 7px;
+  background: #eaedf3;
+}
+
+/* ==========================================================
+   LOCATOR ANALYSIS STATUS
+   ========================================================== */
+
+.mi-locator-analysis {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  width: 100%;
+  padding: 16px;
+
+  border: 1px solid #dfe5f0;
+  border-radius: 12px;
+
+  background: #f8fafc;
+}
+
+.mi-locator-analysis-running {
+  border-color: #c9c5ff;
+  background:
+    linear-gradient(
+      135deg,
+      #f5f3ff 0%,
+      #fafaff 100%
+    );
+}
+
+.mi-locator-analysis-error {
+  border-color: #fecaca;
+  background: #fff5f5;
+}
+
+.mi-locator-analysis-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mi-locator-analysis-content strong {
+  color: #27334a;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.mi-locator-analysis-content span {
+  color: #7c879b;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.mi-locator-analysis-error
+.mi-locator-analysis-content strong {
+  color: #c2414b;
+}
+
+.mi-locator-spinner {
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 18px;
+
+  border: 2px solid #d8d5ff;
+  border-top-color: #5b51ee;
+  border-radius: 50%;
+
+  animation:
+    mi-locator-spin 700ms linear infinite;
+}
+
+.mi-locator-analysis-icon {
+  display: grid;
+  place-items: center;
+
+  width: 20px;
+  height: 20px;
+
+  flex: 0 0 20px;
+
+  border-radius: 50%;
+
+  background: #fee2e2;
+  color: #dc3545;
+
+  font-size: 12px;
+  font-weight: 900;
+}
+
+@keyframes mi-locator-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================
+   LOCATOR ANALYSIS STATUS V2
+   ========================================================== */
+
+.mi-locator-state {
+  width: 100%;
+}
+
+.mi-locator-analysis {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  border: 1px solid #dfe5f0;
+  border-radius: 12px;
+}
+
+.mi-locator-analysis-running {
+  border-color: #c9c5ff;
+  background:
+    linear-gradient(
+      135deg,
+      #f4f2ff 0%,
+      #fafaff 100%
+    );
+}
+
+.mi-locator-analysis-error {
+  border-color: #fecaca;
+  background: #fff5f5;
+}
+
+.mi-locator-analysis-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mi-locator-analysis-content strong {
+  color: #27334a;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.mi-locator-analysis-content span {
+  color: #737f94;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.mi-locator-analysis-error
+.mi-locator-analysis-content strong {
+  color: #be3d49;
+}
+
+.mi-locator-spinner {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  box-sizing: border-box;
+  border: 2px solid #d8d5ff;
+  border-top-color: #5b51ee;
+  border-radius: 50%;
+  animation: mi-locator-spin 700ms linear infinite;
+}
+
+.mi-locator-analysis-icon {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #c93443;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+@keyframes mi-locator-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================
+   TESTFLOW MOBILE INSPECTOR V3
+   Canonical workbench geometry
+   ========================================================== */
+
+.mi-shell {
+  width: min(96vw, 1760px);
+  height: min(94vh, 1080px);
+  min-width: 980px;
+  min-height: 680px;
+
+  display: grid;
+  grid-template-rows:
+    64px
+    minmax(0, 1fr)
+    32px;
+
+  overflow: hidden;
+  border: 1px solid #dfe4ed;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 30px 80px rgba(25, 34, 52, 0.20),
+    0 8px 24px rgba(25, 34, 52, 0.10);
+}
+
+.mi-header {
+  min-width: 0;
+  min-height: 0;
+  height: 64px;
+}
+
+.mi-workbench {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(280px, 0.92fr)
+    minmax(440px, 1.45fr)
+    minmax(360px, 1.13fr);
+
+  overflow: hidden;
+}
+
+.mi-hierarchy-panel,
+.mi-device-panel,
+.mi-inspector-panel {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.mi-hierarchy-panel {
+  border-right: 1px solid #e4e8f0;
+}
+
+.mi-device-panel {
+  border-right: 1px solid #e4e8f0;
+}
+
+.mi-panel-header {
+  flex: 0 0 54px;
+  min-height: 54px;
+  height: 54px;
+
+  box-sizing: border-box;
+
+  padding: 0 16px;
+
+  border-bottom: 1px solid #e6eaf1;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fbfcfe 100%
+    );
+}
+
+.mi-panel-header strong {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+}
+
+.mi-panel-subtitle,
+.mi-panel-header > span {
+  font-size: 11px;
+}
+
+.mi-hierarchy-search {
+  flex: 0 0 40px;
+  min-height: 40px;
+}
+
+.mi-tree-scroll,
+.mi-inspector-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  scrollbar-width: thin;
+}
+
+.mi-tree-node {
+  min-height: 44px;
+}
+
+.mi-node-content strong {
+  font-size: 12px;
+}
+
+.mi-node-content small {
+  font-size: 10.5px;
+}
+
+.mi-inspector-scroll {
+  padding-bottom: 20px;
+}
+
+.mi-section-title strong {
+  font-size: 12px;
+}
+
+.mi-section-title span {
+  font-size: 11px;
+}
+
+.mi-properties > div > span {
+  font-size: 10.5px;
+}
+
+.mi-properties code {
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.mi-locator-lab select,
+.mi-locator-lab input,
+.mi-locator-lab button {
+  min-height: 36px;
+  font-size: 11px;
+}
+
+.mi-statusbar {
+  height: 32px;
+  min-height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  padding: 0 16px;
+
+  border-top: 1px solid #e5e9f0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcfe 0%,
+      #f6f8fb 100%
+    );
+
+  color: #69758a;
+
+  font-size: 10.5px;
+  font-weight: 650;
+}
+
+.mi-statusbar > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.mi-context-menu {
+  position: fixed;
+  z-index: 10000;
+
+  width: 270px;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 24px);
+
+  overflow-y: auto;
+
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   TESTFLOW MOBILE INSPECTOR V4
+   2026 PRODUCT VISUAL SYSTEM
+   ========================================================== */
+
+:root {
+  --mi-brand: #635bff;
+  --mi-brand-strong: #5147ee;
+  --mi-brand-soft: #f0efff;
+  --mi-brand-border: #d9d5ff;
+
+  --mi-success: #10a66a;
+  --mi-success-soft: #eafaf3;
+
+  --mi-danger: #d64555;
+  --mi-danger-soft: #fff0f2;
+
+  --mi-ink: #172033;
+  --mi-ink-soft: #364258;
+  --mi-muted: #76839a;
+  --mi-muted-soft: #9aa5b7;
+
+  --mi-border: #dde3ed;
+  --mi-border-soft: #e9edf4;
+
+  --mi-surface: #ffffff;
+  --mi-surface-soft: #f8f9fc;
+  --mi-surface-raised: #fbfcff;
+  --mi-canvas: #eef1f8;
+
+  --mi-radius-sm: 9px;
+  --mi-radius-md: 13px;
+  --mi-radius-lg: 18px;
+
+  --mi-shadow-sm:
+    0 1px 2px rgba(18, 27, 45, 0.04),
+    0 3px 10px rgba(18, 27, 45, 0.04);
+
+  --mi-shadow-md:
+    0 12px 30px rgba(27, 35, 55, 0.10);
+
+  --mi-shadow-device:
+    0 24px 55px rgba(26, 34, 52, 0.22);
+}
+
+
+/* ---------- Main shell ---------- */
+
+.mi-shell {
+  background: var(--mi-surface);
+  border-color: #d7deea;
+
+  box-shadow:
+    0 30px 90px rgba(24, 32, 50, 0.22),
+    0 8px 30px rgba(24, 32, 50, 0.08);
+}
+
+
+/* ---------- Top application bar ---------- */
+
+.mi-header {
+  padding: 0 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fbfcff 100%
+    );
+
+  border-bottom:
+    1px solid var(--mi-border);
+}
+
+.mi-brand strong {
+  color: var(--mi-ink);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.mi-brand small {
+  color: #8793a7;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.mi-logo {
+  box-shadow:
+    0 7px 18px rgba(99, 91, 255, 0.22);
+}
+
+
+/* ---------- Workbench ---------- */
+
+.mi-workbench {
+  background: var(--mi-surface-soft);
+}
+
+.mi-hierarchy-panel {
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcff 0%,
+      #f8f9fd 100%
+    );
+}
+
+.mi-device-panel {
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #f9faff 0%,
+      #f0f3f9 48%,
+      #e9edf5 100%
+    );
+}
+
+.mi-inspector-panel {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fbfcfe 100%
+    );
+}
+
+
+/* ---------- Panel headers ---------- */
+
+.mi-panel-header {
+  padding: 0 18px;
+
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.mi-panel-header strong {
+  color: var(--mi-ink);
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.055em;
+}
+
+.mi-panel-header > span {
+  color: #8a96aa;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+
+/* ---------- Hierarchy search ---------- */
+
+.mi-hierarchy-search {
+  margin: 14px 12px 10px;
+}
+
+.mi-hierarchy-search input {
+  height: 42px;
+
+  padding: 0 14px 0 38px;
+
+  border:
+    1px solid var(--mi-border);
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: var(--mi-ink-soft);
+
+  font-size: 12px;
+  font-weight: 550;
+
+  box-shadow: var(--mi-shadow-sm);
+
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background 150ms ease;
+}
+
+.mi-hierarchy-search input:focus {
+  border-color: #aaa4ff;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 91, 255, 0.10),
+    var(--mi-shadow-sm);
+}
+
+
+/* ---------- Hierarchy tree ---------- */
+
+.mi-tree-scroll {
+  padding:
+    4px 9px
+    18px;
+}
+
+.mi-tree-node {
+  margin: 2px 0;
+
+  border-radius: 9px;
+
+  transition:
+    background 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
+}
+
+.mi-tree-node:hover {
+  background: #f0f2ff;
+}
+
+.mi-tree-node-selected {
+  background:
+    linear-gradient(
+      90deg,
+      #eeecff 0%,
+      #f5f4ff 100%
+    );
+
+  box-shadow:
+    inset 3px 0 0 var(--mi-brand);
+}
+
+.mi-node-content strong {
+  color: #344057;
+  font-size: 12.5px;
+  font-weight: 720;
+}
+
+.mi-node-content small {
+  margin-top: 2px;
+
+  color: #8995a9;
+  font-size: 10.5px;
+  font-weight: 520;
+}
+
+.mi-tree-node-selected
+.mi-node-content strong {
+  color: #332b9f;
+}
+
+
+/* ---------- Device stage ---------- */
+
+.mi-device-stage {
+  background: transparent;
+}
+
+.mi-device-frame {
+  box-shadow: var(--mi-shadow-device);
+}
+
+.mi-device-toolbar {
+  min-height: 62px;
+
+  border-top:
+    1px solid var(--mi-border);
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  backdrop-filter: blur(16px);
+}
+
+
+/* ---------- Inspect / Interact segmented control ---------- */
+
+.mi-mode-switch {
+  padding: 5px;
+
+  border:
+    1px solid #dfe4ee;
+
+  border-radius: 13px;
+
+  background: #eef1f6;
+
+  box-shadow:
+    inset 0 1px 2px rgba(28, 38, 57, 0.04);
+}
+
+.mi-mode-switch button {
+  min-height: 38px;
+
+  padding: 0 20px;
+
+  border: 0;
+  border-radius: 9px;
+
+  color: #69758a;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    box-shadow 140ms ease,
+    transform 120ms ease;
+}
+
+.mi-mode-switch button:hover {
+  color: var(--mi-ink);
+}
+
+.mi-mode-switch button.active,
+.mi-mode-switch button[aria-pressed="true"] {
+  background: #ffffff;
+
+  color: var(--mi-brand-strong);
+
+  box-shadow:
+    0 3px 10px rgba(32, 40, 60, 0.10);
+}
+
+
+/* ---------- Zoom controls ---------- */
+
+.mi-zoom-controls button,
+.mi-zoom-controls span {
+  min-height: 38px;
+
+  border-radius: 10px;
+
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.mi-zoom-controls button {
+  background: #ffffff;
+  border: 1px solid #dce2ec;
+  color: #526078;
+
+  transition:
+    border-color 130ms ease,
+    background 130ms ease,
+    color 130ms ease,
+    transform 100ms ease;
+}
+
+.mi-zoom-controls button:hover {
+  border-color: #b8b2ff;
+  background: #f5f4ff;
+  color: var(--mi-brand-strong);
+}
+
+.mi-zoom-controls button:active {
+  transform: translateY(1px);
+}
+
+
+/* ---------- Inspector ---------- */
+
+.mi-inspector-scroll {
+  padding:
+    18px 18px
+    28px;
+}
+
+.mi-selected-header {
+  margin-bottom: 18px;
+}
+
+.mi-selected-header h2 {
+  margin: 5px 0 4px;
+
+  color: var(--mi-ink);
+
+  font-size: 20px;
+  font-weight: 820;
+  letter-spacing: -0.035em;
+}
+
+.mi-selected-header code {
+  color: #7b879a;
+
+  font-size: 11px;
+  font-weight: 550;
+}
+
+
+/* ---------- Sections ---------- */
+
+.mi-section {
+  margin-top: 18px;
+}
+
+.mi-section-title {
+  margin-bottom: 9px;
+}
+
+.mi-section-title strong {
+  color: #3e4a61;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.mi-section-title span {
+  color: #929caf;
+  font-size: 10.5px;
+  font-weight: 550;
+}
+
+
+/* ---------- Properties ---------- */
+
+.mi-properties {
+  overflow: hidden;
+
+  border:
+    1px solid var(--mi-border);
+
+  border-radius: 13px;
+
+  background: #ffffff;
+
+  box-shadow: var(--mi-shadow-sm);
+}
+
+.mi-properties > div {
+  min-height: 39px;
+
+  padding: 0 12px;
+
+  border-bottom:
+    1px solid var(--mi-border-soft);
+}
+
+.mi-properties > div:last-child {
+  border-bottom: 0;
+}
+
+.mi-properties > div:hover {
+  background: #fafbfe;
+}
+
+.mi-properties > div > span {
+  color: #8490a4;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.mi-properties code {
+  color: #38455c;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+
+/* ---------- Locator Lab ---------- */
+
+.mi-locator-lab {
+  padding: 13px;
+
+  border:
+    1px solid #dedcfb;
+
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #faf9ff 0%,
+      #ffffff 70%
+    );
+
+  box-shadow:
+    0 7px 20px rgba(75, 65, 180, 0.06);
+}
+
+.mi-locator-lab select,
+.mi-locator-lab input {
+  height: 40px;
+
+  border:
+    1px solid #dce1eb;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #47546a;
+
+  font-size: 11.5px;
+}
+
+.mi-locator-lab input:focus,
+.mi-locator-lab select:focus {
+  outline: none;
+
+  border-color: #aaa4ff;
+
+  box-shadow:
+    0 0 0 3px rgba(99, 91, 255, 0.09);
+}
+
+.mi-locator-lab button {
+  height: 40px;
+
+  border:
+    1px solid var(--mi-brand-border);
+
+  border-radius: 10px;
+
+  background: var(--mi-brand-soft);
+
+  color: var(--mi-brand-strong);
+
+  font-size: 11.5px;
+  font-weight: 800;
+}
+
+
+/* ---------- Verified locator cards ---------- */
+
+.mi-locator-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mi-locator-card {
+  overflow: hidden;
+
+  border:
+    1px solid #dde3ec;
+
+  border-radius: 13px;
+
+  background: #ffffff;
+
+  box-shadow: var(--mi-shadow-sm);
+
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.mi-locator-card:hover {
+  border-color: #c8c4ff;
+
+  box-shadow:
+    0 8px 22px rgba(45, 53, 76, 0.09);
+
+  transform: translateY(-1px);
+}
+
+.mi-locator-card.recommended,
+.mi-locator-card[data-recommended="true"] {
+  border-color: #8bdcbc;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f7fffb 0%,
+      #ffffff 58%
+    );
+
+  box-shadow:
+    0 8px 24px rgba(16, 166, 106, 0.08);
+}
+
+
+/* ---------- Empty locator ---------- */
+
+.mi-no-locator {
+  padding: 18px;
+
+  border:
+    1px dashed #cfd7e5;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f8f9fc 0%,
+      #fcfdff 100%
+    );
+}
+
+.mi-no-locator strong {
+  color: #59667c;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mi-no-locator span {
+  margin-top: 4px;
+
+  color: #929daf;
+  font-size: 11px;
+}
+
+
+/* ---------- Status bar ---------- */
+
+.mi-statusbar {
+  padding: 0 18px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f7f9fc 0%,
+      #fbfcfe 50%,
+      #f7f9fc 100%
+    );
+
+  border-top:
+    1px solid #dfe4ec;
+
+  color: #68758a;
+
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.mi-status-dot {
+  width: 7px;
+  height: 7px;
+
+  background: #18b978;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 3px rgba(24, 185, 120, 0.10);
+}
+
+
+/* ---------- Context menu ---------- */
+
+.mi-context-menu {
+  padding: 7px;
+
+  border:
+    1px solid #d9dfea;
+
+  border-radius: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.98);
+
+  backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 22px 60px rgba(26, 34, 52, 0.22),
+    0 5px 18px rgba(26, 34, 52, 0.10);
+}
+
+.mi-context-menu button {
+  min-height: 38px;
+
+  border-radius: 9px;
+
+  color: #445168;
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.mi-context-menu button:hover {
+  background: #f0efff;
+  color: #4e45dc;
+}
+
+
+/* ---------- Scrollbars ---------- */
+
+.mi-tree-scroll::-webkit-scrollbar,
+.mi-inspector-scroll::-webkit-scrollbar {
+  width: 7px;
+}
+
+.mi-tree-scroll::-webkit-scrollbar-thumb,
+.mi-inspector-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+
+  background:
+    #bcc5d4;
+
+  background-clip:
+    padding-box;
+}
+
+.mi-tree-scroll::-webkit-scrollbar-track,
+.mi-inspector-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ==========================================================
+   V4 LEGIBILITY FLOOR
+   ========================================================== */
+
+.mi-shell {
+  color: var(--mi-ink);
+  font-size: 13px;
+}
+
+.mi-shell button,
+.mi-shell input,
+.mi-shell select {
+  font-family: inherit;
+}
+
+.mi-copy-element {
+  min-height: 38px;
+  padding: 0 14px;
+
+  border:
+    1px solid #dce2ec;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #536077;
+
+  font-size: 11.5px;
+  font-weight: 750;
+
+  box-shadow: var(--mi-shadow-sm);
+}
+
+.mi-copy-element:hover {
+  border-color: #b9b4ff;
+  background: #f7f6ff;
+  color: var(--mi-brand-strong);
+}
+
+.mi-count {
+  min-width: 26px;
+  height: 26px;
+
+  display: inline-grid;
+  place-items: center;
+
+  border-radius: 999px;
+
+  background: #eef1f6;
+
+  color: #68758a;
+
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+/* ==========================================================
+   DEVICE SIDE CONTROLS
+   ========================================================== */
+
+.mi-device-side-controls {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + var(--mi-device-half-width, 190px) + 22px);
+
+  z-index: 8;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 8px;
+
+  transform: translateY(-50%);
+
+  border: 1px solid rgba(205, 214, 228, 0.92);
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 14px 34px rgba(29, 39, 61, 0.13),
+    0 3px 10px rgba(29, 39, 61, 0.06);
+}
+
+.mi-device-side-controls button {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 11px;
+
+  background: transparent;
+
+  color: #587082;
+
+  cursor: pointer;
+
+  transition:
+    background 130ms ease,
+    color 130ms ease,
+    transform 100ms ease,
+    box-shadow 130ms ease;
+}
+
+.mi-device-side-controls button:hover:not(:disabled) {
+  background: #f0efff;
+
+  color: #5b51ee;
+
+  box-shadow:
+    inset 0 0 0 1px #dad6ff;
+}
+
+.mi-device-side-controls button:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.mi-device-side-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+
+/* Android Back */
+
+.mi-android-back {
+  width: 17px;
+  height: 17px;
+
+  border-left: 2.5px solid currentColor;
+  border-bottom: 2.5px solid currentColor;
+
+  transform:
+    translateX(3px)
+    rotate(45deg);
+
+  border-radius: 2px;
+}
+
+
+/* Android Home */
+
+.mi-android-home {
+  width: 18px;
+  height: 18px;
+
+  border: 2.5px solid currentColor;
+  border-radius: 50%;
+}
+
+
+/* Android Recents */
+
+.mi-android-recents {
+  width: 17px;
+  height: 17px;
+
+  border: 2.5px solid currentColor;
+  border-radius: 3px;
+}
+
+/* ==========================================================
+   DEVICE STAGE V5
+   Device + platform controls remain geometrically coupled.
+   ========================================================== */
+
+.mi-device-stage {
+  position: relative;
+}
+
+.mi-device-side-controls {
+  left: auto;
+  right: 18px;
+  top: 50%;
+
+  transform: translateY(-50%);
+}
+
+.mi-device-screen.mi-device-interact {
+  cursor: pointer;
+}
+
+.mi-device-screen.mi-device-inspect {
+  cursor: crosshair;
+}
+
+.mi-device-screen.mi-device-busy {
+  cursor: progress;
+}
+
+/*
+ * Interact is a pure interaction surface.
+ * Defensive CSS in addition to conditional rendering.
+ */
+.mi-device-interact .mi-bounds,
+.mi-device-interact .mi-interact-badge {
+  display: none !important;
+}
+
+.mi-mode-switch .mi-mode-active {
+  position: relative;
+
+  color: var(--mi-brand-strong);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 4px 14px rgba(38, 46, 70, 0.10);
+}
+
+.mi-mode-switch .mi-mode-active::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  margin-right: 7px;
+
+  display: inline-block;
+
+  border-radius: 50%;
+
+  background: var(--mi-brand);
+
+  box-shadow:
+    0 0 0 4px rgba(99, 91, 255, 0.10);
+}
+
+/* ==========================================================
+   INSPECTOR POINTER HIGHLIGHT
+   ========================================================== */
+
+/*
+ * Katalon-style inspection:
+ * bounds identify the candidate without obscuring the AUT.
+ */
+.mi-device-inspect .mi-bounds {
+  background: transparent;
+  border: 2px solid rgba(98, 88, 239, 0.72);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.72);
+  pointer-events: none;
+}
+
+/*
+ * Selection remains persistent but does not paint over
+ * nested controls or visual content.
+ */
+.mi-device-inspect .mi-bounds-selected {
+  background: transparent;
+  border: 2px solid #5b51ee;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.82),
+    0 0 0 3px rgba(91, 81, 238, 0.10);
+}

@@ -1,0 +1,1523 @@
+.mi-device-panel {
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      #ffffff 0%,
+      #f4f6fc 45%,
+      #edf1f8 100%
+    );
+}
+
+.mi-device-stage {
+  position: relative;
+
+  flex: 1 1 auto;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: auto;
+
+  padding: 28px 84px 28px 28px;
+
+  box-sizing: border-box;
+
+  /*
+   * Important:
+   * when the scaled device is larger than the viewport,
+   * flex centering can hide its beginning.
+   */
+  display: block;
+
+  scrollbar-gutter: stable both-edges;
+}
+
+.mi-device-scale {
+  position: relative;
+
+  flex: none;
+
+  margin:
+    max(0px, calc((100% - var(--device-render-width, 0px)) / 2))
+    auto;
+
+  max-width: none;
+
+  transition:
+    width 140ms ease,
+    height 140ms ease;
+}
+
+.mi-device-screen {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  border: 7px solid #1e2636;
+  border-radius: 34px;
+
+  background: #101725;
+
+  box-shadow: var(--tf-shadow-device);
+
+  user-select: none;
+}
+
+.mi-device-screen img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: fill;
+
+  pointer-events: none;
+}
+
+.mi-device-toolbar {
+  flex: 0 0 68px;
+  min-height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 0 20px;
+
+  border-top: 1px solid var(--tf-border);
+
+  background: rgba(255, 255, 255, 0.96);
+
+  backdrop-filter: blur(18px);
+}
+
+.mi-mode-switch {
+  padding: 5px;
+
+  border: 1px solid var(--tf-border);
+
+  border-radius: 14px;
+
+  background: #edf0f6;
+
+  box-shadow: var(--tf-shadow-sm);
+}
+
+.mi-mode-switch button {
+  min-width: 108px;
+  height: 40px;
+
+  padding: 0 16px;
+
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.mi-mode-switch .mi-mode-active {
+  color: var(--tf-violet-strong);
+  background: #fff;
+
+  box-shadow:
+    0 3px 12px rgba(53, 45, 160, 0.13);
+}
+
+.mi-zoom-controls {
+  gap: 8px;
+}
+
+.mi-zoom-controls button {
+  min-width: 42px;
+  height: 40px;
+
+  border: 1px solid var(--tf-border-strong);
+  border-radius: 11px;
+
+  background: #fff;
+
+  color: var(--tf-text-secondary);
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.mi-zoom-controls button:hover {
+  border-color: #bcb5ff;
+
+  color: var(--tf-violet-strong);
+
+  background: var(--tf-surface-violet);
+}
+
+.mi-zoom-value {
+  min-width: 68px !important;
+}
+
+.mi-fit-active {
+  border-color: #b8b0ff !important;
+
+  color: var(--tf-violet-strong) !important;
+
+  background: var(--tf-surface-violet) !important;
+}
+
+
+/* Platform navigation */
+
+.mi-device-side-controls {
+  position: sticky;
+
+  z-index: 20;
+
+  top: 50%;
+
+  float: right;
+
+  width: 52px;
+
+  margin:
+    0
+    -68px
+    0
+    16px;
+
+  transform: translateY(-50%);
+
+  padding: 8px;
+
+  border: 1px solid var(--tf-border);
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow: var(--tf-shadow-md);
+}
+
+.mi-device-side-controls button {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 11px;
+
+  color: #526f80;
+}
+
+.mi-device-side-controls button:hover:not(:disabled) {
+  color: var(--tf-violet-strong);
+  background: var(--tf-surface-violet);
+}
+
+/* ==========================================================
+   DEVICE 2D VIEWPORT
+   ========================================================== */
+
+.mi-device-stage {
+  position: relative;
+
+  overflow: auto;
+
+  min-width: 0;
+  min-height: 0;
+
+  overscroll-behavior: contain;
+
+  scrollbar-gutter: stable;
+
+  scrollbar-width: auto;
+}
+
+.mi-device-canvas {
+  position: relative;
+
+  width: max-content;
+  min-width: 100%;
+
+  height: max-content;
+  min-height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 28px 84px 28px 28px;
+}
+
+.mi-device-stage-fit .mi-device-canvas {
+  display: grid;
+  place-items: center;
+}
+
+.mi-device-stage-manual .mi-device-canvas {
+  display: block;
+}
+
+.mi-device-stage-manual .mi-device-scale {
+  margin: 0 auto;
+}
+
+.mi-device-stage::-webkit-scrollbar {
+  width: 13px;
+  height: 13px;
+}
+
+.mi-device-stage::-webkit-scrollbar-track {
+  background: #e9edf4;
+}
+
+.mi-device-stage::-webkit-scrollbar-thumb {
+  border: 3px solid #e9edf4;
+  border-radius: 999px;
+
+  background: #aeb8ca;
+}
+
+.mi-device-stage::-webkit-scrollbar-thumb:hover {
+  background: #8794aa;
+}
+
+/*
+ * Navigation belongs to the viewport,
+ * not to the scrollable screenshot.
+ */
+.mi-device-side-controls {
+  position: absolute;
+
+  z-index: 30;
+
+  top: 50%;
+  right: 18px;
+  left: auto;
+
+  float: none;
+
+  margin: 0;
+
+  transform: translateY(-50%);
+}
+
+/* ==========================================================
+   APPLICATION CONTEXT WARNING
+   ========================================================== */
+
+.mi-aut-warning {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 12px 18px;
+
+  border-top: 1px solid #f0cf8e;
+  border-bottom: 1px solid #f0cf8e;
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff8e8 0%,
+      #fffdf6 100%
+    );
+}
+
+.mi-aut-warning > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.mi-aut-warning strong {
+  font-size: 13.5px;
+  font-weight: 850;
+
+  color: #805309;
+}
+
+.mi-aut-warning span {
+  overflow: hidden;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #946b25;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mi-aut-warning button {
+  flex: none;
+
+  min-height: 38px;
+
+  padding: 0 14px;
+
+  border: 1px solid #d99b2b;
+  border-radius: 10px;
+
+  font-size: 12.5px;
+  font-weight: 800;
+
+  color: #704705;
+
+  background: #fff;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(160, 105, 14, 0.10);
+}
+
+.mi-aut-warning button:hover:not(:disabled) {
+  background: #fff5dc;
+}
+
+/* ==========================================================
+   DEVICE CENTERING CONTRACT
+   ========================================================== */
+
+.mi-device-stage-fit .mi-device-canvas {
+  width: 100%;
+  min-width: 100%;
+
+  min-height: 100%;
+
+  padding: 28px;
+
+  display: grid;
+
+  place-items: center;
+
+  box-sizing: border-box;
+}
+
+.mi-device-stage-fit .mi-device-scale {
+  margin: 0;
+}
+
+.mi-device-stage-manual .mi-device-canvas {
+  padding: 28px 76px 28px 28px;
+}
+
+/* ==========================================================
+   DEVICE WORKSPACE V3
+   Stage scrolls. Platform controls NEVER scroll.
+   ========================================================== */
+
+.mi-device-workspace {
+  position: relative;
+
+  flex: 1 1 auto;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      #ffffff 0%,
+      #f5f7fc 45%,
+      #eef2f8 100%
+    );
+}
+
+.mi-device-workspace > .mi-device-stage {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: auto;
+
+  box-sizing: border-box;
+}
+
+
+/*
+ * Platform controls are siblings of the scroll stage.
+ * Therefore zoom and scroll cannot move them.
+ */
+.mi-device-workspace > .mi-device-side-controls {
+  position: absolute !important;
+
+  z-index: 50;
+
+  top: 50% !important;
+  right: 20px !important;
+  bottom: auto !important;
+  left: auto !important;
+
+  float: none !important;
+
+  margin: 0 !important;
+
+  transform: translateY(-50%) !important;
+
+  width: 54px;
+
+  padding: 7px;
+
+  border: 1px solid #d9e0eb;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  box-shadow:
+    0 16px 38px rgba(27, 38, 61, 0.14);
+
+  backdrop-filter: blur(18px);
+}
+
+.mi-device-workspace > .mi-device-side-controls button {
+  display: grid;
+  place-items: center;
+
+  width: 40px;
+  height: 44px;
+
+  padding: 0;
+  margin: 0;
+
+  border: 0;
+  border-radius: 11px;
+
+  color: #4d6b7d;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.mi-device-workspace > .mi-device-side-controls button:hover:not(:disabled) {
+  color: #5147dc;
+  background: #efedff;
+}
+
+
+/* ==========================================================
+   PAN CONTROLS
+   ========================================================== */
+
+.mi-pan-controls {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 5px;
+
+  border: 1px solid #dce2ed;
+  border-radius: 13px;
+
+  background: #f4f6fa;
+}
+
+.mi-pan-controls button {
+  min-width: 52px;
+  height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 11px;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  color: #526078;
+
+  background: transparent;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.mi-pan-controls button span {
+  font-size: 17px;
+  line-height: 1;
+
+  color: #6258ed;
+}
+
+.mi-pan-controls button:hover {
+  border-color: #cbc6ff;
+
+  color: #4f45cb;
+
+  background: #fff;
+}
+
+
+/* ==========================================================
+   LIVE DEVICE V13 — PROMINENT FIT
+   Device is the primary surface. Controls remain fixed.
+   ========================================================== */
+
+.mi-device-stage-fit .mi-device-canvas {
+  width: 100%;
+  min-width: 100%;
+
+  height: 100%;
+  min-height: 100%;
+
+  display: grid;
+  place-items: center;
+
+  /*
+   * Small visual breathing room.
+   * The control deck is an overlay and does not consume
+   * layout width.
+   */
+  padding: 10px 12px;
+
+  box-sizing: border-box;
+}
+
+.mi-device-stage-fit .mi-device-scale {
+  margin: 0;
+}
+
+.mi-device-stage-manual .mi-device-canvas {
+  width: max-content;
+  min-width: 100%;
+
+  height: max-content;
+  min-height: 100%;
+
+  padding: 20px 70px 20px 20px;
+
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   ANDROID CONTROL DECK
+   ========================================================== */
+
+.mi-device-workspace > .mi-device-side-controls {
+  width: 76px !important;
+
+  padding: 10px !important;
+
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.mi-device-side-controls .mi-gesture-pad {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 4px;
+}
+
+.mi-device-side-controls .mi-gesture-pad > div {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  gap: 4px;
+}
+
+.mi-device-side-controls .mi-gesture-pad button {
+  width: 38px !important;
+  height: 38px !important;
+
+  border-radius: 10px !important;
+
+  font-size: 22px !important;
+  font-weight: 800 !important;
+
+  color: #574be2 !important;
+
+  background: #f0eeff !important;
+}
+
+.mi-device-side-controls .mi-gesture-pad > div button {
+  width: 28px !important;
+}
+
+.mi-device-control-divider {
+  width: 42px;
+  height: 1px;
+
+  margin: 5px 0;
+
+  background: #dde3ed;
+}
+
+.mi-device-side-controls > button {
+  width: 44px !important;
+  height: 42px !important;
+
+  font-size: 28px !important;
+  font-weight: 600 !important;
+
+  border-radius: 11px !important;
+}
+
+.mi-device-side-controls button:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(83, 72, 218, 0.14);
+}
+
+/* ==========================================================
+   AUT RECOVERY
+   ========================================================== */
+
+.mi-restart-app {
+  min-height: 42px;
+
+  padding: 0 16px;
+
+  border: 1px solid #efb84d;
+  border-radius: 11px;
+
+  color: #8a5700;
+
+  background: #fff8e8;
+
+  font-weight: 750;
+
+  transition:
+    transform 140ms ease,
+    background 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.mi-restart-app:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  background: #fff2d2;
+
+  box-shadow:
+    0 5px 14px rgba(177, 116, 13, .13);
+}
+
+.mi-restart-app:active:not(:disabled) {
+  transform: scale(.98);
+}
+
+/* ==========================================================
+   LIVE DEVICE V13 — COMPACT CONTROL DECK
+   ========================================================== */
+
+.mi-device-workspace > .mi-device-side-controls {
+  right: 12px !important;
+
+  width: 58px !important;
+
+  padding: 7px !important;
+
+  gap: 4px !important;
+
+  border-radius: 18px !important;
+
+  background:
+    rgba(255, 255, 255, .97) !important;
+
+  box-shadow:
+    0 12px 28px
+    rgba(28, 39, 67, .12) !important;
+}
+
+.mi-device-workspace
+> .mi-device-side-controls
+button {
+  width: 42px !important;
+  height: 42px !important;
+
+  min-width: 42px !important;
+  min-height: 42px !important;
+
+  border-radius: 11px !important;
+}
+
+.mi-device-side-controls
+.mi-gesture-pad {
+  gap: 4px !important;
+}
+
+/* =========================================================
+   MOBFLOW LIVE DEVICE V2
+   Recorder-inspired stage without recorder behavior.
+   ========================================================= */
+
+.mi-device-panel {
+  min-width: 0;
+  min-height: 0;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      var(--mi-stage-glow) 0%,
+      var(--mi-stage-bg) 72%
+    );
+}
+
+.mi-device-workspace {
+  min-width: 0;
+  min-height: 0;
+
+  flex: 1;
+
+  background: transparent;
+}
+
+.mi-device-canvas {
+  background: transparent;
+}
+
+.mi-device-toolbar {
+  border-top-color: var(--mi-border);
+  background: var(--mi-panel-bg);
+}
+
+.mi-device-toolbar button {
+  border-color: var(--mi-input-border);
+  background: var(--mi-panel-bg);
+  color: var(--mi-text-secondary);
+}
+
+.mi-device-toolbar button:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  background: var(--mi-accent-soft);
+  color: var(--mi-accent);
+}
+
+
+/* =========================================================
+   MOBFLOW INSPECTOR V4.1
+   Recorder-parity Android gesture deck.
+   Behavior remains owned by AndroidDeviceControls.
+   ========================================================= */
+
+.mi-device-panel
+.mi-device-workspace
+> .mi-device-side-controls {
+  right: 14px !important;
+
+  width: 30px !important;
+
+  padding: 3px !important;
+  gap: 2px !important;
+
+  border:
+    1px solid
+    rgba(139, 124, 255, .18) !important;
+
+  border-radius: 8px !important;
+
+  background:
+    rgba(105, 92, 220, .09) !important;
+
+  color:
+    #9187d8 !important;
+
+  box-shadow:
+    0 8px 22px
+    rgba(0, 0, 0, .14) !important;
+
+  backdrop-filter:
+    blur(10px);
+}
+
+.mi-device-panel
+.mi-device-side-controls button {
+  width: 21px !important;
+  height: 21px !important;
+
+  min-width: 21px !important;
+  min-height: 21px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border: 0 !important;
+  border-radius: 5px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #9187d8 !important;
+
+  box-shadow:
+    none !important;
+
+  font-size: 11px !important;
+  line-height: 1 !important;
+
+  opacity: .82;
+}
+
+.mi-device-panel
+.mi-device-side-controls
+.mi-gesture-pad {
+  width: 100% !important;
+
+  gap: 2px !important;
+}
+
+.mi-device-panel
+.mi-device-side-controls
+.mi-gesture-pad > div {
+  gap: 1px !important;
+}
+
+.mi-device-panel
+.mi-device-side-controls
+.mi-gesture-pad button {
+  width: 21px !important;
+  height: 21px !important;
+
+  min-width: 21px !important;
+  min-height: 21px !important;
+
+  border-radius: 5px !important;
+
+  font-size: 11px !important;
+}
+
+.mi-device-panel
+.mi-device-side-controls
+button:hover:not(:disabled) {
+  transform: none !important;
+
+  background:
+    rgba(117, 103, 255, .10) !important;
+
+  color:
+    #a99fff !important;
+
+  box-shadow:
+    none !important;
+
+  opacity: 1;
+}
+
+.mi-device-panel
+.mi-device-control-divider {
+  width: 17px !important;
+  height: 1px !important;
+
+  margin: 2px 0 !important;
+
+  background:
+    rgba(148, 163, 184, .10) !important;
+}
+
+/* LIGHT keeps the same compact geometry. */
+
+:root[data-theme="light"]
+.mi-device-panel
+.mi-device-workspace
+> .mi-device-side-controls {
+  border-color:
+    rgba(99, 102, 241, .16) !important;
+
+  background:
+    rgba(255, 255, 255, .82) !important;
+
+  box-shadow:
+    0 8px 22px
+    rgba(30, 41, 59, .08) !important;
+}
+
+:root[data-theme="light"]
+.mi-device-panel
+.mi-device-side-controls button {
+  color:
+    #665cc7 !important;
+}
+
+
+/* =========================================================
+   MOBFLOW INSPECTOR V5 — DEVICE CHROME FINAL
+   ========================================================= */
+
+
+/* ---------- STAGE ---------- */
+
+.mi-device-panel {
+  background:
+    #08111d !important;
+}
+
+.mi-device-workspace {
+  position:
+    relative !important;
+
+  min-width:
+    0 !important;
+
+  min-height:
+    0 !important;
+
+  flex:
+    1 1 auto !important;
+
+  background:
+    #08111d !important;
+}
+
+
+/* ---------- TEMPORARY SCROLLBAR ---------- */
+
+.mi-device-stage {
+  scrollbar-width:
+    thin;
+
+  scrollbar-color:
+    transparent
+    transparent;
+}
+
+.mi-device-stage::-webkit-scrollbar {
+  width:
+    4px;
+
+  height:
+    4px;
+}
+
+.mi-device-stage::-webkit-scrollbar-track {
+  background:
+    transparent;
+}
+
+.mi-device-stage::-webkit-scrollbar-thumb {
+  border-radius:
+    999px;
+
+  background:
+    transparent;
+}
+
+.mi-device-stage.mi-device-stage-scrolling {
+  scrollbar-color:
+    rgba(126, 142, 164, .42)
+    transparent;
+}
+
+.mi-device-stage.mi-device-stage-scrolling::-webkit-scrollbar-thumb {
+  background:
+    rgba(126, 142, 164, .42);
+}
+
+
+/* ---------- GESTURE DECK ---------- */
+
+.mi-device-panel
+.mi-device-workspace
+> .mi-device-side-controls {
+  right:
+    12px !important;
+
+  width:
+    46px !important;
+
+  padding:
+    5px !important;
+
+  gap:
+    3px !important;
+
+  display:
+    flex !important;
+
+  flex-direction:
+    column !important;
+
+  align-items:
+    center !important;
+
+  border:
+    1px solid
+    rgba(129, 116, 247, .25) !important;
+
+  border-radius:
+    11px !important;
+
+  background:
+    rgba(20, 27, 52, .82) !important;
+
+  box-shadow:
+    0 8px 20px
+    rgba(0, 0, 0, .16) !important;
+
+  backdrop-filter:
+    blur(10px);
+}
+
+.mi-device-panel
+.mi-device-side-controls
+.mi-gesture-pad {
+  width:
+    100% !important;
+
+  display:
+    flex !important;
+
+  flex-direction:
+    column !important;
+
+  align-items:
+    center !important;
+
+  gap:
+    2px !important;
+}
+
+.mi-device-panel
+.mi-device-side-controls
+.mi-gesture-pad > div {
+  width:
+    100% !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  gap:
+    0 !important;
+}
+
+.mi-device-panel
+.mi-device-side-controls button,
+.mi-device-panel
+.mi-device-side-controls
+.mi-gesture-pad button {
+  width:
+    34px !important;
+
+  height:
+    34px !important;
+
+  min-width:
+    34px !important;
+
+  min-height:
+    34px !important;
+
+  margin:
+    0 !important;
+
+  padding:
+    0 !important;
+
+  display:
+    grid !important;
+
+  place-items:
+    center !important;
+
+  border:
+    0 !important;
+
+  border-radius:
+    7px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #9d94ef !important;
+
+  box-shadow:
+    none !important;
+
+  font-size:
+    19px !important;
+
+  font-weight:
+    750 !important;
+
+  line-height:
+    1 !important;
+
+  opacity:
+    .92;
+}
+
+.mi-device-panel
+.mi-device-side-controls
+.mi-gesture-pad > div button {
+  width:
+    28px !important;
+
+  min-width:
+    28px !important;
+}
+
+.mi-device-panel
+.mi-device-side-controls
+button:hover:not(:disabled) {
+  transform:
+    none !important;
+
+  background:
+    rgba(129, 116, 247, .13) !important;
+
+  color:
+    #c3bdff !important;
+
+  opacity:
+    1;
+}
+
+.mi-device-panel
+.mi-device-control-divider {
+  width:
+    28px !important;
+
+  height:
+    1px !important;
+
+  margin:
+    3px 0 !important;
+
+  background:
+    rgba(148, 163, 184, .13) !important;
+}
+
+
+/* ---------- BOTTOM BAR: ACTUALLY COMPACT ---------- */
+
+.mi-device-toolbar {
+  flex:
+    0 0 36px !important;
+
+  width:
+    100% !important;
+
+  height:
+    36px !important;
+
+  min-height:
+    36px !important;
+
+  max-height:
+    36px !important;
+
+  box-sizing:
+    border-box !important;
+
+  padding:
+    3px 9px !important;
+
+  display:
+    flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    space-between !important;
+
+  gap:
+    8px !important;
+
+  overflow:
+    hidden !important;
+
+  border-top:
+    1px solid
+    rgba(148, 163, 184, .11) !important;
+
+  background:
+    #0a1421 !important;
+
+  box-shadow:
+    none !important;
+
+  backdrop-filter:
+    none !important;
+}
+
+
+/* ---------- MODE SWITCH ---------- */
+
+.mi-mode-switch {
+  width:
+    auto !important;
+
+  height:
+    28px !important;
+
+  min-height:
+    28px !important;
+
+  padding:
+    2px !important;
+
+  gap:
+    1px !important;
+
+  border:
+    1px solid
+    #243348 !important;
+
+  border-radius:
+    8px !important;
+
+  background:
+    #0d1826 !important;
+
+  box-shadow:
+    none !important;
+}
+
+.mi-mode-switch button {
+  width:
+    auto !important;
+
+  min-width:
+    72px !important;
+
+  height:
+    22px !important;
+
+  min-height:
+    22px !important;
+
+  padding:
+    0 9px !important;
+
+  border:
+    0 !important;
+
+  border-radius:
+    6px !important;
+
+  font-size:
+    9.5px !important;
+
+  line-height:
+    1 !important;
+
+  font-weight:
+    800 !important;
+
+  box-shadow:
+    none !important;
+}
+
+.mi-mode-switch button:not(.mi-mode-active) {
+  background:
+    transparent !important;
+
+  color:
+    #8392a7 !important;
+}
+
+
+/* ---------- ZOOM ---------- */
+
+.mi-zoom-controls {
+  display:
+    inline-flex !important;
+
+  align-items:
+    center !important;
+
+  gap:
+    3px !important;
+}
+
+.mi-zoom-controls button {
+  width:
+    26px !important;
+
+  min-width:
+    26px !important;
+
+  height:
+    26px !important;
+
+  min-height:
+    26px !important;
+
+  padding:
+    0 !important;
+
+  display:
+    inline-flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  border:
+    1px solid
+    #243348 !important;
+
+  border-radius:
+    7px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #91a0b4 !important;
+
+  box-shadow:
+    none !important;
+
+  font-size:
+    9.5px !important;
+
+  line-height:
+    1 !important;
+
+  font-weight:
+    800 !important;
+}
+
+.mi-zoom-controls .mi-zoom-value {
+  width:
+    44px !important;
+
+  min-width:
+    44px !important;
+
+  padding:
+    0 6px !important;
+}
+
+.mi-zoom-controls button:last-child {
+  width:
+    auto !important;
+
+  min-width:
+    34px !important;
+
+  padding:
+    0 7px !important;
+}
+
+.mi-zoom-controls button:hover:not(:disabled) {
+  border-color:
+    rgba(129, 116, 247, .38) !important;
+
+  background:
+    rgba(129, 116, 247, .08) !important;
+
+  color:
+    #c2bcff !important;
+}
+
+
+/* ---------- LIGHT ---------- */
+
+:root[data-theme="light"]
+.mi-device-panel,
+:root[data-theme="light"]
+.mi-device-workspace {
+  background:
+    #f4f6fb !important;
+}
+
+:root[data-theme="light"]
+.mi-device-toolbar {
+  border-top-color:
+    #dfe5ee !important;
+
+  background:
+    #ffffff !important;
+}
+
+:root[data-theme="light"]
+.mi-mode-switch {
+  border-color:
+    #dce3ed !important;
+
+  background:
+    #f3f6fa !important;
+}
+
+:root[data-theme="light"]
+.mi-mode-switch button:not(.mi-mode-active) {
+  color:
+    #64748b !important;
+}
+
+:root[data-theme="light"]
+.mi-zoom-controls button {
+  border-color:
+    #dce3ed !important;
+
+  color:
+    #64748b !important;
+}
+
+:root[data-theme="light"]
+.mi-device-panel
+.mi-device-workspace
+> .mi-device-side-controls {
+  border-color:
+    rgba(99, 102, 241, .16) !important;
+
+  background:
+    rgba(255, 255, 255, .90) !important;
+
+  box-shadow:
+    0 5px 14px
+    rgba(30, 41, 59, .07) !important;
+}
+
+:root[data-theme="light"]
+.mi-device-panel
+.mi-device-side-controls button {
+  color:
+    #665cc7 !important;
+}
+

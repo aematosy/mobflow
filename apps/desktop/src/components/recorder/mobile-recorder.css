@@ -1,0 +1,3333 @@
+.mobile-recorder-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+
+  padding: 12px;
+
+  background:
+    rgba(13, 18, 34, .48);
+
+  backdrop-filter:
+    blur(8px);
+}
+
+.mobile-recorder-shell {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid #dfe3ee;
+
+  border-radius: 18px;
+
+  background: #f5f6fb;
+
+  box-shadow:
+    0 28px 80px
+    rgba(15, 23, 42, .28);
+}
+
+.mobile-recorder-header {
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding: 10px 18px;
+
+  border-bottom:
+    1px solid #e2e6ef;
+
+  background: #ffffff;
+}
+
+.mobile-recorder-heading {
+  min-width: 0;
+}
+
+.mobile-recorder-title-row {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.mobile-recorder-live-dot {
+  width: 9px;
+  height: 9px;
+
+  flex: 0 0 auto;
+
+  border-radius: 999px;
+
+  background: #ef4444;
+
+  box-shadow:
+    0 0 0 5px
+    rgba(239, 68, 68, .12);
+}
+
+.mobile-recorder-eyebrow {
+  color: #dc2626;
+
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.mobile-recorder-count {
+  padding: 3px 7px;
+
+  border-radius: 999px;
+
+  background: #f0efff;
+
+  color: #6557e8;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.mobile-recorder-header h2 {
+  margin: 3px 0 2px;
+
+  color: #1d2536;
+
+  font-size: 19px;
+  line-height: 1.1;
+}
+
+.mobile-recorder-session {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  overflow: hidden;
+
+  color: #818a9c;
+
+  font-size: 11px;
+}
+
+.mobile-recorder-session span,
+.mobile-recorder-session strong {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.mobile-recorder-session strong {
+  color: #6557e8;
+}
+
+.mobile-recorder-header-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  flex: 0 0 auto;
+}
+
+.mobile-recorder-header-actions button {
+  min-height: 35px;
+
+  padding: 0 13px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.mobile-recorder-export {
+  border:
+    1px solid #d9deea;
+
+  background: #ffffff;
+
+  color: #566176;
+}
+
+.mobile-recorder-export:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.mobile-recorder-stop {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  border:
+    1px solid
+    rgba(220, 38, 38, .2);
+
+  background: #fff3f3;
+
+  color: #dc2626;
+}
+
+.mobile-recorder-stop > span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 999px;
+
+  background: #ef4444;
+}
+
+.mobile-recorder-error {
+  padding: 8px 14px;
+
+  border-bottom:
+    1px solid #fecaca;
+
+  background: #fff1f2;
+
+  color: #b91c1c;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.mobile-recorder-layout {
+  min-height: 0;
+  flex: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(210px, 255px)
+    minmax(460px, 1fr)
+    minmax(270px, 330px);
+}
+
+.mobile-recorder-steps,
+.mobile-recorder-details {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #ffffff;
+}
+
+.mobile-recorder-steps {
+  border-right:
+    1px solid #e3e7ef;
+}
+
+.mobile-recorder-details {
+  border-left:
+    1px solid #e3e7ef;
+}
+
+.mobile-recorder-pane-header {
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 9px 13px;
+
+  border-bottom:
+    1px solid #edf0f5;
+}
+
+.mobile-recorder-pane-header > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1px;
+}
+
+.mobile-recorder-pane-header span {
+  color: #8a93a5;
+
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+.mobile-recorder-pane-header strong {
+  color: #283146;
+
+  font-size: 12px;
+}
+
+.mobile-recorder-step-total {
+  min-width: 25px;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  background: #efefff;
+
+  color: #6557e8 !important;
+
+  text-align: center;
+
+  font-size: 10px !important;
+}
+
+.mobile-recorder-step-list,
+.mobile-recorder-detail-scroll {
+  min-height: 0;
+  flex: 1;
+
+  overflow: auto;
+}
+
+.mobile-recorder-empty {
+  min-height: 180px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 20px;
+
+  color: #8a93a5;
+
+  text-align: center;
+
+  font-size: 11px;
+}
+
+.mobile-recorder-empty strong {
+  color: #485267;
+
+  font-size: 12px;
+}
+
+.mobile-recorder-empty-icon {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+
+  background: #fff0f0;
+
+  color: #ef4444;
+}
+
+.mobile-recorder-step {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    29px
+    minmax(0, 1fr)
+    20px;
+
+  gap: 8px;
+
+  align-items: center;
+
+  padding: 10px 9px;
+
+  border: 0;
+  border-bottom:
+    1px solid #f0f2f6;
+
+  background: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.mobile-recorder-step:hover {
+  background: #f8f8ff;
+}
+
+.mobile-recorder-step-selected {
+  background: #f1f0ff;
+
+  box-shadow:
+    inset 3px 0 0 #6c5ce7;
+}
+
+.mobile-recorder-sequence {
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 8px;
+
+  background: #eef0f6;
+
+  color: #69748a;
+
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.mobile-recorder-step-selected
+.mobile-recorder-sequence {
+  background: #6c5ce7;
+  color: #ffffff;
+}
+
+.mobile-recorder-step-body {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.mobile-recorder-step-action {
+  color: #6557e8;
+
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .09em;
+}
+
+.mobile-recorder-step-body strong {
+  overflow: hidden;
+
+  color: #313a4e;
+
+  font-size: 11px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-recorder-step-locator {
+  overflow: hidden;
+
+  color: #9098a9;
+
+  font-size: 9px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-recorder-remove {
+  width: 20px;
+  height: 20px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 6px;
+
+  color: #a1a8b6;
+
+  font-size: 15px;
+}
+
+.mobile-recorder-remove:hover {
+  background: #ffecec;
+  color: #dc2626;
+}
+
+.mobile-recorder-device {
+  min-width: 0;
+  min-height: 0;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      #ffffff 0%,
+      #f3f4fa 72%
+    );
+}
+
+.mobile-recorder-device
+.mi-device-panel {
+  height: 100%;
+}
+
+.mobile-recorder-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  background: #f5f6fb;
+
+  color: #69748a;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.mobile-recorder-loading > span {
+  width: 15px;
+  height: 15px;
+
+  border:
+    2px solid #d8dbea;
+
+  border-top-color:
+    #6c5ce7;
+
+  border-radius: 50%;
+
+  animation:
+    mobile-recorder-spin
+    .75s linear infinite;
+}
+
+@keyframes mobile-recorder-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mobile-recorder-detail-scroll {
+  padding: 11px;
+}
+
+.mobile-recorder-action-card,
+.mobile-recorder-detail-section {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-bottom: 10px;
+
+  padding: 11px;
+
+  border:
+    1px solid #e5e8f0;
+
+  border-radius: 11px;
+
+  background: #fafbfe;
+}
+
+.mobile-recorder-action-heading {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.mobile-recorder-action-heading span,
+.mobile-recorder-section-label {
+  color: #8b94a6;
+
+  font-size: 8px;
+  font-weight: 950;
+  letter-spacing: .1em;
+}
+
+.mobile-recorder-action-heading strong,
+.mobile-recorder-detail-section > strong {
+  color: #30394d;
+
+  font-size: 12px;
+}
+
+.mobile-recorder-detail-section > code,
+.mobile-recorder-meta-grid code {
+  color: #6557e8;
+
+  font-size: 9px;
+
+  overflow-wrap: anywhere;
+}
+
+.mobile-recorder-meta-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding-top: 6px;
+
+  border-top:
+    1px solid #eceef4;
+
+  color: #7c8699;
+
+  font-size: 10px;
+}
+
+.mobile-recorder-locator-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.mobile-recorder-score {
+  min-width: 29px;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  background: #e8f8ef;
+
+  color: #18834b;
+
+  text-align: center;
+
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.mobile-recorder-locator-tags {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 5px;
+}
+
+.mobile-recorder-locator-tags span {
+  padding: 3px 6px;
+
+  border-radius: 6px;
+
+  background: #efefff;
+
+  color: #6557e8;
+
+  font-size: 8px;
+  font-weight: 850;
+}
+
+.mobile-recorder-locator-value {
+  display: block;
+
+  padding: 8px;
+
+  border-radius: 8px;
+
+  background: #252b3a;
+
+  color: #f3f5fb;
+
+  font-size: 9px;
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.mobile-recorder-detail-section p {
+  margin: 0;
+
+  color: #7e8799;
+
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.mobile-recorder-alternatives {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.mobile-recorder-alternative {
+  padding: 8px;
+
+  border:
+    1px solid #e7e9f0;
+
+  border-radius: 8px;
+
+  background: #ffffff;
+}
+
+.mobile-recorder-alternative > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  margin-bottom: 5px;
+}
+
+.mobile-recorder-alternative strong {
+  color: #4a5368;
+
+  font-size: 9px;
+}
+
+.mobile-recorder-alternative span {
+  color: #198754;
+
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.mobile-recorder-alternative code {
+  display: block;
+
+  color: #69748a;
+
+  font-size: 8px;
+
+  overflow-wrap: anywhere;
+}
+
+.mobile-recorder-warning {
+  margin-bottom: 10px;
+
+  padding: 10px;
+
+  border:
+    1px solid #fed7aa;
+
+  border-radius: 9px;
+
+  background: #fff7ed;
+
+  color: #c2410c;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+  .mobile-recorder-layout {
+    grid-template-columns:
+      210px
+      minmax(400px, 1fr)
+      270px;
+  }
+}
+
+/* ==========================================================
+   RECORDER DEVICE FOCUS
+   ========================================================== */
+
+.mobile-recorder-layout {
+  grid-template-columns:
+    minmax(190px, 230px)
+    minmax(620px, 1fr)
+    minmax(250px, 300px);
+}
+
+.mobile-recorder-device {
+  padding: 0;
+}
+
+.mobile-recorder-device
+.mi-device-panel {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-recorder-device
+.mi-device-workspace {
+  min-height: 0;
+  height: 100%;
+}
+
+.mobile-recorder-device
+.mi-device-stage {
+  min-height: 0;
+  height: 100%;
+}
+
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-canvas {
+  padding:
+    10px 62px 10px 14px;
+}
+
+/*
+ * Recorder is already an interaction context.
+ * Remove the redundant Inspect/Interact switch and give
+ * that vertical space back to the live device.
+ */
+.mobile-recorder-device
+.mi-mode-switch {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .mobile-recorder-layout {
+    grid-template-columns:
+      190px
+      minmax(520px, 1fr)
+      260px;
+  }
+}
+
+/* ==========================================================
+   RECORDER V3 - LARGE DEVICE WORKSPACE
+   ========================================================== */
+
+.mobile-recorder-layout {
+  grid-template-columns:
+    220px
+    minmax(0, 1fr)
+    310px;
+}
+
+.mobile-recorder-device {
+  background: #f7f8fb;
+}
+
+.mobile-recorder-device
+.mi-device-workspace {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-recorder-device
+.mi-device-stage {
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-canvas {
+  width: 100%;
+  height: 100%;
+
+  padding:
+    8px 72px 8px 12px;
+}
+
+/*
+ * Recorder gets a larger practical rendering than Spy.
+ * DeviceViewport still owns coordinate conversion against
+ * the real screen dimensions.
+ */
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-scale {
+  transform:
+    scale(1.32);
+
+  transform-origin:
+    center center;
+}
+
+.mobile-recorder-device
+.mi-device-toolbar {
+  min-height: 54px;
+}
+
+.mobile-recorder-device
+.mi-zoom-controls {
+  margin-left: auto;
+}
+
+/* Stronger contrast */
+
+.mobile-recorder-shell {
+  background: #f7f8fb;
+}
+
+.mobile-recorder-steps,
+.mobile-recorder-details,
+.mobile-recorder-header {
+  background: #ffffff;
+}
+
+.mobile-recorder-step-selected {
+  background: #ebe9ff;
+
+  box-shadow:
+    inset 4px 0 0 #5846e8;
+}
+
+.mobile-recorder-step-action,
+.mobile-recorder-eyebrow {
+  color: #4936d8;
+}
+
+.mobile-recorder-step-body strong {
+  color: #182033;
+}
+
+.mobile-recorder-pane-header strong,
+.mobile-recorder-action-heading strong,
+.mobile-recorder-detail-section > strong {
+  color: #182033;
+}
+
+.mobile-recorder-locator-value {
+  background: #171c2b;
+  color: #ffffff;
+}
+
+.mobile-recorder-locator-tags span {
+  background: #e8e5ff;
+  color: #3f2dc8;
+}
+
+.mobile-recorder-score {
+  background: #dcfce7;
+  color: #166534;
+}
+
+
+
+
+
+.mobile-recorder-focus
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-scale {
+  transform:
+    scale(1.52);
+}
+
+/* ==========================================================
+   TESTFLOW RECORDER V4 — OBSIDIAN IDE
+   ========================================================== */
+
+.mobile-recorder-overlay {
+  padding: 0;
+
+  background: #090c10;
+
+  backdrop-filter: none;
+}
+
+.mobile-recorder-shell {
+  border: 0;
+  border-radius: 0;
+
+  background: #090c10;
+
+  color: #f4f7fb;
+
+  box-shadow: none;
+}
+
+.mobile-recorder-header {
+  min-height: 76px;
+
+  border-bottom:
+    1px solid #28303d;
+
+  background:
+    rgba(12, 16, 22, .97);
+}
+
+.mobile-recorder-header h2 {
+  color: #f7f9fc;
+}
+
+.mobile-recorder-title-row {
+  gap: 9px;
+}
+
+.mobile-recorder-live-dot {
+  background: #ef4444;
+
+  box-shadow:
+    0 0 0 6px
+    rgba(239, 68, 68, .11);
+}
+
+.mobile-recorder-eyebrow {
+  color: #ff6868;
+}
+
+.mobile-recorder-timer {
+  padding-left: 9px;
+
+  border-left:
+    1px solid #394252;
+
+  color: #d8dee9;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.mobile-recorder-count {
+  background: #242044;
+  color: #9d91ff;
+}
+
+.mobile-recorder-session {
+  color: #7f8ba0;
+}
+
+.mobile-recorder-session strong {
+  color: #8b7cff;
+}
+
+.mobile-recorder-header-actions button {
+  border-color: #303948;
+
+  background: #151b25;
+
+  color: #dbe2ee;
+}
+
+.mobile-recorder-export:hover {
+  border-color: #6557e8;
+  color: #ffffff;
+}
+
+.mobile-recorder-stop {
+  border-color:
+    rgba(239, 68, 68, .48) !important;
+
+  background:
+    rgba(127, 29, 29, .18) !important;
+
+  color: #ff6b6b !important;
+}
+
+.mobile-recorder-layout {
+  grid-template-columns:
+    310px
+    minmax(0, 1fr)
+    390px;
+
+  background: #090c10;
+}
+
+.mobile-recorder-steps,
+.mobile-recorder-details {
+  background: #0d1219;
+
+  color: #dbe2ee;
+}
+
+.mobile-recorder-steps {
+  border-right:
+    1px solid #28303d;
+}
+
+.mobile-recorder-details {
+  border-left:
+    1px solid #28303d;
+}
+
+.mobile-recorder-pane-header {
+  border-bottom:
+    1px solid #28303d;
+
+  background: #10151d;
+}
+
+.mobile-recorder-pane-header span {
+  color: #78859a;
+}
+
+.mobile-recorder-pane-header strong {
+  color: #dfe5ef;
+}
+
+.mobile-recorder-step-total {
+  background: #252044;
+  color: #a59aff !important;
+}
+
+.mobile-recorder-step {
+  border-bottom:
+    1px solid #202733;
+
+  background: #0d1219;
+}
+
+.mobile-recorder-step:hover {
+  background: #141a24;
+}
+
+.mobile-recorder-step-selected {
+  background: #191b31;
+
+  box-shadow:
+    inset 4px 0 0 #7567ff;
+}
+
+.mobile-recorder-sequence {
+  background: #19202b;
+  color: #8190a6;
+}
+
+.mobile-recorder-step-selected
+.mobile-recorder-sequence {
+  background: #6557e8;
+  color: #ffffff;
+}
+
+.mobile-recorder-step-action {
+  color: #8c80ff;
+}
+
+.mobile-recorder-step-body strong {
+  color: #eef2f8;
+}
+
+.mobile-recorder-step-locator {
+  color: #748197;
+}
+
+.mobile-recorder-remove {
+  color: #667287;
+}
+
+.mobile-recorder-remove:hover {
+  background:
+    rgba(239, 68, 68, .14);
+
+  color: #ff6767;
+}
+
+.mobile-recorder-device {
+  position: relative;
+
+  background-color: #090d13;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    38px 38px;
+}
+
+.mobile-recorder-device
+.mi-device-panel,
+.mobile-recorder-device
+.mi-device-stage,
+.mobile-recorder-device
+.mi-device-workspace {
+  background: transparent;
+}
+
+.mobile-recorder-device
+.mi-device-toolbar {
+  border-top:
+    1px solid #28303d;
+
+  background:
+    rgba(13, 18, 25, .96);
+}
+
+.mobile-recorder-device
+.mi-zoom-controls button {
+  border-color: #303948;
+
+  background: #151b25;
+
+  color: #dbe2ee;
+}
+
+.mobile-recorder-device
+.mi-fit-active {
+  border-color: #6557e8 !important;
+
+  background: #241f48 !important;
+
+  color: #a89eff !important;
+}
+
+.mobile-recorder-detail-scroll {
+  background: #0d1219;
+}
+
+.mobile-recorder-action-card,
+.mobile-recorder-detail-section {
+  border-color: #293140;
+
+  background: #121822;
+}
+
+.mobile-recorder-action-heading span,
+.mobile-recorder-section-label {
+  color: #8190a6;
+}
+
+.mobile-recorder-action-heading strong,
+.mobile-recorder-detail-section > strong {
+  color: #f0f3f8;
+}
+
+.mobile-recorder-meta-grid {
+  border-top-color: #28303d;
+
+  color: #8996aa;
+}
+
+.mobile-recorder-detail-section > code,
+.mobile-recorder-meta-grid code {
+  color: #9c90ff;
+}
+
+.mobile-recorder-score {
+  background:
+    rgba(16, 185, 129, .14);
+
+  color: #41dca4;
+
+  border:
+    1px solid
+    rgba(16, 185, 129, .28);
+}
+
+.mobile-recorder-locator-tags span {
+  border:
+    1px solid
+    rgba(117, 103, 255, .25);
+
+  background:
+    rgba(117, 103, 255, .12);
+
+  color: #a99fff;
+}
+
+.mobile-recorder-locator-value {
+  border:
+    1px solid #252d3a;
+
+  background: #070a12;
+
+  color: #a99fff;
+}
+
+.mobile-recorder-detail-section p {
+  color: #8490a3;
+}
+
+.mobile-recorder-alternative {
+  border-color: #293140;
+
+  background: #0b1017;
+}
+
+.mobile-recorder-alternative strong {
+  color: #dce2ec;
+}
+
+.mobile-recorder-alternative span {
+  color: #42dca4;
+}
+
+.mobile-recorder-alternative code {
+  color: #9da8b9;
+}
+
+.mobile-recorder-empty {
+  color: #748197;
+}
+
+.mobile-recorder-empty strong {
+  color: #cbd3df;
+}
+
+.mobile-recorder-loading {
+  background: #090d13;
+  color: #aab4c3;
+}
+
+.mobile-recorder-error {
+  border-color:
+    rgba(239, 68, 68, .28);
+
+  background:
+    rgba(127, 29, 29, .18);
+
+  color: #ff8585;
+}
+
+/*
+ * Large live device.
+ */
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-scale {
+  transform:
+    scale(1.46);
+
+  transform-origin:
+    center center;
+}
+
+.mobile-recorder-focus
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-scale {
+  transform:
+    scale(1.72);
+}
+
+
+
+@media (max-width: 1350px) {
+  .mobile-recorder-layout {
+    grid-template-columns:
+      270px
+      minmax(0, 1fr)
+      340px;
+  }
+}
+
+/* ==========================================================
+   RECORDER V4.1 — GEOMETRY SAFE
+   Never transform the interactive device surface.
+   ========================================================== */
+
+/*
+ * Critical:
+ * DeviceViewport translates pointer coordinates from the
+ * rendered screen rectangle to native Android coordinates.
+ * CSS transforms around that interactive surface must not
+ * be used by Recorder.
+ */
+.mobile-recorder-device
+.mi-device-scale,
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-scale,
+.mobile-recorder-focus
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-scale {
+  transform: none !important;
+}
+
+/*
+ * Device metadata already lives in the Recorder toolbar.
+ * Recover this complete row for the actual device.
+ */
+.mobile-recorder-device
+.mi-device-header {
+  display: none !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel {
+  height: 100%;
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    auto;
+}
+
+.mobile-recorder-device
+.mi-device-workspace {
+  min-height: 0;
+  height: 100%;
+}
+
+.mobile-recorder-device
+.mi-device-stage {
+  min-height: 0;
+  height: 100%;
+
+  padding:
+    18px 86px 12px 20px;
+
+  overflow: auto;
+}
+
+/*
+ * Fit is now responsible for sizing again.
+ * No fake visual enlargement.
+ */
+.mobile-recorder-device
+.mi-device-stage-fit
+.mi-device-canvas {
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+}
+
+/*
+ * Give navigation controls breathing room from the edge.
+ */
+.mobile-recorder-device
+.mi-device-side-controls {
+  right: 24px !important;
+
+  border:
+    1px solid rgba(148, 163, 184, .16);
+
+  background:
+    rgba(15, 21, 30, .72) !important;
+
+  backdrop-filter:
+    blur(14px);
+
+  box-shadow:
+    0 12px 32px
+    rgba(0, 0, 0, .24);
+}
+
+.mobile-recorder-device
+.mi-device-side-controls button {
+  border-color:
+    rgba(139, 124, 255, .16) !important;
+
+  background:
+    rgba(117, 103, 255, .10) !important;
+
+  color: #a99fff !important;
+
+  box-shadow: none !important;
+}
+
+.mobile-recorder-device
+.mi-device-side-controls button:hover:not(:disabled) {
+  border-color:
+    rgba(139, 124, 255, .38) !important;
+
+  background:
+    rgba(117, 103, 255, .18) !important;
+
+  color: #c4bdff !important;
+}
+
+/*
+ * Compact bottom zoom toolbar.
+ */
+.mobile-recorder-device
+.mi-device-toolbar {
+  min-height: 48px;
+
+  padding:
+    6px 18px;
+
+  border-top:
+    1px solid #252d39;
+
+  background:
+    rgba(10, 14, 20, .96);
+}
+
+/*
+ * Recorder is always an interaction workflow while recording.
+ * Do not spend space on the duplicated Inspect/Interact switch.
+ */
+.mobile-recorder-device
+.mi-mode-switch {
+  display: none !important;
+}
+
+/*
+ * LIVE DEVICE is now part of the global toolbar.
+ */
+.mobile-recorder-live-meta {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 3px;
+
+  color: #7f8ba0;
+
+  font-size: 10px;
+}
+
+.mobile-recorder-live-meta strong {
+  color: #dce3ee;
+
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.mobile-recorder-live-meta span {
+  padding: 2px 6px;
+
+  border:
+    1px solid #2b3442;
+
+  border-radius: 5px;
+
+  background: #111720;
+
+  color: #8794a8;
+}
+
+/*
+ * Wider useful canvas. Device owns the middle.
+ */
+.mobile-recorder-layout {
+  grid-template-columns:
+    285px
+    minmax(0, 1fr)
+    360px;
+}
+
+@media (max-width: 1350px) {
+  .mobile-recorder-layout {
+    grid-template-columns:
+      250px
+      minmax(0, 1fr)
+      320px;
+  }
+
+  .mobile-recorder-device
+  .mi-device-stage {
+    padding-right: 76px;
+  }
+
+  .mobile-recorder-device
+  .mi-device-side-controls {
+    right: 18px !important;
+  }
+}
+
+/* ==========================================================
+   TESTFLOW MOBILE V5 — DEVICE LAB
+   ========================================================== */
+
+/*
+ * DeviceViewport owns no secondary header in Recorder mode.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder {
+  height: 100%;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: transparent;
+}
+
+/*
+ * Device workspace becomes the hero surface.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-workspace {
+  position: relative;
+
+  flex: 1 1 auto;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      rgba(255, 255, 255, .025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, .025) 1px,
+      transparent 1px
+    ),
+    #090d13;
+
+  background-size:
+    42px 42px;
+}
+
+/*
+ * Geometry stays real. No CSS transform.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-scale {
+  transform: none !important;
+}
+
+/*
+ * Give almost all available height to the Android device.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  padding:
+    14px 88px 12px 18px;
+
+  overflow: auto;
+
+  box-sizing: border-box;
+}
+
+/*
+ * Fit canvas has almost no decorative whitespace.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-fit
+.mi-device-canvas {
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+}
+
+/*
+ * Device itself remains geometrically accurate.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-screen {
+  box-shadow:
+    0 28px 70px
+    rgba(0, 0, 0, .42);
+}
+
+/* ----------------------------------------------------------
+   ANDROID CONTROL DECK
+   ---------------------------------------------------------- */
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-workspace
+> .mi-device-side-controls {
+  position: absolute !important;
+
+  z-index: 70;
+
+  top: 50% !important;
+  right: 22px !important;
+
+  width: 44px !important;
+
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 5px !important;
+
+  margin: 0 !important;
+  padding: 6px !important;
+
+  transform:
+    translateY(-50%) !important;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, .16) !important;
+
+  border-radius: 15px !important;
+
+  background:
+    rgba(15, 21, 30, .78) !important;
+
+  backdrop-filter:
+    blur(18px);
+
+  box-shadow:
+    0 18px 42px
+    rgba(0, 0, 0, .28) !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-gesture-pad {
+  width: 100% !important;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 3px !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-gesture-pad > div {
+  width: 100% !important;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 3px !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-side-controls button {
+  width: 32px !important;
+  height: 32px !important;
+
+  min-width: 32px !important;
+  min-height: 32px !important;
+
+  display: grid !important;
+
+  place-items: center;
+
+  padding: 0 !important;
+
+  border:
+    1px solid transparent !important;
+
+  border-radius: 9px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #8996aa !important;
+
+  box-shadow:
+    none !important;
+
+  font-size:
+    17px !important;
+
+  font-weight:
+    650 !important;
+
+  line-height: 1;
+
+  transition:
+    color 120ms ease,
+    background 120ms ease,
+    border-color 120ms ease;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-gesture-pad > div button {
+  width: 28px !important;
+  min-width: 28px !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-side-controls button:hover:not(:disabled) {
+  transform: none !important;
+
+  border-color:
+    rgba(117, 103, 255, .28) !important;
+
+  background:
+    rgba(117, 103, 255, .13) !important;
+
+  color:
+    #a99fff !important;
+
+  box-shadow:
+    none !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-control-divider {
+  width: 24px !important;
+  height: 1px;
+
+  margin: 3px 0 !important;
+
+  background:
+    rgba(148, 163, 184, .16) !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-side-controls
+> button {
+  width: 32px !important;
+  height: 32px !important;
+
+  font-size:
+    22px !important;
+}
+
+/* ----------------------------------------------------------
+   BOTTOM ZOOM — SMALL DEVICE-LAB STYLE
+   ---------------------------------------------------------- */
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-toolbar {
+  flex: 0 0 46px;
+
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding:
+    5px 18px;
+
+  border-top:
+    1px solid #252d39;
+
+  background:
+    rgba(9, 13, 19, .96);
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-mode-switch {
+  display: none !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-zoom-controls {
+  display: flex;
+
+  gap: 6px;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-zoom-controls button {
+  min-width: 34px;
+  height: 34px;
+
+  border:
+    1px solid #303948;
+
+  border-radius: 9px;
+
+  background: #111720;
+
+  color: #9aa6b8;
+
+  box-shadow: none;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-zoom-value {
+  min-width: 62px !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-fit-active {
+  border-color:
+    #6557e8 !important;
+
+  background:
+    rgba(101, 87, 232, .15) !important;
+
+  color:
+    #a99fff !important;
+}
+
+/* ----------------------------------------------------------
+   THREE-PANE DEVICE LAB
+   ---------------------------------------------------------- */
+
+.mobile-recorder-layout {
+  grid-template-columns:
+    270px
+    minmax(640px, 1fr)
+    340px;
+
+  background: #090c10;
+}
+
+.mobile-recorder-device {
+  min-width: 0;
+  min-height: 0;
+
+  padding: 0;
+
+  overflow: hidden;
+}
+
+@media (max-width: 1400px) {
+  .mobile-recorder-layout {
+    grid-template-columns:
+      235px
+      minmax(560px, 1fr)
+      300px;
+  }
+}
+
+/* ==========================================================
+   RECORDING LIBRARY
+   ========================================================== */
+
+.recording-library-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1450;
+
+  display: grid;
+  place-items: center;
+
+  padding: 32px;
+
+  background:
+    rgba(4, 7, 11, .78);
+
+  backdrop-filter:
+    blur(16px);
+}
+
+.recording-library {
+  width: min(980px, 100%);
+  max-height: min(760px, 92vh);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid #293140;
+
+  border-radius: 18px;
+
+  background: #0d1219;
+
+  box-shadow:
+    0 32px 100px
+    rgba(0, 0, 0, .52);
+}
+
+.recording-library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 20px;
+
+  border-bottom:
+    1px solid #28303d;
+}
+
+.recording-library-header span {
+  color: #776bff;
+
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.recording-library-header h2 {
+  margin: 3px 0 0;
+
+  color: #f4f7fb;
+
+  font-size: 22px;
+}
+
+.recording-library-header button,
+.recording-library-actions button {
+  min-height: 34px;
+
+  padding: 0 12px;
+
+  border:
+    1px solid #303948;
+
+  border-radius: 9px;
+
+  background: #141a23;
+
+  color: #cfd7e4;
+
+  font-weight: 750;
+
+  cursor: pointer;
+}
+
+.recording-library-actions button:disabled {
+  opacity: .38;
+  cursor: default;
+}
+
+.recording-library-content {
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  overflow: auto;
+
+  padding: 14px;
+}
+
+.recording-library-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 15px;
+
+  border:
+    1px solid #252d39;
+
+  border-radius: 13px;
+
+  background: #10161f;
+}
+
+.recording-library-card-main {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.recording-library-platform {
+  color: #8d81ff;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  text-transform: uppercase;
+}
+
+.recording-library-card-main strong {
+  overflow: hidden;
+
+  color: #eef2f8;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recording-library-card-main > span {
+  color: #8490a3;
+
+  font-size: 11px;
+}
+
+.recording-library-card-main code {
+  color: #5f6c80;
+
+  font-size: 9px;
+}
+
+.recording-library-actions {
+  display: flex;
+
+  gap: 7px;
+
+  flex: 0 0 auto;
+}
+
+.recording-library-actions
+.recording-library-primary {
+  border-color: #6557e8;
+
+  background:
+    rgba(101, 87, 232, .18);
+
+  color: #b1a8ff;
+}
+
+.recording-library-actions
+.recording-library-delete {
+  color: #ff7373;
+}
+
+.recording-library-error {
+  padding: 9px 16px;
+
+  border-bottom:
+    1px solid rgba(239, 68, 68, .24);
+
+  background:
+    rgba(127, 29, 29, .18);
+
+  color: #ff8585;
+
+  font-size: 11px;
+}
+
+.recording-library-empty {
+  min-height: 260px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  color: #748197;
+}
+
+.recording-library-empty strong {
+  color: #dce3ee;
+}
+
+/* ==========================================================
+   TESTFLOW DEVICE LAB V5.2
+   FINAL THREE-PANE GEOMETRY
+   ========================================================== */
+
+.mobile-recorder-layout {
+  min-width: 0;
+  min-height: 0;
+
+  flex: 1;
+
+  display: grid !important;
+
+  grid-template-columns:
+    clamp(230px, 18vw, 285px)
+    minmax(0, 1fr)
+    clamp(300px, 22vw, 360px) !important;
+
+  grid-template-rows:
+    minmax(0, 1fr);
+
+  overflow: hidden;
+
+  background: #090c10;
+}
+
+.mobile-recorder-steps,
+.mobile-recorder-details,
+.mobile-recorder-device {
+  min-width: 0;
+  min-height: 0;
+
+  height: 100%;
+}
+
+/* LEFT */
+
+.mobile-recorder-steps {
+  overflow: hidden;
+
+  border-right:
+    1px solid #252d39;
+}
+
+/* CENTER — owns every available pixel */
+
+.mobile-recorder-device {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  padding: 0 !important;
+
+  background-color: #090d13;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.022) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    42px 42px;
+}
+
+/*
+ * No secondary DeviceViewport header.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-panel-header {
+  display: none !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  height: 100%;
+
+  display: grid !important;
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    48px !important;
+
+  overflow: hidden;
+}
+
+/*
+ * Workspace is exactly the central available area.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-workspace {
+  position: relative;
+
+  min-width: 0;
+  min-height: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background: transparent;
+}
+
+/*
+ * Stage fills center. Side controls get their own breathing
+ * room without stealing the device's vertical space.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage {
+  position: absolute !important;
+
+  inset:
+    0 64px 0 0 !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 10px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  overflow: auto !important;
+}
+
+/*
+ * Fit owns sizing.
+ * Never scale the interactive surface using CSS transform.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-scale {
+  transform: none !important;
+  transform-origin: center !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-fit
+.mi-device-canvas {
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/*
+ * Device gets all possible height while preserving its
+ * native aspect ratio.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-fit
+.mi-device-scale {
+  max-width: 100% !important;
+  max-height: 100% !important;
+}
+
+/* RIGHT */
+
+.mobile-recorder-details {
+  overflow: hidden;
+
+  border-left:
+    1px solid #252d39;
+}
+
+/* ----------------------------------------------------------
+   SUBTLE DEVICE CONTROLS
+   ---------------------------------------------------------- */
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-workspace
+> .mi-device-side-controls {
+  position: absolute !important;
+
+  z-index: 80;
+
+  top: 50% !important;
+  right: 12px !important;
+
+  width: 38px !important;
+
+  margin: 0 !important;
+  padding: 4px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  gap: 2px !important;
+
+  transform:
+    translateY(-50%) !important;
+
+  border:
+    1px solid
+    rgba(148,163,184,.12) !important;
+
+  border-radius:
+    12px !important;
+
+  background:
+    rgba(12,17,24,.72) !important;
+
+  backdrop-filter:
+    blur(16px);
+
+  box-shadow:
+    0 10px 28px
+    rgba(0,0,0,.22) !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-side-controls button {
+  width: 28px !important;
+  height: 28px !important;
+
+  min-width: 28px !important;
+  min-height: 28px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border:
+    1px solid transparent !important;
+
+  border-radius:
+    7px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #758297 !important;
+
+  box-shadow:
+    none !important;
+
+  font-size:
+    15px !important;
+
+  opacity: .82;
+
+  transition:
+    background 120ms ease,
+    color 120ms ease,
+    opacity 120ms ease;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-side-controls button:hover:not(:disabled) {
+  transform: none !important;
+
+  border-color:
+    rgba(117,103,255,.22) !important;
+
+  background:
+    rgba(117,103,255,.11) !important;
+
+  color:
+    #a99fff !important;
+
+  opacity: 1;
+
+  box-shadow:
+    none !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-control-divider {
+  width: 20px !important;
+  height: 1px !important;
+
+  margin: 3px 0 !important;
+
+  background:
+    rgba(148,163,184,.12) !important;
+}
+
+/* ----------------------------------------------------------
+   BOTTOM CONTROLS
+   ---------------------------------------------------------- */
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-toolbar {
+  height: 48px !important;
+  min-height: 48px !important;
+
+  padding:
+    5px 14px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+
+  border-top:
+    1px solid #252d39 !important;
+
+  background:
+    rgba(9,13,19,.96) !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-mode-switch {
+  display: none !important;
+}
+
+/* ==========================================================
+   TESTFLOW RECORDER — FINAL 25 / 50 / 25 LAYOUT
+   ========================================================== */
+
+.mobile-recorder-layout {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 2fr)
+    minmax(0, 1fr) !important;
+
+  grid-template-rows:
+    minmax(0, 1fr) !important;
+
+  gap: 0 !important;
+}
+
+/* LEFT — 25% */
+
+.mobile-recorder-steps {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  overflow: hidden !important;
+
+  border-right:
+    1px solid #252d39 !important;
+}
+
+/* CENTER — 50% */
+
+.mobile-recorder-device {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  overflow: hidden !important;
+
+  border: 0 !important;
+}
+
+/*
+ * The whole middle column belongs to the device workspace.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder {
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+
+/*
+ * Reserve only a small strip for device controls.
+ * The device remains centered in the actual 50% column.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage {
+  inset:
+    0 52px 0 0 !important;
+
+  padding:
+    8px !important;
+}
+
+/*
+ * Controls stay inside the center column.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-workspace
+> .mi-device-side-controls {
+  right:
+    8px !important;
+}
+
+/* RIGHT — 25% */
+
+.mobile-recorder-details {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  overflow: hidden !important;
+
+  border-left:
+    1px solid #252d39 !important;
+}
+
+/*
+ * Prevent long locators from forcing the right column wider.
+ */
+.mobile-recorder-details code,
+.mobile-recorder-details pre,
+.mobile-recorder-locator-value,
+.mobile-recorder-alternative {
+  min-width: 0 !important;
+  max-width: 100% !important;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/*
+ * Timeline text must also remain inside its 25%.
+ */
+.mobile-recorder-step-body {
+  min-width: 0 !important;
+}
+
+.mobile-recorder-step-body strong,
+.mobile-recorder-step-locator {
+  display: block;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ==========================================================
+   TESTFLOW DEVICE LAB V5.4 FINAL
+   LEFT 28% | CENTER 44% | RIGHT 28%
+   CENTER IS DEVICE-ONLY — NO HEADER
+   ========================================================== */
+
+.mobile-recorder-shell {
+  display: grid !important;
+
+  grid-template-columns:
+    minmax(0, 28fr)
+    minmax(0, 44fr)
+    minmax(0, 28fr) !important;
+
+  grid-template-rows:
+    auto
+    minmax(0, 1fr) !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  overflow: hidden !important;
+
+  background: #090c10;
+}
+
+
+/* ----------------------------------------------------------
+   HEADER
+   Header has NO physical box of its own.
+   Left metadata stays left.
+   Actions stay right.
+   Center receives NOTHING.
+   ---------------------------------------------------------- */
+
+.mobile-recorder-header {
+  display: contents !important;
+}
+
+
+/* LEFT HEADER */
+
+.mobile-recorder-header-main {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+
+  min-width: 0 !important;
+
+  padding:
+    9px 14px 8px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+
+  border-right:
+    1px solid #252d39 !important;
+
+  border-bottom:
+    1px solid #252d39 !important;
+
+  background:
+    #0c1118 !important;
+}
+
+.mobile-recorder-title-row {
+  min-width: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 8px !important;
+}
+
+.mobile-recorder-header-main h2 {
+  margin:
+    3px 0 0 !important;
+
+  color: #f4f7fb;
+
+  font-size: 18px !important;
+  line-height: 1.15;
+}
+
+
+/*
+ * Device/session metadata belongs LEFT.
+ */
+.mobile-recorder-live-meta {
+  margin:
+    4px 0 0 !important;
+
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+
+  gap: 6px !important;
+
+  border: 0 !important;
+
+  background:
+    transparent !important;
+}
+
+.mobile-recorder-session {
+  margin-top:
+    3px !important;
+
+  min-width: 0 !important;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* RIGHT HEADER */
+
+.mobile-recorder-header-actions {
+  grid-column: 3 !important;
+  grid-row: 1 !important;
+
+  min-width: 0 !important;
+
+  padding:
+    8px 14px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+
+  gap: 8px !important;
+
+  border-bottom:
+    1px solid #252d39 !important;
+
+  background:
+    #0c1118 !important;
+}
+
+
+/* ----------------------------------------------------------
+   BODY
+   Make wrapper transparent to parent grid.
+   ---------------------------------------------------------- */
+
+.mobile-recorder-layout {
+  display: contents !important;
+}
+
+
+/* ----------------------------------------------------------
+   LEFT — 28%
+   ---------------------------------------------------------- */
+
+.mobile-recorder-steps {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  max-width: none !important;
+
+  overflow: hidden !important;
+
+  border-right:
+    1px solid #252d39 !important;
+
+  background:
+    #0d1219 !important;
+}
+
+.mobile-recorder-step-body {
+  min-width: 0 !important;
+}
+
+.mobile-recorder-step-body strong,
+.mobile-recorder-step-locator {
+  display: block !important;
+
+  min-width: 0 !important;
+
+  overflow: hidden !important;
+
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+
+/* ----------------------------------------------------------
+   CENTER — 44%
+   DEVICE SPANS HEADER + BODY.
+   THIS IS THE IMPORTANT PART.
+   ---------------------------------------------------------- */
+
+.mobile-recorder-device {
+  grid-column: 2 !important;
+  grid-row: 1 / 3 !important;
+
+  position: relative !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  max-width: none !important;
+  max-height: none !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  overflow: hidden !important;
+
+  border-left:
+    1px solid #252d39 !important;
+
+  border-right:
+    1px solid #252d39 !important;
+
+  background-color:
+    #090d13 !important;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.022) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.022) 1px,
+      transparent 1px
+    ) !important;
+
+  background-size:
+    42px 42px !important;
+}
+
+
+/*
+ * Recorder DeviceViewport owns ALL center height.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder {
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: grid !important;
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    42px !important;
+
+  overflow: hidden !important;
+
+  background:
+    transparent !important;
+}
+
+
+/*
+ * Absolutely no DeviceViewport header inside Recorder.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-panel-header {
+  display: none !important;
+}
+
+
+/*
+ * Workspace occupies everything except bottom zoom.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-workspace {
+  position: relative !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  overflow: hidden !important;
+
+  background:
+    transparent !important;
+}
+
+
+/*
+ * Only reserve a tiny right strip for navigation.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage {
+  position: absolute !important;
+
+  inset:
+    5px 36px 5px 5px !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  overflow: auto !important;
+}
+
+
+/*
+ * IMPORTANT:
+ * no CSS transform around interactive device.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-scale {
+  transform:
+    none !important;
+
+  transform-origin:
+    center center !important;
+}
+
+
+/*
+ * FIT consumes the full real geometry of center.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-fit
+.mi-device-canvas {
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+/* ----------------------------------------------------------
+   DEVICE NAVIGATION
+   tiny / subtle / inside center
+   ---------------------------------------------------------- */
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-workspace
+> .mi-device-side-controls {
+  position: absolute !important;
+
+  z-index: 80 !important;
+
+  top: 50% !important;
+  right: 4px !important;
+
+  width: 27px !important;
+
+  margin: 0 !important;
+  padding: 2px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+
+  gap: 1px !important;
+
+  transform:
+    translateY(-50%) !important;
+
+  border:
+    1px solid
+    rgba(148,163,184,.07) !important;
+
+  border-radius:
+    8px !important;
+
+  background:
+    rgba(12,17,24,.38) !important;
+
+  backdrop-filter:
+    blur(10px);
+
+  box-shadow:
+    none !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-side-controls button {
+  width: 21px !important;
+  height: 21px !important;
+
+  min-width: 21px !important;
+  min-height: 21px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: grid !important;
+
+  place-items: center !important;
+
+  border:
+    0 !important;
+
+  border-radius:
+    5px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #647186 !important;
+
+  box-shadow:
+    none !important;
+
+  font-size:
+    11px !important;
+  line-height: 1 !important;
+
+  opacity: .62;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-side-controls button:hover:not(:disabled) {
+  transform:
+    none !important;
+
+  background:
+    rgba(117,103,255,.10) !important;
+
+  color:
+    #a99fff !important;
+
+  opacity: 1;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-control-divider {
+  width: 17px !important;
+  height: 1px !important;
+
+  margin:
+    2px 0 !important;
+
+  background:
+    rgba(148,163,184,.10) !important;
+}
+
+
+/* ----------------------------------------------------------
+   BOTTOM ZOOM
+   ---------------------------------------------------------- */
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-toolbar {
+  width: 100% !important;
+
+  height: 42px !important;
+  min-height: 42px !important;
+
+  margin: 0 !important;
+
+  padding:
+    3px 8px !important;
+
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: flex-end !important;
+
+  border-top:
+    1px solid #202733 !important;
+
+  background:
+    rgba(9,13,19,.94) !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-mode-switch {
+  display:
+    none !important;
+}
+
+
+/* ----------------------------------------------------------
+   RIGHT — 28%
+   ---------------------------------------------------------- */
+
+.mobile-recorder-details {
+  grid-column: 3 !important;
+  grid-row: 2 !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  min-width: 0 !important;
+  min-height: 0 !important;
+
+  max-width: none !important;
+
+  overflow: hidden !important;
+
+  background:
+    #0d1219 !important;
+}
+
+.mobile-recorder-detail-scroll,
+.mobile-recorder-action-card,
+.mobile-recorder-detail-section,
+.mobile-recorder-alternative {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.mobile-recorder-details code,
+.mobile-recorder-details pre,
+.mobile-recorder-locator-value {
+  max-width: 100% !important;
+
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+
+/* ==========================================================
+   DEVICE LAB V5.4 — FINAL ZOOM CONTRACT
+   ========================================================== */
+
+/*
+ * Fit is always a fully contained device.
+ * No stale scrollbar from manual zoom is allowed.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-fit {
+  overflow: hidden !important;
+
+  scrollbar-width: none !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-fit::-webkit-scrollbar {
+  display: none !important;
+
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/*
+ * Manual zoom may legitimately exceed the available
+ * Device Lab viewport.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-manual {
+  overflow: auto !important;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    rgba(100, 113, 134, .55)
+    transparent;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-manual::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-manual::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage-manual::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+
+  background:
+    rgba(100, 113, 134, .55);
+}
+
+/* ==========================================================
+   PHYSICAL RECORDER V1 — CONTROLS
+   ========================================================== */
+
+.mobile-recorder-left-tools {
+  margin-top: 6px;
+
+  display: flex;
+  align-items: center;
+}
+
+.mobile-recorder-refresh {
+  height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 0 9px;
+
+  border:
+    1px solid
+    rgba(139, 124, 255, .18);
+
+  border-radius: 7px;
+
+  background:
+    rgba(105, 92, 220, .08);
+
+  color: #9187d8;
+
+  font-size: 10px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    background 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.mobile-recorder-refresh:hover {
+  border-color:
+    rgba(139, 124, 255, .34);
+
+  background:
+    rgba(105, 92, 220, .14);
+
+  color: #b0a8ff;
+}
+
+/*
+ * Unified pane separators.
+ * No white edge.
+ */
+.mobile-recorder-device {
+  border-left:
+    1px solid #252d39 !important;
+
+  border-right:
+    1px solid #252d39 !important;
+}
+
+.mobile-recorder-steps {
+  border-right:
+    0 !important;
+}
+
+.mobile-recorder-details {
+  border-left:
+    0 !important;
+}
+
+/*
+ * Move Android gesture deck inward.
+ */
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-stage {
+  inset:
+    5px 52px 5px 5px !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-workspace
+> .mi-device-side-controls {
+  right: 14px !important;
+
+  width: 30px !important;
+
+  padding: 3px !important;
+
+  border:
+    1px solid
+    rgba(139, 124, 255, .18) !important;
+
+  background:
+    rgba(105, 92, 220, .09) !important;
+
+  color: #9187d8 !important;
+
+  box-shadow:
+    0 8px 22px
+    rgba(0, 0, 0, .14) !important;
+}
+
+.mobile-recorder-device
+.mi-device-panel-recorder
+.mi-device-side-controls button {
+  color:
+    #9187d8 !important;
+
+  opacity: .82;
+}
