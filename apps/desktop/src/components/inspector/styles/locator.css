@@ -1290,3 +1290,51 @@
   > div {
   column-gap: 10px;
 }
+
+/* ==========================================================
+   SPY DARK SURFACES V13
+   Keep every locator surface inside the Inspector dark theme.
+   ========================================================== */
+
+:root[data-theme="dark"] .mi-locator-template-section {
+  border-color: #29384d !important;
+  background:
+    linear-gradient(
+      145deg,
+      #111b2a 0%,
+      #0c1623 100%
+    ) !important;
+  color: #dce6f4 !important;
+}
+
+:root[data-theme="dark"] .mi-locator-template-title,
+:root[data-theme="dark"] .mi-locator-template-title strong {
+  color: #dce6f4 !important;
+}
+
+:root[data-theme="dark"] .mi-locator-parameter-summary {
+  color: #aebbd0 !important;
+}
+
+:root[data-theme="dark"] .mi-locator-parameter-summary code {
+  border-color: #29384d !important;
+  background: #101b2a !important;
+  color: #c8c2ff !important;
+}
+
+:root[data-theme="dark"] .mi-locator-template-actions .mi-locator-action-template {
+  border-color: #34465f !important;
+  background: #111d2b !important;
+  color: #dce6f4 !important;
+}
+
+:root[data-theme="dark"] .mi-locator-template-actions .mi-locator-action-template:hover {
+  border-color: #7165ef !important;
+  background: #172338 !important;
+  color: #ffffff !important;
+}
+
+:root[data-theme="dark"] .mi-locator-unique,
+:root[data-theme="dark"] .mi-locator-role {
+  color: #8f9eb4 !important;
+}

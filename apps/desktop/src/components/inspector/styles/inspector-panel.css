@@ -176,3 +176,89 @@
   color: #dce4ef;
 }
 
+/* =========================================================
+   INTERACTION MODE
+   Presentation only. DeviceViewport remains mode owner.
+   ========================================================= */
+
+.mi-interaction-mode-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  min-height: 420px;
+  margin: 18px;
+  padding: 32px 24px;
+
+  border: 1px solid var(--mi-border);
+  border-radius: 18px;
+
+  background: var(--mi-panel-bg-soft);
+  color: var(--mi-text-primary);
+
+  text-align: center;
+}
+
+.mi-interaction-mode-icon {
+  display: grid;
+  place-items: center;
+
+  width: 52px;
+  height: 52px;
+
+  border: 1px solid rgba(99, 102, 241, .32);
+  border-radius: 16px;
+
+  background: var(--mi-accent-soft);
+  color: var(--mi-accent);
+
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.mi-interaction-mode-state > strong {
+  color: var(--mi-text-strong);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.mi-interaction-mode-state > span {
+  max-width: 330px;
+  color: var(--mi-text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.mi-interaction-mode-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+
+  margin-top: 4px;
+}
+
+.mi-interaction-mode-actions span {
+  padding: 6px 10px;
+
+  border: 1px solid var(--mi-border);
+  border-radius: 999px;
+
+  background: var(--mi-accent-soft);
+  color: var(--mi-accent);
+
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.mi-interaction-mode-state small {
+  max-width: 350px;
+  margin-top: 8px;
+
+  color: var(--mi-text-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+

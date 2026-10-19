@@ -2266,7 +2266,7 @@
 
   border-radius: 13px;
 
-  background: #ffffff;
+  background: var(--mi-panel-bg-soft);
 
   box-shadow: var(--mi-shadow-sm);
 }
@@ -2278,6 +2278,9 @@
 
   border-bottom:
     1px solid var(--mi-border-soft);
+
+  transition:
+    background 120ms ease;
 }
 
 .mi-properties > div:last-child {
@@ -2285,17 +2288,17 @@
 }
 
 .mi-properties > div:hover {
-  background: #fafbfe;
+  background: var(--mi-accent-soft);
 }
 
 .mi-properties > div > span {
-  color: #8490a4;
+  color: var(--mi-text-muted);
   font-size: 11px;
   font-weight: 650;
 }
 
 .mi-properties code {
-  color: #38455c;
+  color: var(--mi-text-primary);
   font-size: 11.5px;
   font-weight: 600;
 }
@@ -2807,4 +2810,16 @@
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.82),
     0 0 0 3px rgba(91, 81, 238, 0.10);
+}
+
+.mi-interaction-hover-bounds {
+  position: absolute;
+  z-index: 20;
+  box-sizing: border-box;
+  border: 2px solid #22c55e;
+  border-radius: 3px;
+  background: rgba(34, 197, 94, 0.10);
+  box-shadow:
+    0 0 0 1px rgba(34, 197, 94, 0.18);
+  pointer-events: none;
 }

@@ -72,6 +72,9 @@ export default function MobileInspector({
   const [selectedId, setSelectedId] =
     useState<string | null>(null);
 
+  const [inspectorMode, setInspectorMode] =
+    useState<"inspect" | "interact">("inspect");
+
   const [hoveredId, setHoveredId] =
     useState<string | null>(null);
 
@@ -92,8 +95,13 @@ export default function MobileInspector({
     useState<string | null>(null);
 
 
+  /*
+   * Spy opens in its expanded workspace mode by default.
+   * This is the same state as pressing the Inspector
+   * fullscreen button manually.
+   */
   const [fullscreen, setFullscreen] =
-    useState(false);
+    useState(true);
 
 
 
@@ -207,33 +215,21 @@ export default function MobileInspector({
 
       setSnapshot(result);
 
-      setSelectedId((current) => {
-        if (
-          current &&
-          result.elements.some(
-            (element) => element.id === current,
-          )
-        ) {
-          return current;
-        }
-
-        const useful =
-          result.elements.find(
-            (element) =>
-              element.displayed &&
-              element.bounds &&
-              (
-                element.clickable ||
-                element.locators.length > 0
-              ),
-          );
-
-        return (
-          useful?.id ??
-          result.elements[0]?.id ??
-          null
-        );
-      });
+      /*
+       * Do not invent an initial Inspector selection.
+       *
+       * A locator analysis belongs to an explicit user
+       * selection. Preserve an existing selection across
+       * refreshes only while that element still exists.
+       */
+      setSelectedId((current) =>
+        current &&
+        result.elements.some(
+          (element) => element.id === current,
+        )
+          ? current
+          : null,
+      );
     } catch (reason) {
       setError(
         reason instanceof Error
@@ -650,6 +646,7 @@ export default function MobileInspector({
                 setHoveredId(null);
               }}
               onError={setError}
+              onModeChange={setInspectorMode}
 
               onRecordedTap={(
                 element,
@@ -708,16 +705,42 @@ export default function MobileInspector({
             <PanelHeader
               title="Inspector"
               meta={
-                selected
-                  ? shortType(
-                      selected.elementType,
-                    )
-                  : "No selection"
+                inspectorMode === "interact"
+                  ? "Interaction mode"
+                  : selected
+                    ? shortType(
+                        selected.elementType,
+                      )
+                    : "No selection"
               }
             />
 
             <div className="mi-inspector-scroll">
-              {selected ? (
+              {inspectorMode === "interact" ? (
+                <div className="mi-interaction-mode-state">
+                  <div className="mi-interaction-mode-icon">
+                    ↗
+                  </div>
+
+                  <strong>
+                    Interaction mode active
+                  </strong>
+
+                  <span>
+                    Interact directly with the connected device.
+                  </span>
+
+                  <div className="mi-interaction-mode-actions">
+                    <span>Tap</span>
+                    <span>Swipe</span>
+                    <span>Navigate</span>
+                  </div>
+
+                  <small>
+                    Switch back to Inspect to view element properties and locators.
+                  </small>
+                </div>
+              ) : selected ? (
                 <>
                   <div className="mi-element-title">
                     <div>

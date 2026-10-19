@@ -54,6 +54,7 @@ interface DeviceViewportProps {
     snapshot: InspectorSnapshot,
   ) => void;
   onError: (message: string) => void;
+  onModeChange?: (mode: InspectorMode) => void;
 
   onRecorderTapIntent?: (
     element: InspectorElement,
@@ -103,6 +104,7 @@ export default function DeviceViewport({
   onHover,
   onSnapshot,
   onError,
+  onModeChange,
   onRecorderTapIntent,
   onRecordedTap,
   onRecordedSwipe,
@@ -123,6 +125,13 @@ export default function DeviceViewport({
   const [mode, setMode] =
     useState<InspectorMode>("inspect");
 
+  const changeMode = (
+    nextMode: InspectorMode,
+  ) => {
+    setMode(nextMode);
+    onModeChange?.(nextMode);
+  };
+
   useEffect(() => {
     /*
      * Recording means real interaction.
@@ -130,12 +139,14 @@ export default function DeviceViewport({
      * Start Recording enters Interact automatically.
      * Stop Recording returns to Inspect.
      */
-    setMode(
+    const nextMode: InspectorMode =
       recording
         ? "interact"
-        : "inspect",
-    );
-  }, [recording]);
+        : "inspect";
+
+    setMode(nextMode);
+    onModeChange?.(nextMode);
+  }, [recording, onModeChange]);
 
   /*
    * MobFlow device surfaces share the same stable initial
@@ -572,6 +583,74 @@ export default function DeviceViewport({
     );
   };
 
+  const [interactionHoverBounds, setInteractionHoverBounds] =
+    useState<ElementBoundsValue | null>(null);
+
+  const interactionElementAtPointer = (
+    event: React.MouseEvent<HTMLDivElement>,
+  ): InspectorElement | null => {
+    const image =
+      screenshotImageRef.current;
+
+    if (
+      !image
+      || image.naturalWidth <= 0
+      || image.naturalHeight <= 0
+    ) {
+      return null;
+    }
+
+    const rect =
+      image.getBoundingClientRect();
+
+    if (
+      rect.width <= 0
+      || rect.height <= 0
+    ) {
+      return null;
+    }
+
+    const point =
+      viewportPointToDevice(
+        event.clientX,
+        event.clientY,
+        rect,
+        image.naturalWidth,
+        image.naturalHeight,
+      );
+
+    return findDeepestElementAtPoint(
+      snapshot.elements,
+      point,
+    );
+  };
+
+  const handlePointerMove = (
+    event: React.MouseEvent<HTMLDivElement>,
+  ) => {
+    if (mode === "interact") {
+      const element =
+        interactionElementAtPointer(event);
+
+      setInteractionHoverBounds(
+        element?.bounds ?? null,
+      );
+
+      return;
+    }
+
+    handleInspectPointerMove(event);
+  };
+
+  const handlePointerLeave = () => {
+    if (mode === "interact") {
+      setInteractionHoverBounds(null);
+      return;
+    }
+
+    handleInspectPointerLeave();
+  };
+
   const handleInspectPointerMove = (
     event: React.MouseEvent<HTMLDivElement>,
   ) => {
@@ -724,7 +803,17 @@ export default function DeviceViewport({
       recordingTarget ??
       deepestElement;
 
-    if (target) {
+    /*
+     * Plain Interact must never become Inspector selection.
+     *
+     * Recording needs semantic target ownership so the step
+     * can be persisted. Normal Interact only mirrors the
+     * physical gesture and must not trigger locator analysis.
+     */
+    if (
+      recording
+      && target
+    ) {
       onSelect(target.id);
     }
 
@@ -1129,10 +1218,10 @@ export default function DeviceViewport({
               .filter(Boolean)
               .join(" ")}
             onMouseMove={
-              handleInspectPointerMove
+              handlePointerMove
             }
             onMouseLeave={
-              handleInspectPointerLeave
+              handlePointerLeave
             }
             onClick={(event) => {
               if (mode === "inspect") {
@@ -1171,6 +1260,16 @@ export default function DeviceViewport({
                   }
                 />
               ),
+            )}
+
+            {interactionHoverBounds && (
+              <LocatorTestBounds
+                bounds={interactionHoverBounds}
+                screenElement={
+                  screenshotImageRef.current
+                }
+                className="mi-interaction-hover-bounds"
+              />
             )}
 
             {locatorHighlightBounds && (
@@ -1242,7 +1341,7 @@ export default function DeviceViewport({
             }
             disabled={recording}
             onClick={() =>
-              setMode("inspect")
+              changeMode("inspect")
             }
             title={
               recording
@@ -1261,7 +1360,7 @@ export default function DeviceViewport({
                 : ""
             }
             onClick={() =>
-              setMode("interact")
+              changeMode("interact")
             }
           >
             Interact
@@ -1317,9 +1416,11 @@ export default function DeviceViewport({
 function LocatorTestBounds({
   bounds,
   screenElement,
+  className = "mi-locator-test-bounds",
 }: {
   bounds: ElementBoundsValue;
   screenElement: HTMLImageElement | null;
+  className?: string;
 }) {
   console.log("[LOCATOR-HIGHLIGHT]", {
     bounds,
@@ -1374,7 +1475,7 @@ function LocatorTestBounds({
 
   return (
     <div
-      className="mi-locator-test-bounds"
+      className={className}
       style={{
         left: viewportBounds.left,
         top: viewportBounds.top,
