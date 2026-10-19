@@ -154,6 +154,176 @@ pub fn screenshot(session_id: &str) -> Result<String, String> {
         })
 }
 
+#[derive(Debug, Clone, serde::Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LocatorTestResult {
+    pub match_count: usize,
+    pub element_id: Option<String>,
+    pub bounds: Option<crate::models::spy::ElementBounds>,
+}
+
+pub fn test_locator_detail(
+    session_id: &str,
+    strategy: &str,
+    selector: &str,
+) -> Result<LocatorTestResult, String> {
+    let using = appium_locator_using(strategy)?;
+
+    let url = format!(
+        "{}/session/{session_id}/elements",
+        runtime_config::appium_url()
+    );
+
+    let payload = serde_json::json!({
+        "using": using,
+        "value": selector
+    });
+
+    let started = Instant::now();
+
+    log_service::info("locator", format!("Testing locator detail [{strategy}]"));
+
+    let response = ureq::post(&url)
+        .config()
+        .timeout_global(Some(LOCATOR_REQUEST_TIMEOUT))
+        .build()
+        .send_json(payload);
+
+    let elapsed_ms = started.elapsed().as_millis();
+
+    let mut response = match response {
+        Ok(response) => response,
+
+        Err(ureq::Error::StatusCode(code)) => {
+            let message = format!("Locator detail returned HTTP {code} after {elapsed_ms}ms");
+
+            log_service::error("locator", &message);
+            return Err(message);
+        }
+
+        Err(error) => {
+            let message = format!("Locator detail failed after {elapsed_ms}ms: {error}");
+
+            log_service::error("locator", &message);
+            return Err(message);
+        }
+    };
+
+    let body: Value = response.body_mut().read_json().map_err(|error| {
+        let message = format!("Unable to decode locator detail response ")
+            + &format!("after {elapsed_ms}ms: {error}");
+
+        log_service::error("locator", &message);
+        message
+    })?;
+
+    let elements = body.get("value").and_then(Value::as_array).ok_or_else(|| {
+        let message = format!("Locator detail response contains no ")
+            + &format!("element array after {elapsed_ms}ms");
+
+        log_service::error("locator", &message);
+        message
+    })?;
+
+    let match_count = elements.len();
+
+    if match_count != 1 {
+        log_service::info(
+            "locator",
+            format!("Locator detail [{strategy}] -> ")
+                + &format!("{match_count} match(es) in {elapsed_ms}ms"),
+        );
+
+        return Ok(LocatorTestResult {
+            match_count,
+            element_id: None,
+            bounds: None,
+        });
+    }
+
+    let element_id = element_id_from_value(&elements[0]).ok_or_else(|| {
+        let message = "Unique locator match contains no Appium element id".to_string();
+
+        log_service::error("locator", &message);
+        message
+    })?;
+
+    let rect_url = format!(
+        "{}/session/{session_id}/element/{element_id}/rect",
+        runtime_config::appium_url()
+    );
+
+    let rect_response = ureq::get(&rect_url)
+        .config()
+        .timeout_global(Some(LOCATOR_REQUEST_TIMEOUT))
+        .build()
+        .call();
+
+    let mut rect_response = match rect_response {
+        Ok(response) => response,
+
+        Err(ureq::Error::StatusCode(code)) => {
+            let message = format!("Element rect returned HTTP {code}");
+
+            log_service::error("locator", &message);
+            return Err(message);
+        }
+
+        Err(error) => {
+            let message = format!("Unable to request element rect: {error}");
+
+            log_service::error("locator", &message);
+            return Err(message);
+        }
+    };
+
+    let rect_body: Value = rect_response.body_mut().read_json().map_err(|error| {
+        let message = format!("Unable to decode element rect response: {error}");
+
+        log_service::error("locator", &message);
+        message
+    })?;
+
+    let rect = rect_body
+        .get("value")
+        .ok_or_else(|| "Element rect response contains no value".to_string())?;
+
+    let number = |name: &str| -> Result<i32, String> {
+        let value = rect
+            .get(name)
+            .and_then(Value::as_f64)
+            .ok_or_else(|| format!("Element rect contains no numeric {name}"))?;
+
+        if !value.is_finite() || value < i32::MIN as f64 || value > i32::MAX as f64 {
+            return Err(format!("Element rect {name} is outside i32 range"));
+        }
+
+        Ok(value.round() as i32)
+    };
+
+    let bounds = crate::models::spy::ElementBounds {
+        x: number("x")?,
+        y: number("y")?,
+        width: number("width")?.max(0),
+        height: number("height")?.max(0),
+    };
+
+    log_service::info(
+        "locator",
+        format!("Locator detail [{strategy}] -> unique element ")
+            + &format!(
+                "{element_id} at {},{} {}x{}",
+                bounds.x, bounds.y, bounds.width, bounds.height,
+            ),
+    );
+
+    Ok(LocatorTestResult {
+        match_count,
+        element_id: Some(element_id),
+        bounds: Some(bounds),
+    })
+}
+
 pub fn locator_match_count(
     session_id: &str,
     strategy: &str,

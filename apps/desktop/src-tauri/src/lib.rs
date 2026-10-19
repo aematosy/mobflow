@@ -33,6 +33,7 @@ pub fn run() {
             commands::activate_android_app,
             commands::terminate_android_app,
             commands::test_locator,
+            commands::test_locator_detail,
             commands::analyze_android_element_locators,
             commands::start_device_stream,
             commands::stop_device_stream,

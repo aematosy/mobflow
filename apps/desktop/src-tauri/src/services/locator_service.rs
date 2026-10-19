@@ -6,7 +6,6 @@ use crate::services::appium_client;
 
 const MAX_CANDIDATES: usize = 4;
 
-const MAX_LOCAL_RELATIONAL_CANDIDATES: usize = 2;
 const MAX_SYNC_RELATIONAL_CANDIDATES: usize = 6;
 
 const LOCATOR_ANALYSIS_DEADLINE: Duration = Duration::from_secs(4);
@@ -1199,6 +1198,45 @@ pub fn analyze_android_element(
     }
 
     /*
+     * -----------------------------------------------------
+     * 2. LOCAL SEMANTIC CONTEXT
+     * -----------------------------------------------------
+     *
+     * Prefer component-local semantic identity before
+     * spending the request budget on broader structural
+     * parent/sibling/ancestor relationships.
+     *
+     * This is especially important for repeated native
+     * attributes where text/resource/accessibility identify
+     * the role but not the concrete business item.
+     */
+    let mut local_context_attempted = false;
+
+    if verified.len() < MAX_CANDIDATES && context.can_request() {
+        local_context_attempted = true;
+
+        let mut local_candidates = local_semantic_context_candidates(target, elements);
+
+        local_candidates.truncate(MAX_SYNC_RELATIONAL_CANDIDATES);
+
+        let local_candidate_count = local_candidates.len();
+
+        let local_verified = validate(session_id, local_candidates, &mut context);
+
+        crate::services::log_service::info(
+            "locator",
+            format!(
+                "Early local semantic context for {}: {} candidates generated, {} verified MATCH 1",
+                target.id,
+                local_candidate_count,
+                local_verified.len(),
+            ),
+        );
+
+        merge_verified(&mut verified, local_verified);
+    }
+
+    /*
      * DIRECT FAST PATH
      *
      * Every candidate in `verified` already passed the
@@ -1213,7 +1251,7 @@ pub fn analyze_android_element(
      * difficult elements instead of spending it after a
      * direct solution has already been proven.
      */
-    if !verified.is_empty() && !locator_needs_context(target) {
+    if verified.len() >= MAX_CANDIDATES && !locator_needs_context(target) {
         crate::services::log_service::info(
             "locator",
             format!(
@@ -1407,7 +1445,18 @@ pub fn analyze_android_element(
      * findElements request. The selection path
      * must therefore remain strictly bounded.
      */
-    relational.truncate(MAX_LOCAL_RELATIONAL_CANDIDATES);
+    /*
+     * Relational alternatives are part of the public locator
+     * contract, not merely an emergency fallback.
+     *
+     * Keep the exploration bounded, but allow the verifier to
+     * evaluate enough structural candidates to discover
+     * parent, sibling and ancestor alternatives.
+     *
+     * The shared LocatorAnalysisContext still enforces the
+     * global request/deadline budget.
+     */
+    relational.truncate(MAX_CANDIDATES);
 
     let candidate_count = relational.len();
 
@@ -1478,7 +1527,7 @@ pub fn analyze_android_element(
      *
      * This runs before the broader V4 contextual search.
      */
-    if verified.is_empty() && context.can_request() {
+    if !local_context_attempted && verified.is_empty() && context.can_request() {
         let mut local_candidates = local_semantic_context_candidates(target, elements);
 
         local_candidates.truncate(MAX_SYNC_RELATIONAL_CANDIDATES);
@@ -1506,6 +1555,20 @@ pub fn analyze_android_element(
      * anchors that could belong to another card/menu item.
      */
     if !verified.is_empty() {
+        /*
+         * Local semantic context resolved the business identity,
+         * so broader contextual search is intentionally skipped.
+         *
+         * Restore already-verified direct/native candidates as
+         * safe alternatives before ranking the final result.
+         * They were temporarily parked only to give semantic
+         * context first chance at becoming the recommended
+         * locator.
+         */
+        if let Some(fallback) = contextual_fallback {
+            merge_verified(&mut verified, fallback);
+        }
+
         verified.sort_by(|left, right| right.score.cmp(&left.score));
 
         verified

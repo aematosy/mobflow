@@ -7,6 +7,7 @@ import {
 import { mobileApi } from "../../services/mobileApi";
 
 import type {
+  ElementBounds,
   InspectorElement,
   InspectorSnapshot,
   LocatorCandidate,
@@ -110,6 +111,16 @@ export default function MobileInspector({
 
   const [locatorError, setLocatorError] =
     useState<string | null>(null);
+
+  /*
+   * Live visual result of Locator Lab Test.
+   *
+   * Independent from Inspector selection and hover.
+   */
+  const [
+    locatorHighlightBounds,
+    setLocatorHighlightBounds,
+  ] = useState<ElementBounds | null>(null);
 
 
 
@@ -343,6 +354,7 @@ export default function MobileInspector({
 
       setLocatorResult(null);
       setLocatorError(message);
+      setLocatorHighlightBounds(null);
 
       throw new Error(message);
     }
@@ -350,18 +362,27 @@ export default function MobileInspector({
     setLocatorTesting(true);
     setLocatorError(null);
     setLocatorResult(null);
+    setLocatorHighlightBounds(null);
 
     try {
-      const count =
-        await mobileApi.testLocator(
+      const result =
+        await mobileApi.testLocatorDetail(
           session.sessionId,
           strategy,
           selector,
         );
 
-      setLocatorResult(count);
+      setLocatorResult(
+        result.matchCount,
+      );
 
-      return count;
+      setLocatorHighlightBounds(
+        result.matchCount === 1
+          ? result.bounds
+          : null,
+      );
+
+      return result.matchCount;
     } catch (reason) {
       const message =
         reason instanceof Error
@@ -369,6 +390,7 @@ export default function MobileInspector({
           : String(reason);
 
       setLocatorError(message);
+      setLocatorHighlightBounds(null);
 
       throw new Error(message);
     } finally {
@@ -606,6 +628,9 @@ export default function MobileInspector({
               applicationPackage={session.package}
               selectedId={selectedId}
               hoveredId={hoveredId}
+              locatorHighlightBounds={
+                locatorHighlightBounds
+              }
               onHover={setHoveredId}
               onSelect={(id) => {
                 void selectElement(id);
@@ -748,6 +773,7 @@ export default function MobileInspector({
                           );
                           setLocatorResult(null);
                           setLocatorError(null);
+                          setLocatorHighlightBounds(null);
                         }}
                       >
                         <option value="accessibility-id">
@@ -778,6 +804,7 @@ export default function MobileInspector({
                           );
                           setLocatorResult(null);
                           setLocatorError(null);
+                          setLocatorHighlightBounds(null);
                         }}
                         placeholder="Paste or write a locator..."
                       />
@@ -840,7 +867,7 @@ export default function MobileInspector({
                         </strong>
 
                         <span>
-                          MATCH 1 only · max 4
+                          MATCH 1 only · up to 4
                         </span>
                       </div>
 
@@ -865,22 +892,6 @@ export default function MobileInspector({
                               onCopy={
                                 copyText
                               }
-                              onTest={(
-                                strategy,
-                                value,
-                              ) => {
-                                setLocatorStrategy(
-                                  strategy,
-                                );
-                                setLocatorValue(
-                                  value,
-                                );
-
-                                return testLocator(
-                                  strategy,
-                                  value,
-                                );
-                              }}
                             />
                           ),
                         )
@@ -1071,48 +1082,10 @@ function appiumLocatorCode(
 function LocatorCard({
   locator,
   onCopy,
-  onTest,
 }: {
   locator: LocatorCandidate;
   onCopy: (value: string) => Promise<void>;
-  onTest: (
-    strategy: string,
-    value: string,
-  ) => Promise<number>;
 }) {
-  const [liveTesting, setLiveTesting] =
-    useState(false);
-
-  const [liveResult, setLiveResult] =
-    useState<number | null>(null);
-
-  const [liveError, setLiveError] =
-    useState<string | null>(null);
-
-  const runLiveTest = async () => {
-    setLiveTesting(true);
-    setLiveResult(null);
-    setLiveError(null);
-
-    try {
-      const count =
-        await onTest(
-          locator.strategy,
-          locator.value,
-        );
-
-      setLiveResult(count);
-    } catch (reason) {
-      setLiveError(
-        reason instanceof Error
-          ? reason.message
-          : String(reason),
-      );
-    } finally {
-      setLiveTesting(false);
-    }
-  };
-
   const [copiedAction, setCopiedAction] =
     useState<"selector" | "appium" | "template" | null>(
       null,
@@ -1152,36 +1125,27 @@ function LocatorCard({
         locator.recommended
           ? "mi-locator-card-recommended"
           : "",
-        parameterized
-          ? "mi-locator-card-parameterized"
-          : "",
       ]
         .filter(Boolean)
         .join(" ")}
     >
       <header className="mi-locator-card-header">
         <div className="mi-locator-identity">
-          <div className="mi-locator-eyebrow">
-            {locator.recommended && (
-              <span className="mi-locator-recommended-badge">
-                ★ RECOMMENDED
-              </span>
-            )}
-
-            {parameterized && (
-              <span className="mi-locator-parameterized-badge">
-                ◆ PARAMETERIZED
-              </span>
-            )}
-          </div>
-
-          <strong>
-            {locator.strategy}
-          </strong>
-
-          <span className="mi-locator-category">
-            {locator.category}
+          <span className="mi-locator-role">
+            {locator.recommended
+              ? "Suggested locator"
+              : "Alternative"}
           </span>
+
+          <div className="mi-locator-strategy-line">
+            <strong>
+              {locator.strategy}
+            </strong>
+
+            <span className="mi-locator-category">
+              {locator.category}
+            </span>
+          </div>
         </div>
 
         <div className="mi-locator-score">
@@ -1191,61 +1155,53 @@ function LocatorCard({
       </header>
 
       <section className="mi-locator-code-section">
-        <div className="mi-locator-code-heading">
-          <strong>
-            Selector
-          </strong>
-
-          <span>
-            Verified against the current live hierarchy
-          </span>
-        </div>
-
         <code className="mi-locator-code">
           {locator.value}
         </code>
 
-        <div className="mi-locator-validation-badges">
-          <span className="mi-badge-success">
-            ✓ MATCH 1
-          </span>
+        <span className="mi-locator-unique">
+          Unique
+        </span>
 
-          <span className="mi-badge-success">
-            ✓ UNIQUE
-          </span>
+        <div className="mi-locator-actions-v3">
+          <button
+            type="button"
+            className="mi-locator-action-primary"
+            onClick={() =>
+              void copyWithFeedback(
+                "selector",
+                locator.value,
+              )
+            }
+          >
+            {copiedAction === "selector"
+              ? "✓ Copied"
+              : "Copy selector"}
+          </button>
 
-          {locator.stable && (
-            <span className="mi-badge-info">
-              ✓ STABLE
-            </span>
-          )}
-
-          {locator.category.includes(
-            "relational",
-          ) && (
-            <span className="mi-badge-violet">
-              ✓ CONTEXTUAL
-            </span>
-          )}
+          <button
+            type="button"
+            className="mi-locator-action-appium"
+            onClick={() =>
+              void copyWithFeedback(
+                "appium",
+                appiumLocatorCode(locator),
+              )
+            }
+          >
+            {copiedAction === "appium"
+              ? "✓ Copied"
+              : "Copy Appium"}
+          </button>
         </div>
       </section>
 
       {parameterized && (
         <section className="mi-locator-template-section">
           <div className="mi-locator-template-title">
-            <div>
-              <strong>
-                Reusable template
-              </strong>
-
-              <span>
-                Replace the semantic anchor at runtime
-              </span>
-            </div>
-
-            <span className="mi-template-ready">
-              TEMPLATE READY
-            </span>
+            <strong>
+              Reusable template
+            </strong>
           </div>
 
           <div className="mi-locator-parameter-summary">
@@ -1263,109 +1219,24 @@ function LocatorCard({
           <code className="mi-locator-template-code">
             {locator.template}
           </code>
-        </section>
-      )}
 
-      <p className="mi-locator-reason">
-        {locator.reason}
-      </p>
-
-      <footer className="mi-locator-actions-v3">
-        <button
-          type="button"
-          className="mi-locator-action-primary"
-          onClick={() =>
-            void copyWithFeedback(
-              "selector",
-              locator.value,
-            )
-          }
-        >
-          {copiedAction === "selector"
-            ? "✓ Copied"
-            : "Copy selector"}
-        </button>
-
-        <button
-          type="button"
-          className="mi-locator-action-appium"
-          onClick={() =>
-            void copyWithFeedback(
-              "appium",
-              appiumLocatorCode(
-                locator,
-              ),
-            )
-          }
-          title="Copy ready-to-use Appium locator"
-        >
-          {copiedAction === "appium"
-            ? "✓ Copied"
-            : "Copy Appium"}
-        </button>
-
-        {locator.template && (
-          <button
-            type="button"
-            className="mi-locator-action-template"
-            onClick={() =>
-              void copyWithFeedback(
-                "template",
-                locator.template!,
-              )
-            }
-          >
-            {copiedAction === "template"
+          <div className="mi-locator-template-actions">
+            <button
+              type="button"
+              className="mi-locator-action-template"
+              onClick={() =>
+                void copyWithFeedback(
+                  "template",
+                  locator.template!,
+                )
+              }
+            >
+              {copiedAction === "template"
                 ? "✓ Copied"
                 : "Copy template"}
-          </button>
-        )}
-
-        <button
-          type="button"
-          className="mi-locator-action-test"
-          onClick={() =>
-            void runLiveTest()
-          }
-          title="Re-test the concrete locator against the current Appium session"
-        >
-          {liveTesting
-            ? "Testing..."
-            : "Test live"}
-        </button>
-      </footer>
-
-      {liveResult !== null && (
-        <div
-          className={
-            liveResult === 1
-              ? "mi-test-result mi-test-success"
-              : "mi-test-result mi-test-warning"
-          }
-        >
-          <strong>
-            {liveResult === 1
-              ? "✓ MATCH 1"
-              : liveResult === 0
-                ? "✕ NO MATCH"
-                : `⚠ ${liveResult} MATCHES`}
-          </strong>
-
-          <span>
-            {liveResult === 1
-              ? "Selector is still unique in the live session."
-              : liveResult === 0
-                ? "Selector no longer resolves an element."
-                : "Selector is now ambiguous."}
-          </span>
-        </div>
-      )}
-
-      {liveError && (
-        <div className="mi-test-result mi-test-error">
-          <strong>✕ TEST FAILED</strong>
-          <span>{liveError}</span>
-        </div>
+            </button>
+          </div>
+        </section>
       )}
     </article>
   );

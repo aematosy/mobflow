@@ -6,6 +6,7 @@ import {
 } from "react";
 
 import type {
+  ElementBounds as ElementBoundsValue,
   InspectorElement,
   InspectorSnapshot,
 } from "../../types/mobile";
@@ -46,6 +47,7 @@ interface DeviceViewportProps {
   applicationPackage: string;
   selectedId: string | null;
   hoveredId: string | null;
+  locatorHighlightBounds?: ElementBoundsValue | null;
   onSelect: (id: string) => void;
   onHover?: (id: string | null) => void;
   onSnapshot: (
@@ -96,6 +98,7 @@ export default function DeviceViewport({
   applicationPackage,
   selectedId,
   hoveredId,
+  locatorHighlightBounds = null,
   onSelect,
   onHover,
   onSnapshot,
@@ -745,58 +748,31 @@ export default function DeviceViewport({
       }
 
       /*
-       * Locator-first interaction contract.
+       * Interact mirrors the user's physical gesture.
        *
-       * Snapshot ids such as "android-32" are hierarchy ids,
-       * NOT live Appium element references.
+       * Locator Intelligence belongs to inspection,
+       * recording metadata and generated automation.
+       * It must never replace the actual pointer gesture
+       * performed on the rendered device surface.
        *
-       * Prefer a locator that has already been verified as
-       * unique against the active Appium session.
-       *
-       * Coordinates remain a generic fallback only when no
-       * verified semantic locator is available.
+       * Coordinates are derived from the current screenshot
+       * geometry; no device-specific coordinates or offsets.
        */
-      const verifiedLocator =
-        target?.locators.find(
-          (locator) =>
-            locator.unique
-            && locator.matchCount === 1
-            && locator.value.trim().length > 0,
-        ) ?? null;
+      await mobileApi.addRuntimeLog(
+        "info",
+        "aut",
+        [
+          "INTERACT TAP",
+          `target=${target?.id ?? "none"}`,
+          `point=${point.x},${point.y}`,
+        ].join(" | "),
+      );
 
-      if (verifiedLocator) {
-        await mobileApi.addRuntimeLog(
-          "info",
-          "aut",
-          [
-            "INTERACT LOCATOR",
-            `strategy=${verifiedLocator.strategy}`,
-            `target=${target?.id ?? "unknown"}`,
-          ].join(" | "),
-        );
-
-        await mobileApi.clickSessionLocator(
-          snapshot.sessionId,
-          verifiedLocator.strategy,
-          verifiedLocator.value,
-        );
-      } else {
-        await mobileApi.addRuntimeLog(
-          "info",
-          "aut",
-          [
-            "INTERACT COORDINATE FALLBACK",
-            `target=${target?.id ?? "none"}`,
-            `point=${point.x},${point.y}`,
-          ].join(" | "),
-        );
-
-        await mobileApi.tapSession(
-          snapshot.sessionId,
-          point.x,
-          point.y,
-        );
-      }
+      await mobileApi.tapSession(
+        snapshot.sessionId,
+        point.x,
+        point.y,
+      );
 
       /*
        * Observe the foreground immediately after the native
@@ -837,19 +813,39 @@ export default function DeviceViewport({
       }
 
       /*
-       * Small UI stabilization only.
+       * Semantic synchronization must never block the visual
+       * interaction path.
+       *
+       * The live stream owns visual feedback. Appium refresh
+       * updates hierarchy/metadata asynchronously after the
+       * application has had a short stabilization window.
        *
        * No activateApp.
        * No automatic AUT recovery.
        */
-      await new Promise((resolve) =>
-        window.setTimeout(
-          resolve,
-          250,
-        ),
-      );
+      void (async () => {
+        await new Promise((resolve) =>
+          window.setTimeout(
+            resolve,
+            250,
+          ),
+        );
 
-      await refreshSnapshot();
+        try {
+          await refreshSnapshot();
+        } catch (reason) {
+          const message =
+            reason instanceof Error
+              ? reason.message
+              : String(reason);
+
+          await mobileApi.addRuntimeLog(
+            "error",
+            "aut",
+            `ASYNC SEMANTIC REFRESH FAILED | ${message}`,
+          );
+        }
+      })();
     } catch (reason) {
       onError(
         reason instanceof Error
@@ -1177,6 +1173,21 @@ export default function DeviceViewport({
               ),
             )}
 
+            {locatorHighlightBounds && (
+              <LocatorTestBounds
+                key={[
+                  locatorHighlightBounds.x,
+                  locatorHighlightBounds.y,
+                  locatorHighlightBounds.width,
+                  locatorHighlightBounds.height,
+                ].join(":")}
+                bounds={locatorHighlightBounds}
+                screenElement={
+                  screenshotImageRef.current
+                }
+              />
+            )}
+
             {interacting && (
               <div className="mi-device-progress">
                 Executing gesture…
@@ -1300,6 +1311,77 @@ export default function DeviceViewport({
         </div>
       </div>
     </main>
+  );
+}
+
+function LocatorTestBounds({
+  bounds,
+  screenElement,
+}: {
+  bounds: ElementBoundsValue;
+  screenElement: HTMLImageElement | null;
+}) {
+  console.log("[LOCATOR-HIGHLIGHT]", {
+    bounds,
+    hasScreenElement: Boolean(screenElement),
+    naturalWidth: screenElement?.naturalWidth ?? null,
+    naturalHeight: screenElement?.naturalHeight ?? null,
+  });
+  if (
+    !screenElement
+    || screenElement.naturalWidth <= 0
+    || screenElement.naturalHeight <= 0
+  ) {
+    return null;
+  }
+
+  const imageRect =
+    screenElement.getBoundingClientRect();
+
+  if (
+    imageRect.width <= 0
+    || imageRect.height <= 0
+  ) {
+    return null;
+  }
+
+  const parentRect =
+    screenElement.parentElement
+      ?.getBoundingClientRect();
+
+  if (!parentRect) {
+    return null;
+  }
+
+  /*
+   * Same projection contract as Inspector bounds.
+   *
+   * Appium provides the live element rectangle.
+   * The rendered screenshot provides visual geometry.
+   *
+   * No device-specific coordinates or offsets.
+   */
+  const viewportBounds =
+    deviceBoundsToViewport(
+      bounds,
+      screenElement.naturalWidth,
+      screenElement.naturalHeight,
+      imageRect.width,
+      imageRect.height,
+      imageRect.left - parentRect.left,
+      imageRect.top - parentRect.top,
+    );
+
+  return (
+    <div
+      className="mi-locator-test-bounds"
+      style={{
+        left: viewportBounds.left,
+        top: viewportBounds.top,
+        width: viewportBounds.width,
+        height: viewportBounds.height,
+      }}
+    />
   );
 }
 

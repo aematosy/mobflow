@@ -104,6 +104,20 @@ pub fn android_navigation_key(session_id: String, action: String) -> Result<(), 
 }
 
 #[tauri::command]
+pub fn test_locator_detail(
+    session_id: String,
+    strategy: String,
+    selector: String,
+) -> Result<crate::services::appium_client::LocatorTestResult, String> {
+    crate::services::log_service::info(
+        "locator",
+        format!("Testing locator detail: strategy={strategy}, selector={selector}"),
+    );
+
+    crate::services::appium_client::test_locator_detail(&session_id, &strategy, &selector)
+}
+
+#[tauri::command]
 pub fn test_locator(
     session_id: String,
     strategy: String,

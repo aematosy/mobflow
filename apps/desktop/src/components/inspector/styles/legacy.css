@@ -1012,7 +1012,7 @@
 }
 
 .mi-device-inspect {
-  cursor: crosshair;
+  cursor: pointer;
 }
 
 .mi-device-interact {
@@ -2736,7 +2736,7 @@
 }
 
 .mi-device-screen.mi-device-inspect {
-  cursor: crosshair;
+  cursor: pointer;
 }
 
 .mi-device-screen.mi-device-busy {

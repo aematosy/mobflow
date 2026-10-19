@@ -271,7 +271,12 @@ function App() {
     ios: [],
   });
 
-  const [loading, setLoading] = useState(true);
+  /*
+   * The application shell must render immediately.
+   * Environment/device discovery runs asynchronously and
+   * must not block the first usable frame.
+   */
+  const [loading, setLoading] = useState(false);
   const [operation, setOperation] = useState<Operation>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
 

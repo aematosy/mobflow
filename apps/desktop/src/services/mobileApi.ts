@@ -12,6 +12,7 @@ import type {
   InspectorSnapshot,
   InspectorElement,
   LocatorCandidate,
+  LocatorTestResult,
   LogEntry,
   MobileElementSnapshot,
   PrepareApplicationResult,
@@ -222,6 +223,21 @@ export const mobileApi = {
       strategy,
       selector,
     });
+  },
+
+  testLocatorDetail(
+    sessionId: string,
+    strategy: string,
+    selector: string,
+  ): Promise<LocatorTestResult> {
+    return invoke<LocatorTestResult>(
+      "test_locator_detail",
+      {
+        sessionId,
+        strategy,
+        selector,
+      },
+    );
   },
 
   analyzeAndroidElementLocators(

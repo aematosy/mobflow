@@ -84,6 +84,12 @@ export interface ElementBounds {
   height: number;
 }
 
+export interface LocatorTestResult {
+  matchCount: number;
+  elementId: string | null;
+  bounds: ElementBounds | null;
+}
+
 export interface AndroidAppContext {
   package: string;
   activity: string;

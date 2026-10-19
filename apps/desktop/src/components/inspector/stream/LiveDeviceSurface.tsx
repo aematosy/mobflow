@@ -65,19 +65,14 @@ export default function LiveDeviceSurface({
             return;
           }
 
-          setLiveFrame(frame);
-
           /*
-           * UI delivery is intentionally bounded to ~30 FPS.
-           * The backend decoder may run independently.
+           * The backend stream already owns frame cadence.
+           *
+           * Do not add a second frontend throttle here.
+           * Request the newest available frame immediately
+           * after publishing the current one.
            */
-          await new Promise(
-            (resolve) =>
-              window.setTimeout(
-                resolve,
-                33,
-              ),
-          );
+          setLiveFrame(frame);
         } catch (reason) {
           console.warn(
             "Live frame failed; keeping last available frame",

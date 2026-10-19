@@ -1085,3 +1085,208 @@
   color: #ffffff;
 }
 
+/*
+ * Live result of an explicit Locator Lab Test.
+ *
+ * It must render above normal Inspector selection bounds.
+ */
+.mi-locator-test-bounds {
+  position: absolute;
+  box-sizing: border-box;
+  border: 2px solid #ff2d2d;
+  background: transparent;
+  pointer-events: none;
+  z-index: 20;
+  border-radius: 2px;
+}
+
+/* ==========================================================
+   LOCATOR CARD V11 — CLEAN COMPACT UX
+   Final presentation contract for the simplified LocatorCard.
+   ========================================================== */
+
+/* ---------- Section headings ---------- */
+
+.mi-locator-lab-title,
+.mi-locator-section-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 3px;
+}
+
+.mi-locator-lab-title > span,
+.mi-locator-section-title > span {
+  margin-left: 0;
+}
+
+/* ---------- Card identity ---------- */
+
+.mi-locator-role {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--mi-text-muted);
+}
+
+.mi-locator-strategy-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.mi-locator-strategy-line > strong {
+  line-height: 1.3;
+}
+
+/* ---------- Selector ---------- */
+
+.mi-locator-code-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mi-locator-unique {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1;
+  color: var(--mi-text-muted);
+}
+
+/* ---------- Selector actions ---------- */
+
+.mi-locator-code-section .mi-locator-actions-v3 {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+
+  width: 100% !important;
+  margin: 2px 0 0 !important;
+}
+
+.mi-locator-code-section .mi-locator-actions-v3 button {
+  flex: 0 0 auto !important;
+
+  width: auto !important;
+  min-width: max-content !important;
+
+  height: 34px !important;
+  min-height: 34px !important;
+
+  margin: 0 !important;
+  padding: 0 14px !important;
+
+  border-radius: 9px !important;
+
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+/* ---------- Reusable template ---------- */
+
+.mi-locator-template-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mi-locator-template-title {
+  display: flex;
+  align-items: center;
+}
+
+.mi-locator-template-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mi-locator-template-actions .mi-locator-action-template {
+  width: auto !important;
+  min-width: max-content !important;
+
+  height: 34px !important;
+  min-height: 34px !important;
+
+  margin: 0 !important;
+  padding: 0 14px !important;
+
+  border-radius: 9px !important;
+
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+/* Copy template belongs to the same action family visually. */
+.mi-locator-template-actions .mi-locator-action-template {
+  color: var(--mi-text) !important;
+  border: 1px solid var(--mi-border) !important;
+  background: var(--mi-panel-bg) !important;
+  box-shadow: none !important;
+}
+
+.mi-locator-template-actions .mi-locator-action-template:hover {
+  transform: none;
+  border-color: var(--mi-accent);
+}
+
+/* ---------- Narrow inspector ---------- */
+
+@media (max-width: 1280px) {
+  .mi-locator-code-section .mi-locator-actions-v3 button,
+  .mi-locator-template-actions .mi-locator-action-template {
+    width: auto !important;
+    min-width: max-content !important;
+    padding-inline: 12px !important;
+    font-size: 12px !important;
+  }
+}
+
+
+/* ==========================================================
+   LOCATOR SECTION HEADINGS V12
+   The real JSX uses .mi-section-title > div > strong/span.
+   ========================================================== */
+
+.mi-inspector-panel .mi-section-title > div {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 4px;
+}
+
+.mi-inspector-panel .mi-section-title > div > strong {
+  display: inline-block;
+}
+
+.mi-inspector-panel .mi-section-title > div > span {
+  display: inline-block;
+  margin-left: 0 !important;
+}
+
+/*
+ * Locator headings need visible separation between the
+ * section name and explanatory copy.
+ */
+.mi-inspector-panel .mi-locator-lab .mi-section-title > div,
+.mi-inspector-panel .mi-section:has(.mi-locator-list)
+  > .mi-section-title
+  > div {
+  column-gap: 10px;
+}
