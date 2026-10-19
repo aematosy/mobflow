@@ -1338,3 +1338,221 @@
 :root[data-theme="dark"] .mi-locator-role {
   color: #8f9eb4 !important;
 }
+
+/* =========================================================
+   SPY FINAL — Locator Lab + Selected Element
+   Theme-aware presentation only.
+   ========================================================= */
+
+.mi-inspector-panel .mi-element-title h3 {
+  color: var(--mi-text-strong);
+}
+
+.mi-inspector-panel .mi-element-title > div > span,
+.mi-inspector-panel .mi-element-title code {
+  color: var(--mi-text-muted);
+}
+
+.mi-inspector-panel .mi-locator-lab {
+  border-color: var(--mi-border);
+  background: var(--mi-panel-bg-soft);
+}
+
+.mi-inspector-panel .mi-locator-test-row {
+  display: grid;
+  grid-template-columns:
+    minmax(125px, 0.34fr)
+    minmax(0, 1fr);
+  gap: 8px;
+}
+
+.mi-inspector-panel .mi-locator-test-row select,
+.mi-inspector-panel .mi-locator-test-row input {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+
+  border: 1px solid var(--mi-input-border);
+  border-radius: 10px;
+
+  background: var(--mi-input-bg);
+  color: var(--mi-text-primary);
+
+  font-size: 11.5px;
+}
+
+.mi-inspector-panel .mi-locator-test-row input::placeholder {
+  color: var(--mi-text-muted);
+  opacity: 1;
+}
+
+.mi-inspector-panel .mi-locator-test-row select:focus,
+.mi-inspector-panel .mi-locator-test-row input:focus {
+  outline: none;
+  border-color: var(--mi-accent);
+  box-shadow: 0 0 0 3px var(--mi-accent-soft);
+}
+
+.mi-inspector-panel .mi-locator-test-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+
+  margin-top: 9px;
+}
+
+.mi-inspector-panel .mi-locator-test-actions button {
+  min-width: 86px;
+  height: 36px;
+  padding: 0 14px;
+
+  border-radius: 9px;
+
+  font-size: 11.5px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.mi-inspector-panel .mi-locator-clean {
+  border: 1px solid var(--mi-border);
+  background: var(--mi-panel-bg);
+  color: var(--mi-text-secondary);
+}
+
+.mi-inspector-panel .mi-locator-verify {
+  border: 1px solid var(--mi-brand-border);
+  background: var(--mi-brand-soft);
+  color: var(--mi-brand-strong);
+}
+
+.mi-inspector-panel .mi-locator-test-actions button:disabled {
+  opacity: .48;
+  cursor: default;
+}
+
+@media (max-width: 1050px) {
+  .mi-inspector-panel .mi-locator-test-row {
+    grid-template-columns:
+      minmax(105px, 0.38fr)
+      minmax(0, 1fr);
+  }
+}
+
+/* =========================================================
+   SPY FINAL — Unified action buttons
+   All primary Spy actions share one visual language.
+   ========================================================= */
+
+.mi-inspector-panel .mi-locator-verify,
+.mi-inspector-panel .mi-locator-clean,
+.mi-inspector-panel .mi-locator-action-template {
+  border: 1px solid #5146e5 !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #6558f5 0%,
+      #5748e8 100%
+    ) !important;
+
+  color: #ffffff !important;
+
+  box-shadow:
+    0 5px 14px rgba(78, 67, 220, .20) !important;
+
+  font-weight: 800 !important;
+}
+
+.mi-inspector-panel .mi-locator-verify:hover:not(:disabled),
+.mi-inspector-panel .mi-locator-clean:hover:not(:disabled),
+.mi-inspector-panel .mi-locator-action-template:hover:not(:disabled) {
+  border-color: #5d51ed !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #7064fa 0%,
+      #6051ee 100%
+    ) !important;
+
+  color: #ffffff !important;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 7px 16px rgba(78, 67, 220, .26) !important;
+}
+
+.mi-inspector-panel .mi-locator-verify:active:not(:disabled),
+.mi-inspector-panel .mi-locator-clean:active:not(:disabled),
+.mi-inspector-panel .mi-locator-action-template:active:not(:disabled) {
+  transform: translateY(0) scale(.98);
+}
+
+.mi-inspector-panel .mi-locator-test-actions button:disabled {
+  border-color: #5146e5 !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #6558f5 0%,
+      #5748e8 100%
+    ) !important;
+
+  color: #ffffff !important;
+
+  opacity: .38;
+  box-shadow: none !important;
+  cursor: default;
+}
+
+/* SPY FINAL — Copy template uses the primary Copy action skin. */
+.mi-inspector-panel
+.mi-locator-template-actions
+.mi-locator-action-template.mi-locator-action-primary {
+  color: #fff !important;
+  border: 1px solid #584be0 !important;
+  background:
+    linear-gradient(
+      135deg,
+      #695cf3 0%,
+      #5145d8 100%
+    ) !important;
+  box-shadow:
+    0 5px 12px rgba(81, 69, 216, .18) !important;
+}
+
+:root[data-theme="dark"]
+.mi-inspector-panel
+.mi-locator-template-actions
+.mi-locator-action-template.mi-locator-action-primary {
+  color: #fff !important;
+  border: 1px solid #584be0 !important;
+  background:
+    linear-gradient(
+      135deg,
+      #695cf3 0%,
+      #5145d8 100%
+    ) !important;
+  box-shadow:
+    0 5px 12px rgba(81, 69, 216, .18) !important;
+}
+
+/* SPY FINAL — Verify icon proportions */
+.mi-inspector-panel .mi-locator-verify {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.mi-inspector-panel .mi-locator-verify .mi-verify-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 25px;
+  line-height: 1;
+  font-weight: 900;
+}

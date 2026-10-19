@@ -369,9 +369,17 @@ pub fn locator_match_count(
      * requests. Snapshot/source/screenshot operations use
      * their own lifecycle.
      */
+    /*
+     * Keep HTTP error responses readable.
+     *
+     * Appium/UiAutomator2 returns the useful WebDriver
+     * diagnostic inside the response body. Treating HTTP
+     * 4xx/5xx as a transport error would discard it.
+     */
     let response = ureq::post(&url)
         .config()
         .timeout_global(Some(LOCATOR_REQUEST_TIMEOUT))
+        .http_status_as_error(false)
         .build()
         .send_json(payload);
 
@@ -380,16 +388,9 @@ pub fn locator_match_count(
     let mut response = match response {
         Ok(response) => response,
 
-        Err(ureq::Error::StatusCode(code)) => {
-            let message = format!("Locator validation returned HTTP {code} after {elapsed_ms}ms");
-
-            log_service::error("locator", &message);
-
-            return Err(message);
-        }
-
         Err(error) => {
-            let message = format!("Locator validation failed after {elapsed_ms}ms: {error}");
+            let message =
+                format!("Locator validation transport failed after {elapsed_ms}ms: {error}");
 
             log_service::error("locator", &message);
 
@@ -397,23 +398,56 @@ pub fn locator_match_count(
         }
     };
 
-    let body: Value = response.body_mut().read_json().map_err(|error| {
+    let status = response.status().as_u16();
+
+    let body = response
+        .body_mut()
+        .read_to_string()
+        .map_err(|error| {
+            let message = format!(
+                "Unable to read locator validation response after {elapsed_ms}ms: {error}"
+            );
+
+            log_service::error("locator", &message);
+
+            message
+        })?;
+
+    if !(200..300).contains(&status) {
+        let appium_message =
+            appium_error_message(status, &body);
+
         let message =
-            format!("Unable to decode locator validation response after {elapsed_ms}ms: {error}");
+            format!("{appium_message} after {elapsed_ms}ms");
 
         log_service::error("locator", &message);
 
-        message
-    })?;
+        return Err(message);
+    }
 
-    let elements = body.get("value").and_then(Value::as_array).ok_or_else(|| {
-        let message =
-            format!("Locator validation response contains no element array after {elapsed_ms}ms");
+    let body: Value =
+        serde_json::from_str(&body).map_err(|error| {
+            let message = format!(
+                "Unable to decode locator validation response after {elapsed_ms}ms: {error}"
+            );
 
-        log_service::error("locator", &message);
+            log_service::error("locator", &message);
 
-        message
-    })?;
+            message
+        })?;
+
+    let elements =
+        body.get("value")
+            .and_then(Value::as_array)
+            .ok_or_else(|| {
+                let message = format!(
+                    "Locator validation response contains no element array after {elapsed_ms}ms"
+                );
+
+                log_service::error("locator", &message);
+
+                message
+            })?;
 
     let match_count = elements.len();
 

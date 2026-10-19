@@ -743,6 +743,40 @@ export default function DeviceViewport({
       );
 
     /*
+     * Diagnostic only:
+     * compare tap coordinates against the element resolved
+     * from the same device point. No interaction behavior
+     * is changed here.
+     */
+    const diagnosticTarget =
+      findDeepestElementAtPoint(
+        snapshot.elements,
+        point,
+      );
+
+    await mobileApi.addRuntimeLog(
+      "info",
+      "aut",
+      [
+        "INTERACT HIT TEST",
+        `point=${point.x},${point.y}`,
+        `target=${diagnosticTarget?.id ?? "none"}`,
+        `type=${diagnosticTarget?.elementType ?? "none"}`,
+        `text=${diagnosticTarget?.text ?? "none"}`,
+        `bounds=${
+          diagnosticTarget?.bounds
+            ? [
+                diagnosticTarget.bounds.x,
+                diagnosticTarget.bounds.y,
+                diagnosticTarget.bounds.width,
+                diagnosticTarget.bounds.height,
+              ].join(",")
+            : "none"
+        }`,
+      ].join(" | "),
+    );
+
+    /*
      * TAP foreground ownership gate.
      *
      * Never dispatch a pending MobFlow interaction when the

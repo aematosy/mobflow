@@ -789,6 +789,7 @@ export default function MobileInspector({
 
                     <div className="mi-locator-test-row">
                       <select
+                        aria-label="Locator strategy"
                         value={locatorStrategy}
                         onChange={(event) => {
                           setLocatorStrategy(
@@ -820,6 +821,7 @@ export default function MobileInspector({
                       </select>
 
                       <input
+                        aria-label="Locator value"
                         value={locatorValue}
                         onChange={(event) => {
                           setLocatorValue(
@@ -831,9 +833,34 @@ export default function MobileInspector({
                         }}
                         placeholder="Paste or write a locator..."
                       />
+                    </div>
+
+                    <div className="mi-locator-test-actions">
+                      <button
+                        type="button"
+                        className="mi-locator-clean"
+                        disabled={
+                          locatorTesting
+                          || (
+                            !locatorValue
+                            && locatorResult === null
+                            && locatorError === null
+                            && locatorHighlightBounds === null
+                          )
+                        }
+                        onClick={() => {
+                          setLocatorValue("");
+                          setLocatorResult(null);
+                          setLocatorError(null);
+                          setLocatorHighlightBounds(null);
+                        }}
+                      >
+                        Clean
+                      </button>
 
                       <button
                         type="button"
+                        className="mi-locator-verify"
                         disabled={locatorTesting}
                         onClick={() =>
                           void testLocator(
@@ -842,9 +869,19 @@ export default function MobileInspector({
                           )
                         }
                       >
-                        {locatorTesting
-                          ? "Testing..."
-                          : "⌕ Test"}
+                        {locatorTesting ? (
+                          "Verifying..."
+                        ) : (
+                          <>
+                            <span
+                              className="mi-verify-icon"
+                              aria-hidden="true"
+                            >
+                              ⌕
+                            </span>
+                            <span>Verify</span>
+                          </>
+                        )}
                       </button>
                     </div>
 
@@ -1246,7 +1283,7 @@ function LocatorCard({
           <div className="mi-locator-template-actions">
             <button
               type="button"
-              className="mi-locator-action-template"
+              className="mi-locator-action-template mi-locator-action-primary"
               onClick={() =>
                 void copyWithFeedback(
                   "template",

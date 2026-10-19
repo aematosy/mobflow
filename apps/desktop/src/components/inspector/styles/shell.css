@@ -844,3 +844,169 @@
     #68778d !important;
 }
 
+
+/* SPY FINAL — Session identity +50% */
+.mi-header-right .mi-session {
+  gap: 10.5px;
+  font-size: 12px;
+}
+
+.mi-header-right .mi-session strong {
+  font-size: 12px;
+}
+
+.mi-header-right .mi-connected {
+  gap: 7.5px;
+  font-size: 12px;
+}
+
+.mi-header-right .mi-connected i {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+}
+
+/* SPY FINAL — Brand identity +40% */
+.mi-brand {
+  min-height: 68px !important;
+  height: 68px !important;
+  gap: 14px !important;
+}
+
+.mi-brand .mi-logo {
+  width: 140px !important;
+  min-width: 140px !important;
+}
+
+.mi-brand .mi-mobflow-logo {
+  width: 140px !important;
+  height: auto !important;
+}
+
+.mi-brand h2 {
+  margin: 0 !important;
+  font-size: 19.6px !important;
+  line-height: 1.1 !important;
+  font-weight: 850 !important;
+}
+
+.mi-brand .mi-header-device-meta {
+  margin-top: 3px;
+}
+
+.mi-brand .mi-header-device-meta span {
+  font-size: 11.2px !important;
+  line-height: 1.1 !important;
+  letter-spacing: .08em;
+}
+
+/* SPY FINAL — Brand proportions correction */
+.mi-brand {
+  min-height: 56px !important;
+  height: 56px !important;
+  gap: 12px !important;
+  padding: 7px 14px !important;
+}
+
+.mi-brand .mi-logo {
+  width: 140px !important;
+  min-width: 140px !important;
+}
+
+.mi-brand .mi-mobflow-logo {
+  width: 140px !important;
+  height: auto !important;
+}
+
+.mi-brand h2 {
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.15 !important;
+  font-weight: 850 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.mi-brand .mi-header-device-meta {
+  margin-top: 2px !important;
+}
+
+.mi-brand .mi-header-device-meta span {
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  letter-spacing: .08em !important;
+}
+
+/* SPY FINAL — Compact brand lockup */
+.mi-brand {
+  gap: 4px !important;
+}
+
+.mi-brand .mi-logo {
+  width: 175px !important;
+  min-width: 175px !important;
+  margin-right: -18px !important;
+}
+
+.mi-brand .mi-mobflow-logo {
+  width: 175px !important;
+  max-width: none !important;
+  height: auto !important;
+}
+
+.mi-brand > div:last-child {
+  margin-left: 0 !important;
+}
+
+.mi-brand h2 {
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.15 !important;
+}
+
+.mi-brand .mi-header-device-meta {
+  margin-top: 2px !important;
+}
+
+.mi-brand .mi-header-device-meta span {
+  font-size: 10px !important;
+}
+
+/* SPY FINAL — Brand lockup balanced */
+.mi-brand {
+  gap: 8px !important;
+}
+
+.mi-brand .mi-logo {
+  width: 122px !important;
+  min-width: 122px !important;
+  margin-right: 0 !important;
+}
+
+.mi-brand .mi-mobflow-logo {
+  width: 122px !important;
+  max-width: 122px !important;
+  height: auto !important;
+}
+
+.mi-brand > div:last-child {
+  margin-left: 0 !important;
+}
+
+.mi-brand h2 {
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.15 !important;
+}
+
+.mi-brand .mi-header-device-meta {
+  margin-top: 2px !important;
+}
+
+.mi-brand .mi-header-device-meta span {
+  font-size: 10px !important;
+}
+
+/* SPY FINAL — Hierarchy subtitle */
+.mi-hierarchy-panel .mi-panel-subtitle {
+  font-size: 12px !important;
+}
