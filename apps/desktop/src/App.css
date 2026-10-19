@@ -8944,3 +8944,142 @@ textarea:focus-visible {
     #4338ca !important;
 }
 
+
+/* ============================================================
+ * SESSION HEALTH — LOST
+ * A dead Appium session must never retain healthy green state.
+ * ============================================================ */
+
+.session-live-indicator.session-live-indicator-lost {
+  border-color: #fecdd3;
+  background: #fff1f2;
+}
+
+.session-live-indicator-lost .session-live-dot,
+.session-live-dot.session-live-dot-lost {
+  background: #e5485d;
+  box-shadow: 0 0 0 5px #ffe4e8;
+}
+
+.session-live-indicator-lost strong {
+  color: #c92f45;
+}
+
+.session-live-indicator-lost span {
+  color: #a84b5a;
+}
+
+:root[data-theme="dark"]
+  .session-live-indicator.session-live-indicator-lost {
+  border-color: rgba(244, 63, 94, 0.30);
+  background: rgba(244, 63, 94, 0.09);
+}
+
+:root[data-theme="dark"]
+  .session-live-indicator-lost
+  .session-live-dot,
+:root[data-theme="dark"]
+  .session-live-dot.session-live-dot-lost {
+  background: #fb7185;
+  box-shadow: 0 0 0 5px rgba(244, 63, 94, 0.12);
+}
+
+:root[data-theme="dark"]
+  .session-live-indicator-lost strong {
+  color: #fb7185;
+}
+
+:root[data-theme="dark"]
+  .session-live-indicator-lost span {
+  color: #f0a1ad;
+}
+
+/* ============================================================
+ * SESSION HEALTH — LOST BADGE
+ * ============================================================ */
+
+.session-status.session-lost {
+  border: 1px solid #fecdd3;
+  background: #fff1f2;
+  color: #c92f45;
+}
+
+:root[data-theme="dark"]
+  .session-status.session-lost {
+  border-color: rgba(244, 63, 94, 0.30);
+  background: rgba(244, 63, 94, 0.09);
+  color: #fb7185;
+}
+
+/* ============================================================
+ * SESSION RECOVERY
+ * ============================================================ */
+
+.automation-session-recover {
+  border: 1px solid #f0b8c1;
+  background: #fff1f2;
+  color: #c92f45;
+}
+
+.automation-session-recover:hover:not(:disabled) {
+  border-color: #e98a99;
+  background: #ffe7eb;
+}
+
+:root[data-theme="dark"]
+  .automation-session-recover {
+  border-color: rgba(244, 63, 94, 0.32);
+  background: rgba(244, 63, 94, 0.10);
+  color: #fb7185;
+}
+
+:root[data-theme="dark"]
+  .automation-session-recover:hover:not(:disabled) {
+  border-color: rgba(251, 113, 133, 0.50);
+  background: rgba(244, 63, 94, 0.16);
+}
+
+/* ============================================================
+ * AUT RELAUNCH
+ * Keep lifecycle controls visually consistent.
+ * ============================================================ */
+
+.automation-aut-relaunch {
+  border: 1px solid rgba(99, 91, 255, 0.28);
+  background: rgba(99, 91, 255, 0.08);
+  color: #5147df;
+  box-shadow: none;
+}
+
+.automation-aut-relaunch:hover:not(:disabled) {
+  border-color: rgba(99, 91, 255, 0.46);
+  background: rgba(99, 91, 255, 0.14);
+  color: #463bd3;
+  box-shadow: none;
+}
+
+.automation-aut-relaunch:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.automation-aut-relaunch:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"]
+  .automation-aut-relaunch {
+  border-color: rgba(139, 124, 255, 0.34);
+  background: rgba(139, 124, 255, 0.10);
+  color: #aaa0ff;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"]
+  .automation-aut-relaunch:hover:not(:disabled) {
+  border-color: rgba(139, 124, 255, 0.52);
+  background: rgba(139, 124, 255, 0.17);
+  color: #bbb3ff;
+  box-shadow: none;
+}

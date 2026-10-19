@@ -112,11 +112,33 @@ pub fn ensure_server() -> Result<(), String> {
     Err(message.to_string())
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum AndroidSessionLaunchPolicy {
+    LaunchApplication,
+    PreserveApplicationState,
+}
+
 pub fn create_android_session(
+    device_id: &str,
+    application_path: &str,
+    package: &str,
+    activity: &str,
+) -> Result<AppiumSession, String> {
+    create_android_session_with_policy(
+        device_id,
+        application_path,
+        package,
+        activity,
+        AndroidSessionLaunchPolicy::LaunchApplication,
+    )
+}
+
+pub fn create_android_session_with_policy(
     device_id: &str,
     _application_path: &str,
     package: &str,
     activity: &str,
+    launch_policy: AndroidSessionLaunchPolicy,
 ) -> Result<AppiumSession, String> {
     ensure_server()?;
 
@@ -143,7 +165,23 @@ pub fn create_android_session(
      * non-identity defaults.
      */
     always_match.insert("appium:noReset".to_string(), json!(true));
-    always_match.insert("appium:newCommandTimeout".to_string(), json!(300));
+    always_match.insert("appium:newCommandTimeout".to_string(), json!(3600));
+
+    if launch_policy
+        == AndroidSessionLaunchPolicy::PreserveApplicationState
+    {
+        /*
+         * Session recovery attaches automation infrastructure
+         * without asking UiAutomator2 to launch/restart the AUT.
+         *
+         * The application may already be several screens deep
+         * and recovery must preserve that state.
+         */
+        always_match.insert(
+            "appium:autoLaunch".to_string(),
+            json!(false),
+        );
+    }
 
     for capability in config.capabilities {
         /*

@@ -1,4 +1,5 @@
 import {
+  useCallback,
   useEffect,
   useMemo,
   useState,
@@ -12,9 +13,11 @@ import type {
   InspectorSnapshot,
   LocatorCandidate,
   PrepareApplicationResult,
+  SessionHealth,
 } from "../../types/mobile";
 
 import DeviceViewport from "./DeviceViewport";
+import TextInputInteraction from "./interaction/TextInputInteraction";
 import HierarchyPanel from "./HierarchyPanel";
 import "./inspector.css";
 
@@ -28,6 +31,10 @@ import {
 
 interface Props {
   session: PrepareApplicationResult;
+  sessionHealth: SessionHealth | null;
+  sessionHealthChecking: boolean;
+  onRevalidateSession: () => Promise<SessionHealth | null>;
+  onAutForegroundChange: (foreground: boolean) => void;
   minimized: boolean;
   onMinimize: () => void;
   onRestore: () => void;
@@ -52,11 +59,37 @@ function shortType(value: string) {
 
 export default function MobileInspector({
   session,
+  sessionHealth,
+  sessionHealthChecking,
+  onRevalidateSession,
+  onAutForegroundChange,
   minimized,
   onMinimize,
   onRestore,
   onClose,
 }: Props) {
+  /*
+   * App.tsx owns canonical Appium session health.
+   *
+   * Inspector renders that state only. The presence of a
+   * session id is never treated as proof of connectivity.
+   */
+  const sessionAlive =
+    sessionHealth?.alive === true;
+
+  const sessionLost =
+    !sessionHealthChecking
+    && sessionHealth?.alive === false;
+
+  const sessionStatusLabel =
+    sessionHealthChecking
+      ? "Checking"
+      : sessionLost
+        ? "Session lost"
+        : sessionAlive
+          ? "Connected"
+          : "Unverified";
+
   const [snapshot, setSnapshot] =
     useState<InspectorSnapshot | null>(null);
 
@@ -74,6 +107,33 @@ export default function MobileInspector({
 
   const [inspectorMode, setInspectorMode] =
     useState<"inspect" | "interact">("inspect");
+
+  /*
+   * Interact text entry owns a target independently from
+   * Inspector selection.
+   *
+   * The target remains stable while the pointer leaves the
+   * device surface and moves into the interaction panel.
+   */
+  const [
+    interactionInputTarget,
+    setInteractionInputTarget,
+  ] = useState<InspectorElement | null>(null);
+
+  const [
+    interactionInputValue,
+    setInteractionInputValue,
+  ] = useState("");
+
+  const [
+    interactionInputBusy,
+    setInteractionInputBusy,
+  ] = useState(false);
+
+  const [
+    interactionInputError,
+    setInteractionInputError,
+  ] = useState<string | null>(null);
 
   const [hoveredId, setHoveredId] =
     useState<string | null>(null);
@@ -134,6 +194,102 @@ export default function MobileInspector({
 
 
 
+  const typeInteractionText = async () => {
+    if (
+      !snapshot
+      || !interactionInputTarget
+      || interactionInputValue.length === 0
+      || interactionInputBusy
+    ) {
+      return;
+    }
+
+    setInteractionInputBusy(true);
+    setInteractionInputError(null);
+
+    try {
+      await mobileApi.typeElementText(
+        snapshot.sessionId,
+        interactionInputTarget,
+        interactionInputValue,
+      );
+
+      /*
+       * Refresh only after the input operation completes.
+       * The semantic target remains owned independently from
+       * Inspector selection.
+       */
+      await refresh();
+    } catch (reason) {
+      setInteractionInputError(
+        reason instanceof Error
+          ? reason.message
+          : String(reason),
+      );
+    } finally {
+      setInteractionInputBusy(false);
+    }
+  };
+
+  const clearInteractionText = async () => {
+    if (
+      !snapshot
+      || !interactionInputTarget
+      || interactionInputBusy
+    ) {
+      return;
+    }
+
+    setInteractionInputBusy(true);
+    setInteractionInputError(null);
+
+    try {
+      await mobileApi.clearElementText(
+        snapshot.sessionId,
+        interactionInputTarget,
+      );
+
+      setInteractionInputValue("");
+
+      await refresh();
+    } catch (reason) {
+      setInteractionInputError(
+        reason instanceof Error
+          ? reason.message
+          : String(reason),
+      );
+    } finally {
+      setInteractionInputBusy(false);
+    }
+  };
+
+  const cancelInteractionInput = () => {
+    setInteractionInputTarget(null);
+    setInteractionInputValue("");
+    setInteractionInputError(null);
+  };
+
+  /*
+   * DeviceViewport has a recording synchronization effect that
+   * depends on onModeChange.
+   *
+   * Keep this callback stable so ordinary parent renders do not
+   * re-run that effect and force a non-recording viewport back
+   * to Inspect.
+   */
+  const handleInspectorModeChange = useCallback(
+    (mode: "inspect" | "interact") => {
+      setInspectorMode(mode);
+
+      if (mode !== "interact") {
+        setInteractionInputTarget(null);
+        setInteractionInputValue("");
+        setInteractionInputError(null);
+      }
+    },
+    [],
+  );
+
   const refresh = async () => {
     setLoading(true);
     setError(null);
@@ -152,9 +308,12 @@ export default function MobileInspector({
             session.sessionId,
           );
 
-        if (
-          beforePackage !== session.package
-        ) {
+        const foreground =
+          beforePackage === session.package;
+
+        onAutForegroundChange(foreground);
+
+        if (!foreground) {
           /*
            * Inspector is observational.
            *
@@ -200,9 +359,12 @@ export default function MobileInspector({
             session.sessionId,
           );
 
-        if (
-          afterPackage !== session.package
-        ) {
+        const foreground =
+          afterPackage === session.package;
+
+        onAutForegroundChange(foreground);
+
+        if (!foreground) {
           await mobileApi.addRuntimeLog(
             "info",
             "aut",
@@ -231,11 +393,27 @@ export default function MobileInspector({
           : null,
       );
     } catch (reason) {
-      setError(
-        reason instanceof Error
-          ? reason.message
-          : String(reason),
-      );
+      /*
+       * The failed Inspector request does not decide whether
+       * the Appium session is dead.
+       *
+       * Ask the canonical session owner to revalidate it.
+       * session_health_service owns that decision.
+       */
+      const health =
+        await onRevalidateSession();
+
+      if (health?.alive === false) {
+        setError(
+          "The Appium session is no longer available.",
+        );
+      } else {
+        setError(
+          reason instanceof Error
+            ? reason.message
+            : String(reason),
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -463,7 +641,16 @@ export default function MobileInspector({
           onClick={onRestore}
           aria-label="Restore Mobile Inspector"
         >
-          <span className="mi-minimized-status">
+          <span
+            className={[
+              "mi-minimized-status",
+              sessionLost
+                ? "mi-minimized-status-lost"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
             <i />
           </span>
 
@@ -474,7 +661,14 @@ export default function MobileInspector({
               {session.platform.toUpperCase()}
               {" · "}
               {session.automationName}
-              {" · session active"}
+              {" · "}
+              {sessionHealthChecking
+                ? "checking session"
+                : sessionLost
+                  ? "session lost"
+                  : sessionAlive
+                    ? "session active"
+                    : "session unverified"}
             </small>
           </span>
 
@@ -510,9 +704,18 @@ export default function MobileInspector({
 
           <div className="mi-header-right">
           <div className="mi-session">
-            <span className="mi-connected">
+            <span
+              className={[
+                "mi-connected",
+                sessionLost
+                  ? "mi-connected-lost"
+                  : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
               <i />
-              Connected
+              {sessionStatusLabel}
             </span>
 
             <strong>
@@ -646,7 +849,12 @@ export default function MobileInspector({
                 setHoveredId(null);
               }}
               onError={setError}
-              onModeChange={setInspectorMode}
+              onModeChange={handleInspectorModeChange}
+              onEditableTarget={(element) => {
+                setInteractionInputTarget(element);
+                setInteractionInputValue("");
+                setInteractionInputError(null);
+              }}
 
               onRecordedTap={(
                 element,
@@ -717,29 +925,50 @@ export default function MobileInspector({
 
             <div className="mi-inspector-scroll">
               {inspectorMode === "interact" ? (
-                <div className="mi-interaction-mode-state">
-                  <div className="mi-interaction-mode-icon">
-                    ↗
+                interactionInputTarget ? (
+                  <TextInputInteraction
+                    target={interactionInputTarget}
+                    value={interactionInputValue}
+                    busy={interactionInputBusy}
+                    error={interactionInputError}
+                    onValueChange={
+                      setInteractionInputValue
+                    }
+                    onType={() => {
+                      void typeInteractionText();
+                    }}
+                    onClear={() => {
+                      void clearInteractionText();
+                    }}
+                    onCancel={
+                      cancelInteractionInput
+                    }
+                  />
+                ) : (
+                  <div className="mi-interaction-mode-state">
+                    <div className="mi-interaction-mode-icon">
+                      ↗
+                    </div>
+
+                    <strong>
+                      Interaction mode active
+                    </strong>
+
+                    <span>
+                      Interact directly with the connected device.
+                    </span>
+
+                    <div className="mi-interaction-mode-actions">
+                      <span>Tap</span>
+                      <span>Swipe</span>
+                      <span>Navigate</span>
+                    </div>
+
+                    <small>
+                      Select an editable field to enter or clear text.
+                    </small>
                   </div>
-
-                  <strong>
-                    Interaction mode active
-                  </strong>
-
-                  <span>
-                    Interact directly with the connected device.
-                  </span>
-
-                  <div className="mi-interaction-mode-actions">
-                    <span>Tap</span>
-                    <span>Swipe</span>
-                    <span>Navigate</span>
-                  </div>
-
-                  <small>
-                    Switch back to Inspect to view element properties and locators.
-                  </small>
-                </div>
+                )
               ) : selected ? (
                 <>
                   <div className="mi-element-title">
@@ -1020,8 +1249,23 @@ export default function MobileInspector({
 
         <div className="mi-statusbar">
           <div>
-            <span className="mi-status-dot" />
-            Session active
+            <span
+              className={[
+                "mi-status-dot",
+                sessionLost
+                  ? "mi-status-dot-lost"
+                  : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            />
+            {sessionHealthChecking
+              ? "Checking session"
+              : sessionLost
+                ? "Session lost"
+                : sessionAlive
+                  ? "Session active"
+                  : "Session unverified"}
           </div>
 
           <div>

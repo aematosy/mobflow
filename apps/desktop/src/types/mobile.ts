@@ -58,6 +58,13 @@ export interface TestApplication {
   identifier: string;
 }
 
+export interface SessionHealth {
+  sessionId: string;
+  alive: boolean;
+  automationName: string | null;
+  platformName: string | null;
+}
+
 export interface PrepareApplicationResult {
   ok: boolean;
   platform: string;
@@ -148,6 +155,10 @@ export interface InspectorElement {
   enabled: boolean;
   displayed: boolean;
   selected: boolean;
+
+  editable: boolean;
+  focusable: boolean;
+  focused: boolean;
 
   bounds: ElementBounds | null;
 

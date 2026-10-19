@@ -27,6 +27,7 @@ import type {
   DeviceInventory,
   EnvironmentStatus,
   PrepareApplicationResult,
+  SessionHealth,
   TestApplication,
   ToolStatus,
 } from "./types/mobile";
@@ -290,10 +291,155 @@ function App() {
   const [automationSession, setAutomationSession] =
     useState<PrepareApplicationResult | null>(null);
 
+  /*
+   * Session identity and runtime health are intentionally
+   * separate concerns.
+   *
+   * automationSession describes the Appium session MobFlow
+   * created. sessionHealth describes whether Appium still
+   * recognizes that session right now.
+   */
+  const [sessionHealth, setSessionHealth] =
+    useState<SessionHealth | null>(null);
+
+  const [sessionHealthChecking, setSessionHealthChecking] =
+    useState(false);
+
   const [sessionTransitioning, setSessionTransitioning] =
     useState(false);
 
+  /*
+   * Appium health and AUT foreground ownership are separate.
+   *
+   * null  = not verified / not applicable
+   * true  = expected AUT owns Android foreground
+   * false = Appium is alive but AUT does not own foreground
+   */
+  const [autForeground, setAutForeground] =
+    useState<boolean | null>(null);
+
+
   const [error, setError] = useState<string | null>(null);
+
+  const revalidateSessionHealth = useCallback(
+    async (): Promise<SessionHealth | null> => {
+      const sessionId =
+        automationSession?.sessionId;
+
+      if (!sessionId) {
+        setSessionHealth(null);
+        setSessionHealthChecking(false);
+        return null;
+      }
+
+      setSessionHealthChecking(true);
+
+      try {
+        const health =
+          await mobileApi.sessionHealth(sessionId);
+
+        /*
+         * Session identity may change while the request is
+         * running. Never commit health for an obsolete session.
+         */
+        if (
+          automationSession?.sessionId
+          !== health.sessionId
+        ) {
+          return null;
+        }
+
+        setSessionHealth(health);
+
+        return health;
+      } catch (reason) {
+        /*
+         * Infrastructure/transport failure is not proof that
+         * the Appium session is dead.
+         */
+        setSessionHealth(null);
+
+        console.error(
+          "Unable to revalidate Appium session health",
+          reason,
+        );
+
+        return null;
+      } finally {
+        setSessionHealthChecking(false);
+      }
+    },
+    [automationSession?.sessionId],
+  );
+
+  useEffect(() => {
+    void revalidateSessionHealth();
+  }, [revalidateSessionHealth]);
+
+
+  const revalidateAutForeground = useCallback(
+    async (): Promise<boolean | null> => {
+      const current = automationSession;
+
+      if (
+        !current?.sessionId
+        || current.platform !== "android"
+        || sessionHealth?.alive !== true
+      ) {
+        setAutForeground(null);
+        return null;
+      }
+
+      try {
+        const packageName =
+          await mobileApi.androidCurrentPackage(
+            current.sessionId,
+          );
+
+        /*
+         * Session identity may change while current_package is
+         * in flight. Never commit AUT state for an old session.
+         */
+        if (
+          automationSession?.sessionId
+          !== current.sessionId
+        ) {
+          return null;
+        }
+
+        const foreground =
+          packageName === current.package;
+
+        setAutForeground(foreground);
+
+        return foreground;
+      } catch (reason) {
+        /*
+         * Failure to query foreground is not proof that the AUT
+         * is dead. Leave it unverified instead of inventing state.
+         */
+        setAutForeground(null);
+
+        console.error(
+          "Unable to revalidate AUT foreground",
+          reason,
+        );
+
+        return null;
+      }
+    },
+    [
+      automationSession?.sessionId,
+      automationSession?.package,
+      automationSession?.platform,
+      sessionHealth?.alive,
+    ],
+  );
+
+  useEffect(() => {
+    void revalidateAutForeground();
+  }, [revalidateAutForeground]);
+
   const [logsOpen, setLogsOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [mobFlowSettings, setMobFlowSettings] =
@@ -530,6 +676,112 @@ function App() {
     } catch (reason) {
       setError(
         `Unable to finish automation session: ${
+          reason instanceof Error
+            ? reason.message
+            : String(reason)
+        }`,
+      );
+    } finally {
+      setSessionTransitioning(false);
+    }
+  };
+
+  const relaunchAutomationApplication = async () => {
+    const current = automationSession;
+
+    if (
+      !current?.sessionId
+      || current.platform !== "android"
+      || sessionHealth?.alive !== true
+      || autForeground !== false
+      || sessionTransitioning
+    ) {
+      return;
+    }
+
+    setSessionTransitioning(true);
+    setError(null);
+
+    try {
+      /*
+       * AUT recovery is intentionally NOT session recovery.
+       *
+       * Keep the existing Appium session and application data.
+       * No pm clear, no reinstall, no Appium session replacement.
+       */
+      await mobileApi.activateAndroidApp(
+        current.sessionId,
+        current.package,
+      );
+
+      await revalidateAutForeground();
+    } catch (reason) {
+      setError(
+        `Unable to relaunch application: ${
+          reason instanceof Error
+            ? reason.message
+            : String(reason)
+        }`,
+      );
+    } finally {
+      setSessionTransitioning(false);
+    }
+  };
+
+  const recoverAutomationSession = async () => {
+    const current =
+      automationSession;
+
+    if (
+      !current?.sessionId
+      || !selectedDevice
+      || sessionTransitioning
+      || sessionHealth?.alive !== false
+    ) {
+      return;
+    }
+
+    if (selectedDevice.platform !== "android") {
+      setError(
+        "Session recovery is currently available for Android only.",
+      );
+      return;
+    }
+
+    setSessionTransitioning(true);
+    setError(null);
+
+    try {
+      /*
+       * Recovery is intentionally different from New session.
+       *
+       * Do not delete/clear/reinstall/relaunch the AUT here.
+       * The backend recovery contract preserves its current
+       * Android runtime state and creates only a new Appium
+       * automation session.
+       *
+       * Keep the current UI surfaces open as well. Inspector
+       * may be open or minimized when the Appium session is
+       * lost; replacing automationSession will reconnect that
+       * same surface to the recovered session.
+       */
+      const recovered =
+        await mobileApi.recoverAndroidSession(
+          current.deviceId,
+          current.applicationPath,
+          current.package,
+          current.activity,
+        );
+
+      setAutomationSession(recovered);
+    } catch (reason) {
+      /*
+       * Keep the lost session identity available so the user
+       * can retry Recovery, choose New session, or explicitly
+       * finish the lifecycle.
+       */
+      setError(
+        `Unable to recover automation session: ${
           reason instanceof Error
             ? reason.message
             : String(reason)
@@ -816,13 +1068,23 @@ function App() {
               device={selectedDevice}
               application={application}
               currentSession={automationSession}
+              sessionHealth={sessionHealth}
               onChange={setApplication}
               onSessionReady={setAutomationSession}
             />
 
             <AutomationPanel
               session={automationSession}
+              sessionHealth={sessionHealth}
+              sessionHealthChecking={sessionHealthChecking}
+              autForeground={autForeground}
               sessionTransitioning={sessionTransitioning}
+              onRelaunchApplication={() =>
+                void relaunchAutomationApplication()
+              }
+              onRecoverSession={() =>
+                void recoverAutomationSession()
+              }
               onRestartSession={() =>
                 void restartAutomationSession()
               }
@@ -947,6 +1209,10 @@ function App() {
         automationSession && (
           <MobileInspector
             session={automationSession}
+            sessionHealth={sessionHealth}
+            sessionHealthChecking={sessionHealthChecking}
+            onRevalidateSession={revalidateSessionHealth}
+            onAutForegroundChange={setAutForeground}
             minimized={
               inspectorVisibility ===
               "minimized"

@@ -7,6 +7,7 @@ import { mobileApi } from "../services/mobileApi";
 import type {
   Device,
   PrepareApplicationResult,
+  SessionHealth,
   TestApplication,
 } from "../types/mobile";
 
@@ -14,6 +15,7 @@ interface Props {
   device: Device;
   application: TestApplication;
   currentSession: PrepareApplicationResult | null;
+  sessionHealth: SessionHealth | null;
   onChange: (application: TestApplication) => void;
   onSessionReady: (
     session: PrepareApplicationResult,
@@ -36,6 +38,7 @@ export default function ApplicationManager({
   device,
   application,
   currentSession,
+  sessionHealth,
   onChange,
   onSessionReady,
 }: Props) {
@@ -86,6 +89,7 @@ export default function ApplicationManager({
       const reusable =
         currentSession
         && currentSession.sessionId
+        && sessionHealth?.alive === true
         && currentSession.deviceId === device.id
         && currentSession.applicationPath
           === application.path;

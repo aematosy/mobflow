@@ -16,6 +16,7 @@ import type {
   LogEntry,
   MobileElementSnapshot,
   PrepareApplicationResult,
+  SessionHealth,
 } from "../types/mobile";
 
 import type { MobileRecording } from "../components/inspector/mobile-recorder";
@@ -135,6 +136,15 @@ export const mobileApi = {
   },
 
 
+  sessionHealth(
+    sessionId: string,
+  ): Promise<SessionHealth> {
+    return invoke<SessionHealth>(
+      "get_session_health",
+      { sessionId },
+    );
+  },
+
   androidCurrentPackage(
     sessionId: string,
   ): Promise<string> {
@@ -209,6 +219,45 @@ export const mobileApi = {
       {
         sessionId,
         action,
+      },
+    );
+  },
+
+  typeElementText(
+    sessionId: string,
+    element: InspectorElement,
+    text: string,
+  ): Promise<void> {
+    return invoke(
+      "type_element_text",
+      {
+        sessionId,
+        element,
+        text,
+      },
+    );
+  },
+
+  clearElementText(
+    sessionId: string,
+    element: InspectorElement,
+  ): Promise<void> {
+    return invoke(
+      "clear_element_text",
+      {
+        sessionId,
+        element,
+      },
+    );
+  },
+
+  hideAndroidKeyboard(
+    sessionId: string,
+  ): Promise<void> {
+    return invoke(
+      "hide_android_keyboard",
+      {
+        sessionId,
       },
     );
   },
@@ -319,6 +368,23 @@ export const mobileApi = {
       {
         deviceId,
         applicationPath,
+      },
+    );
+  },
+
+  recoverAndroidSession(
+    deviceId: string,
+    applicationPath: string,
+    packageName: string,
+    activity: string,
+  ): Promise<PrepareApplicationResult> {
+    return invoke<PrepareApplicationResult>(
+      "recover_android_session",
+      {
+        deviceId,
+        applicationPath,
+        package: packageName,
+        activity,
       },
     );
   },

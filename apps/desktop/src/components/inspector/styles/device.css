@@ -1521,3 +1521,150 @@ button:hover:not(:disabled) {
     #665cc7 !important;
 }
 
+
+/* Hide keyboard — enlarged crossed keyboard icon. */
+.mi-hide-keyboard-icon {
+  position: relative;
+
+  display: inline-grid;
+  place-items: center;
+
+  width: 24px;
+  height: 24px;
+
+  font-size: 24px;
+  line-height: 1;
+}
+
+.mi-hide-keyboard-icon::after {
+  content: "";
+
+  position: absolute;
+  left: 1px;
+  top: 11px;
+
+  width: 22px;
+  height: 2px;
+
+  border-radius: 999px;
+
+  background: currentColor;
+
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+/* Hide keyboard tooltip */
+.mi-hide-keyboard-control {
+  position: relative;
+}
+
+.mi-hide-keyboard-control::after {
+  content: "Hide keyboard";
+
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 9px);
+
+  z-index: 50;
+
+  padding: 6px 9px;
+
+  border: 1px solid var(--mi-border);
+  border-radius: 7px;
+
+  background: var(--mi-panel-bg);
+  color: var(--mi-text-primary);
+
+  box-shadow: var(--mi-shadow-sm);
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform:
+    translateX(-50%)
+    translateY(3px);
+
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease,
+    visibility 120ms ease;
+}
+
+.mi-hide-keyboard-control:hover::after,
+.mi-hide-keyboard-control:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+/* Back tooltip */
+.mi-back-control {
+  position: relative;
+}
+
+.mi-back-control::after {
+  content: "Back";
+
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 9px);
+
+  z-index: 50;
+
+  padding: 6px 9px;
+
+  border: 1px solid var(--mi-border);
+  border-radius: 7px;
+
+  background: var(--mi-panel-bg);
+  color: var(--mi-text-primary);
+
+  box-shadow: var(--mi-shadow-sm);
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform:
+    translateX(-50%)
+    translateY(3px);
+
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease,
+    visibility 120ms ease;
+}
+
+.mi-back-control:hover::after,
+.mi-back-control:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+/* Back icon — 40% larger without resizing the control. */
+.mi-back-control-icon {
+  display: inline-block;
+
+  font-size: 140%;
+  line-height: 1;
+  font-weight: 700;
+}

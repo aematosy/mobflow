@@ -61,6 +61,17 @@ pub struct MobileElementSnapshot {
     pub displayed: bool,
     pub selected: bool,
 
+    /*
+     * Native interaction capabilities reported by the
+     * automation hierarchy.
+     *
+     * These flags are semantic metadata. Consumers must not
+     * infer editability from platform widget class names.
+     */
+    pub editable: bool,
+    pub focusable: bool,
+    pub focused: bool,
+
     pub bounds: Option<ElementBounds>,
 
     pub locators: Vec<LocatorCandidate>,

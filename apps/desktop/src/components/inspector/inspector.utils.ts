@@ -422,6 +422,29 @@ export function buildElementSubtree(
  * Prefer an actionable/semantic element whose bounds contain
  * the real device coordinate.
  */
+export function findEditableElementAtPoint(
+  elements: InspectorElement[],
+  point: Point,
+): InspectorElement | null {
+  /*
+   * Reuse the canonical hit-test algorithm, but restrict the
+   * candidate set to elements whose live hierarchy metadata
+   * explicitly reports editable=true.
+   *
+   * No widget class, resource id, application text or
+   * platform-specific coordinate is hardcoded here.
+   */
+  return findDeepestElementAtPoint(
+    elements.filter(
+      (element) =>
+        element.editable
+        && element.enabled
+        && element.displayed,
+    ),
+    point,
+  );
+}
+
 export function findRecordingTargetAtPoint(
   elements: InspectorElement[],
   point: Point,

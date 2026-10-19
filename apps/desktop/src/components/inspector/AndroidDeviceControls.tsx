@@ -7,6 +7,7 @@ interface Props {
   onSwipeRight: () => void;
 
   onBack: () => void;
+  onHideKeyboard: () => void;
 }
 
 export function AndroidDeviceControls({
@@ -18,6 +19,7 @@ export function AndroidDeviceControls({
   onSwipeRight,
 
   onBack,
+  onHideKeyboard,
 }: Props) {
   return (
     <aside
@@ -74,10 +76,32 @@ export function AndroidDeviceControls({
         type="button"
         disabled={disabled}
         onClick={onBack}
-        title="Android Back"
-        aria-label="Android Back"
+        title="Back"
+        aria-label="Back"
+        className="mi-back-control"
       >
-        ‹
+        <span
+          className="mi-back-control-icon"
+          aria-hidden="true"
+        >
+          ‹
+        </span>
+      </button>
+
+      <button
+        type="button"
+        disabled={disabled}
+        onClick={onHideKeyboard}
+        title="Hide keyboard"
+        aria-label="Hide keyboard"
+        className="mi-hide-keyboard-control"
+      >
+        <span
+          className="mi-hide-keyboard-icon"
+          aria-hidden="true"
+        >
+          ⌨
+        </span>
       </button>
 
       

@@ -51,6 +51,24 @@ pub fn prepare_android_application(
 }
 
 #[tauri::command]
+pub fn recover_android_session(
+    device_id: String,
+    application_path: String,
+    package: String,
+    activity: String,
+) -> Result<
+    crate::services::application_service::PrepareApplicationResult,
+    String,
+> {
+    crate::services::session_recovery_service::recover_android_session(
+        &device_id,
+        &application_path,
+        &package,
+        &activity,
+    )
+}
+
+#[tauri::command]
 pub fn restart_android_application(
     device_id: String,
     application_path: String,
@@ -104,6 +122,39 @@ pub fn android_navigation_key(session_id: String, action: String) -> Result<(), 
 }
 
 #[tauri::command]
+pub fn type_element_text(
+    session_id: String,
+    element: crate::models::spy::MobileElementSnapshot,
+    text: String,
+) -> Result<(), String> {
+    crate::services::element_input_service::type_text(
+        &session_id,
+        &element,
+        &text,
+    )
+}
+
+#[tauri::command]
+pub fn clear_element_text(
+    session_id: String,
+    element: crate::models::spy::MobileElementSnapshot,
+) -> Result<(), String> {
+    crate::services::element_input_service::clear_text(
+        &session_id,
+        &element,
+    )
+}
+
+#[tauri::command]
+pub fn hide_android_keyboard(
+    session_id: String,
+) -> Result<(), String> {
+    crate::services::element_input_service::hide_android_keyboard(
+        &session_id,
+    )
+}
+
+#[tauri::command]
 pub fn test_locator_detail(
     session_id: String,
     strategy: String,
@@ -146,6 +197,18 @@ pub fn analyze_android_element_locators(
     elements: Vec<crate::models::spy::MobileElementSnapshot>,
 ) -> Result<Vec<crate::models::spy::LocatorCandidate>, String> {
     crate::services::locator_service::analyze_android_element(&session_id, &element_id, &elements)
+}
+
+#[tauri::command]
+pub fn get_session_health(
+    session_id: String,
+) -> Result<
+    crate::services::session_health_service::SessionHealth,
+    String,
+> {
+    crate::services::session_health_service::check_session(
+        &session_id,
+    )
 }
 
 #[tauri::command]

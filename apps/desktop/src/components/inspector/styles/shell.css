@@ -1010,3 +1010,66 @@
 .mi-hierarchy-panel .mi-panel-subtitle {
   font-size: 12px !important;
 }
+
+/* ============================================================
+ * SESSION HEALTH — LOST
+ * Overrides the normal green connected/session-active state.
+ * ============================================================ */
+
+.mi-connected.mi-connected-lost {
+  color: #d63c51 !important;
+}
+
+.mi-connected.mi-connected-lost i {
+  background: #e5485d !important;
+
+  box-shadow:
+    0 0 0 4px rgba(229, 72, 93, 0.12) !important;
+}
+
+.mi-status-dot.mi-status-dot-lost {
+  background: #e5485d !important;
+
+  box-shadow:
+    0 0 0 3px rgba(229, 72, 93, 0.10) !important;
+}
+
+:root[data-theme="dark"]
+  .mi-connected.mi-connected-lost {
+  color: #fb7185 !important;
+}
+
+:root[data-theme="dark"]
+  .mi-connected.mi-connected-lost i {
+  background: #fb7185 !important;
+
+  box-shadow:
+    0 0 0 4px rgba(244, 63, 94, 0.13) !important;
+}
+
+:root[data-theme="dark"]
+  .mi-status-dot.mi-status-dot-lost {
+  background: #fb7185 !important;
+
+  box-shadow:
+    0 0 0 3px rgba(244, 63, 94, 0.12) !important;
+}
+
+/* ============================================================
+ * MINIMIZED INSPECTOR — LOST SESSION
+ * ============================================================ */
+
+.mi-minimized-status.mi-minimized-status-lost i {
+  background: #e5485d !important;
+
+  box-shadow:
+    0 0 0 7px rgba(229, 72, 93, 0.10) !important;
+}
+
+:root[data-theme="dark"]
+  .mi-minimized-status.mi-minimized-status-lost i {
+  background: #fb7185 !important;
+
+  box-shadow:
+    0 0 0 7px rgba(244, 63, 94, 0.13) !important;
+}

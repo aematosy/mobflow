@@ -1,0 +1,363 @@
+/* ============================================================
+ * MOBFLOW — TEXT INPUT INTERACTION
+ * Theme-aware Inspector surface.
+ * ============================================================ */
+
+.mi-text-input-interaction {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  padding: 22px;
+
+  border: 1px solid var(--mi-border);
+  border-radius: 18px;
+
+  background: var(--mi-panel-bg-soft);
+  color: var(--mi-text-primary);
+
+  overflow: hidden;
+}
+
+.mi-text-input-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--mi-accent);
+  border-radius: 14px;
+
+  background: var(--mi-accent-soft);
+  color: var(--mi-accent);
+
+  font-size: 24px;
+  line-height: 1;
+}
+
+.mi-text-input-heading {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mi-text-input-heading strong {
+  color: var(--mi-text-strong);
+
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.mi-text-input-heading span {
+  color: var(--mi-text-secondary);
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.mi-text-input-target {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  padding: 14px 16px;
+
+  border: 1px solid var(--mi-border);
+  border-radius: 12px;
+
+  background: var(--mi-panel-bg);
+}
+
+.mi-text-input-target > span {
+  color: var(--mi-text-muted);
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.mi-text-input-target strong {
+  display: block;
+
+  min-width: 0;
+  max-width: 100%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: var(--mi-text-strong);
+
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.mi-text-input-target code {
+  display: block;
+
+  min-width: 0;
+  max-width: 100%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: var(--mi-text-muted);
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 11px;
+}
+
+.mi-text-input-form {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mi-text-input-form > label {
+  color: var(--mi-text-secondary);
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.mi-text-input-form > input {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+
+  box-sizing: border-box;
+
+  padding: 0 14px;
+
+  border: 1px solid var(--mi-input-border);
+  border-radius: 11px;
+
+  outline: none;
+
+  background: var(--mi-input-bg);
+  color: var(--mi-text-primary);
+
+  font: inherit;
+  font-size: 14px;
+
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background 120ms ease;
+}
+
+.mi-text-input-form > input::placeholder {
+  color: var(--mi-text-muted);
+}
+
+.mi-text-input-form > input:focus {
+  border-color: var(--mi-accent);
+
+  box-shadow:
+    0 0 0 3px var(--mi-accent-soft);
+}
+
+.mi-text-input-form > input:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.mi-text-input-error {
+  padding: 10px 12px;
+
+  border: 1px solid rgba(244, 63, 94, .28);
+  border-radius: 10px;
+
+  background: rgba(244, 63, 94, .08);
+  color: #fb7185;
+
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.mi-text-input-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.25fr;
+  gap: 9px;
+
+  margin-top: 4px;
+}
+
+.mi-text-input-buttons button {
+  min-width: 0;
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid var(--mi-border);
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  background: var(--mi-panel-bg);
+  color: var(--mi-text-primary);
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 800;
+
+  transition:
+    transform 100ms ease,
+    border-color 120ms ease,
+    background 120ms ease,
+    opacity 120ms ease;
+}
+
+.mi-text-input-buttons button:hover:not(:disabled) {
+  border-color: var(--mi-accent);
+  background: var(--mi-hover-bg);
+}
+
+.mi-text-input-buttons button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.mi-text-input-buttons button[type="submit"] {
+  border-color: transparent;
+
+  background:
+    linear-gradient(
+      135deg,
+      #695cf3 0%,
+      #5145d8 100%
+    );
+
+  color: #fff;
+
+  box-shadow:
+    0 5px 12px rgba(81, 69, 216, .18);
+}
+
+.mi-text-input-buttons button[type="submit"]:hover:not(:disabled) {
+  border-color: transparent;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7569f5 0%,
+      #5b4de0 100%
+    );
+
+  color: #fff;
+}
+
+.mi-text-input-buttons button:disabled {
+  cursor: not-allowed;
+  opacity: .46;
+}
+
+.mi-text-input-interaction > small {
+  color: var(--mi-text-secondary);
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* Dark-specific refinement */
+:root[data-theme="dark"] .mi-text-input-interaction {
+  border-color: #26364a;
+
+  background:
+    linear-gradient(
+      145deg,
+      #111d2b 0%,
+      #0d1724 100%
+    );
+}
+
+:root[data-theme="dark"] .mi-text-input-target {
+  border-color: #223044;
+  background: #101c2b;
+}
+
+:root[data-theme="dark"] .mi-text-input-form > input {
+  border-color: #26364a;
+  background: #09131f;
+  color: #dce4ef;
+}
+
+:root[data-theme="dark"] .mi-text-input-buttons button:not([type="submit"]) {
+  border-color: #314157;
+  background: #111d2b;
+  color: #dce4ef;
+}
+
+:root[data-theme="dark"] .mi-text-input-buttons button:not([type="submit"]):hover:not(:disabled) {
+  border-color: #7165ef;
+  background: #182638;
+  color: #fff;
+}
+
+/* Light-specific refinement */
+:root[data-theme="light"] .mi-text-input-interaction {
+  border-color: #dfe4ed;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fbfbff 0%,
+      #ffffff 100%
+    );
+}
+
+:root[data-theme="light"] .mi-text-input-target {
+  border-color: #e2e7ef;
+  background: #f8f9fc;
+}
+
+:root[data-theme="light"] .mi-text-input-form > input {
+  border-color: #d8e0eb;
+  background: #ffffff;
+  color: #2d394e;
+}
+
+:root[data-theme="light"] .mi-text-input-buttons button:not([type="submit"]) {
+  border-color: #d8e0eb;
+  background: #ffffff;
+  color: #2d394e;
+}
+
+:root[data-theme="light"] .mi-text-input-buttons button:not([type="submit"]):hover:not(:disabled) {
+  border-color: #b9b4ff;
+  background: #f5f4ff;
+  color: #5147ee;
+}
+
+@media (max-width: 1100px) {
+  .mi-text-input-buttons {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mi-text-input-buttons button[type="submit"] {
+    grid-column: 1 / -1;
+  }
+}

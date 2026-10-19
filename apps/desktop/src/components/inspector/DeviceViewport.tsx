@@ -30,6 +30,7 @@ import {
 import {
   clampZoom,
   findDeepestElementAtPoint,
+  findEditableElementAtPoint,
   findRecordingTargetAtPoint,
   viewportPointToDevice,
   deviceBoundsToViewport,
@@ -55,6 +56,14 @@ interface DeviceViewportProps {
   ) => void;
   onError: (message: string) => void;
   onModeChange?: (mode: InspectorMode) => void;
+
+  /*
+   * Plain Interact may expose semantic capabilities without
+   * becoming Inspector selection.
+   */
+  onEditableTarget?: (
+    element: InspectorElement,
+  ) => void;
 
   onRecorderTapIntent?: (
     element: InspectorElement,
@@ -105,6 +114,7 @@ export default function DeviceViewport({
   onSnapshot,
   onError,
   onModeChange,
+  onEditableTarget,
   onRecorderTapIntent,
   onRecordedTap,
   onRecordedSwipe,
@@ -838,6 +848,41 @@ export default function DeviceViewport({
       deepestElement;
 
     /*
+     * Text-entry capability has its own semantic target.
+     *
+     * The physical tap continues using the exact same point
+     * and target contract as before. This lookup only asks
+     * whether an actionable editable element owns that point.
+     */
+    const editableTarget =
+      !recording
+        ? findEditableElementAtPoint(
+            snapshot.elements,
+            point,
+          )
+        : null;
+
+    if (!recording) {
+      await mobileApi.addRuntimeLog(
+        "info",
+        "aut",
+        [
+          "INTERACT INPUT TARGET",
+          `point=${point.x},${point.y}`,
+          `deepest=${deepestElement?.id ?? "none"}`,
+          `type=${deepestElement?.elementType ?? "none"}`,
+          `editable=${deepestElement?.editable ?? false}`,
+          `focusable=${deepestElement?.focusable ?? false}`,
+          `focused=${deepestElement?.focused ?? false}`,
+          `clickable=${deepestElement?.clickable ?? false}`,
+          `resource=${deepestElement?.resourceId ?? "none"}`,
+          `text=${deepestElement?.text ?? "none"}`,
+          `editableTarget=${editableTarget?.id ?? "none"}`,
+        ].join(" | "),
+      );
+    }
+
+    /*
      * Plain Interact must never become Inspector selection.
      *
      * Recording needs semantic target ownership so the step
@@ -849,6 +894,17 @@ export default function DeviceViewport({
       && target
     ) {
       onSelect(target.id);
+    }
+
+    /*
+     * Input capability is independent from Inspector
+     * selection and locator analysis.
+     *
+     * Persist the semantic snapshot target before the pointer
+     * leaves the device surface for the Inspector panel.
+     */
+    if (editableTarget) {
+      onEditableTarget?.(editableTarget);
     }
 
     setInteracting(true);
@@ -1105,6 +1161,37 @@ export default function DeviceViewport({
       }
     };
 
+  const hideAndroidKeyboard = async () => {
+    if (
+      snapshot.platform !== "android"
+      || interacting
+    ) {
+      return;
+    }
+
+    setInteracting(true);
+
+    try {
+      await mobileApi.hideAndroidKeyboard(
+        snapshot.sessionId,
+      );
+
+      /*
+       * Keyboard visibility changes the live viewport.
+       * Refresh only after Appium completes the operation.
+       */
+      await refreshSnapshot();
+    } catch (reason) {
+      onError(
+        reason instanceof Error
+          ? reason.message
+          : String(reason),
+      );
+    } finally {
+      setInteracting(false);
+    }
+  };
+
   const executeAndroidNavigation =
     async (
       action: "back" | "home" | "recents",
@@ -1351,6 +1438,9 @@ export default function DeviceViewport({
               void executeAndroidNavigation(
                 "back",
               )
+            }
+            onHideKeyboard={() =>
+              void hideAndroidKeyboard()
             }
           />
         ) : (

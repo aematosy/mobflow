@@ -53,7 +53,7 @@ export const APPIUM_CAPABILITY_CATALOG:
     description:
       "Tiempo máximo sin recibir comandos antes de cerrar la sesión.",
     type: "number",
-    defaultValue: "300",
+    defaultValue: "3600",
     category: "session",
   },
 

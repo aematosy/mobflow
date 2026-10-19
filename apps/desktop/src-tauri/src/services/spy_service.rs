@@ -159,6 +159,10 @@ fn parse_android_node(
     let mut enabled = None;
     let mut displayed = None;
     let mut selected = None;
+    let mut editable = None;
+    let mut input_type = None;
+    let mut focusable = None;
+    let mut focused = None;
     let mut bounds = None;
 
     for attribute in event.attributes().flatten() {
@@ -186,6 +190,14 @@ fn parse_android_node(
             "displayed" => displayed = Some(value),
 
             "selected" => selected = Some(value),
+
+            "editable" => editable = Some(value),
+
+            "input-type" => input_type = Some(value),
+
+            "focusable" => focusable = Some(value),
+
+            "focused" => focused = Some(value),
 
             "bounds" => bounds = Some(value),
 
@@ -231,6 +243,14 @@ fn parse_android_node(
         enabled: bool_attribute(enabled),
         displayed: bool_attribute(displayed),
         selected: bool_attribute(selected),
+
+        editable: bool_attribute(editable)
+            || input_type
+                .as_deref()
+                .and_then(|value| value.parse::<u32>().ok())
+                .is_some_and(|value| value > 0),
+        focusable: bool_attribute(focusable),
+        focused: bool_attribute(focused),
 
         bounds: parse_bounds(bounds.as_deref()),
 
